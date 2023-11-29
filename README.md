@@ -5,7 +5,7 @@ Web Programlama Dersi Dönem Sonu Proje Ödevi
 Projenin amacı hastanelerden randevu almak isteyen hastaların online olarak sistemde müsait olan doktorlara, saatlere ve günlere göre randevu oluşturabilecekleri bir hastane randevu sistemi oluşturmaktır. 
 
 ## PROJE İÇİN KULLANILAN TEKNOLOJİLER
-Asp .Net Core 6 MVC , C# , PostgreSQL , Entity Framework Core , Bootstrap , HTML5 , CSS3 , JavaScript , JQUERY
+Asp .Net Core 6 MVC , C# , SQLServer , Entity Framework Core , Bootstrap , HTML5 , CSS3 , JavaScript , JQUERY
 
 ## PROJE İÇERİĞİ 
 - Admin kullanıcıların ve randevu almak isteyen kullanıcıların sisteme giriş yapmalarını sağlayan bir 'Log In' sayfası
