@@ -2,7 +2,7 @@
 
 namespace webProjeOdev.Models
 {
-    public class Hasta
+    public class HastaIletisim
     {
         [Key]
         public int hastaId { get; set; }
@@ -48,7 +48,18 @@ namespace webProjeOdev.Models
             Bekar
         }
 
+        [Required]
+        [Display(Name="Şifre")]
+        public string hastaSifre { get; set; }
+
         //*******************************************************
         public ICollection<IletisimBilgileri> IletisimBilgileri { get; set; }
+        public ICollection<Randevu> Randevular { get; set; }
+
+
+        //********************************************************
+        //Çok a çok ilişki kısmı 
+        public List<HastaneHasta> HastaneHastalar { get; } = new();
+        public List<Hastane> Hastaneler { get; } = new();
     }
 }

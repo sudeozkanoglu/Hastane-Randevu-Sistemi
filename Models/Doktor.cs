@@ -54,18 +54,6 @@ namespace webProjeOdev.Models
         [Display(Name = "Çalışma Saatleri")]
         public TimeSpan calismaSaat { get; set; }
 
-        [Required]
-        [Display(Name ="Ana Bilim Dalı")]
-        public string brans { get; set; }
-
-        [Required]
-        [Display(Name ="Klinik Adı")]
-        public string doktorKlinik { get; set; }
-
-        [Required]
-        [Display(Name ="Poliklinik")]
-        public string doktorPoliklinik { get; set; }
-
         //***************************************************************
 
         [ForeignKey("AnaBilimDali")]
@@ -83,6 +71,6 @@ namespace webProjeOdev.Models
         //****************************************************************
         public ICollection<IletisimBilgileri> IletisimBilgileri { get; set; }
         public ICollection<Poliklinik> Poliklinikler { get; set; }
-
+        public ICollection<Randevu> Randevular { get; set; }
     }
 }

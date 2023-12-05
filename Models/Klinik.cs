@@ -23,6 +23,13 @@ namespace webProjeOdev.Models
 
         public ICollection<Doktor> Doktorlar { get; set; }
         public ICollection<Poliklinik> Poliklinikler { get; set; }
+        public ICollection<Randevu> Randevular { get; set; }
+
+        //********************************************************
+        //Çok a çok ilişki kısmı - HastaneKlinik
+        public List<HastaneKlinik> HastaneKlinikler { get; } = new();
+        public List<Hastane> Hastaneler { get; } = new();
+
 
     }
 }

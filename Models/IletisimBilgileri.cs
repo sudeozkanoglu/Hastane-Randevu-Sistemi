@@ -27,7 +27,7 @@ namespace webProjeOdev.Models
 
         [ForeignKey("Hasta")]
         public int hastaId { get; set; }
-        public Hasta Hasta { get; set; } = null!;
+        public HastaIletisim Hasta { get; set; } = null!;
 
         [ForeignKey("Doktor")]
         public int doktorId { get; set; }

@@ -24,5 +24,14 @@ namespace webProjeOdev.Models
         [ForeignKey("Doktor")]
         public int doktorId { get; set; }
         public Doktor Doktor { get; set; } = null!;
+
+        //*********************************************************
+        public ICollection<Randevu> Randevular { get; set; }
+
+        //********************************************************
+        //Çok a çok ilişki kısmı - HastanePoliklinik
+        public List<HastaneKlinik> HastaneKlinikler { get; } = new();
+        public List<Hastane> Hastaneler { get; } = new();
+
     }
 }
