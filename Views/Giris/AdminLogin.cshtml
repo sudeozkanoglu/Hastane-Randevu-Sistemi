@@ -1,0 +1,40 @@
+﻿@model AdminLogin
+@{
+    ViewData["Title"] = "AdminLogin";
+}
+@if (Context.Session.GetString("SessionAdmin") is null)
+{
+
+    <div class="row">
+        <div class="col-4 offset-4">
+            <h2 class="display-4 text-center pb-4">@ViewData["Title"]</h2>
+            <hr />
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-4 offset-4">
+            <form action="\Giris\AdminLogin" method="post">
+                <!--sonra degistirilebilir-->
+                <div class="form-group mt-3">
+                    <label asp-for="KullaniciAdi" class="form-label">Kullanici Adi</label>
+                    <input asp-for="KullaniciAdi" class="form-control" type="email" />
+                    <span asp-validation-for="KullaniciAdi" class="text-danger"></span>
+                </div>
+                <div class="form-group mt-3">
+                    <label asp-for="Sifre" class="form-label">Sifre</label>
+                    <input asp-for="Sifre" class="form-control" type="password" />
+                    <span asp-validation-for="Sifre" class="text-danger"></span>
+                </div>
+                <div class="form-group d-grid mt-3">
+                    <button type="submit" class="btn btn-primary d-block">Login</button>
+                </div>
+            </form>
+        </div>
+    </div>
+}
+else
+{
+    <h2>Login olundu</h2>
+}

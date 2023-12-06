@@ -29,7 +29,7 @@ namespace webProjeOdev.Models
         public DateTime dogumTarihi { get; set; }
 
         [Required]
-        [Display(Name = "Cinsiyet")]
+        [Display(Name = "Cinsiyet\n")]
         public Cinsiyet cinsiyet { get; set; }
 
         public enum Cinsiyet
@@ -51,6 +51,10 @@ namespace webProjeOdev.Models
         [Required]
         [Display(Name="Şifre")]
         public string hastaSifre { get; set; }
+
+        [Required]
+        [StringLength(50)]
+        public string Role { get; set; } = "user";//migration yapip orayi da user olarak ayarladik
 
         //*******************************************************
         public ICollection<IletisimBilgileri> IletisimBilgileri { get; set; }

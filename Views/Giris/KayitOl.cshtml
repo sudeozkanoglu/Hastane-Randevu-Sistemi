@@ -1,0 +1,61 @@
+﻿@model webProjeOdev.Models.HastaIletisim
+
+@{
+    ViewData["Title"] = "KayitOl";
+}
+
+<h1>KayitOl</h1>
+
+<h4>HastaIletisim</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="KayitOl">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="hastaTC" class="control-label"></label>
+                <input asp-for="hastaTC" class="form-control" />
+                <span asp-validation-for="hastaTC" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="hastaAdi" class="control-label"></label>
+                <input asp-for="hastaAdi" class="form-control" />
+                <span asp-validation-for="hastaAdi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="hastaSoyadi" class="control-label"></label>
+                <input asp-for="hastaSoyadi" class="form-control" />
+                <span asp-validation-for="hastaSoyadi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="dogumTarihi" class="control-label"></label>
+                <input asp-for="dogumTarihi" class="form-control" />
+                <span asp-validation-for="dogumTarihi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="cinsiyet" class="control-label"></label>
+                <select asp-for="cinsiyet" class="form_control" ></select>
+                <span asp-validation-for="cinsiyet" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="medeniHal" class="control-label"></label>
+                <select asp-for="medeniHal" class="form-control" value="evli">Evli</select>
+                <select asp-for="medeniHal" class="form-control" value="bekar">Bekar</select>
+                <span asp-validation-for="medeniHal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="hastaSifre" class="control-label"></label>
+                <input asp-for="hastaSifre" class="form-control" />
+                <span asp-validation-for="hastaSifre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

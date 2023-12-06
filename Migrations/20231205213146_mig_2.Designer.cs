@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using webProjeOdev.Data;
 
@@ -11,9 +12,11 @@ using webProjeOdev.Data;
 namespace webProjeOdev.Migrations
 {
     [DbContext(typeof(HastaneRandevuContext))]
-    partial class HastaneRandevuContextModelSnapshot : ModelSnapshot
+    [Migration("20231205213146_mig_2")]
+    partial class mig_2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -100,11 +103,6 @@ namespace webProjeOdev.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("hastaId"));
-
-                    b.Property<string>("Role")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("cinsiyet")
                         .HasColumnType("int");
