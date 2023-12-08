@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\SudeS\\source\\repos\\webProjeOdev\\webProjeOdev\\webProjeOdev.csproj": {}
+    "C:\\Users\\ozkan\\source\\repos\\webProjeOdev\\webProjeOdev\\webProjeOdev.csproj": {}
   },
   "projects": {
-    "C:\\Users\\SudeS\\source\\repos\\webProjeOdev\\webProjeOdev\\webProjeOdev.csproj": {
+    "C:\\Users\\ozkan\\source\\repos\\webProjeOdev\\webProjeOdev\\webProjeOdev.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\SudeS\\source\\repos\\webProjeOdev\\webProjeOdev\\webProjeOdev.csproj",
+        "projectUniqueName": "C:\\Users\\ozkan\\source\\repos\\webProjeOdev\\webProjeOdev\\webProjeOdev.csproj",
         "projectName": "webProjeOdev",
-        "projectPath": "C:\\Users\\SudeS\\source\\repos\\webProjeOdev\\webProjeOdev\\webProjeOdev.csproj",
-        "packagesPath": "C:\\Users\\SudeS\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\SudeS\\source\\repos\\webProjeOdev\\webProjeOdev\\obj\\",
+        "projectPath": "C:\\Users\\ozkan\\source\\repos\\webProjeOdev\\webProjeOdev\\webProjeOdev.csproj",
+        "packagesPath": "C:\\Users\\ozkan\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\ozkan\\source\\repos\\webProjeOdev\\webProjeOdev\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\SudeS\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\ozkan\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -40,6 +40,10 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.14, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[7.0.14, )"
@@ -74,7 +78,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.402\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
         }
       }
     }

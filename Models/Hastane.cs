@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace webProjeOdev.Models
 {
@@ -12,16 +13,19 @@ namespace webProjeOdev.Models
         [Display(Name ="Hastane Adı")]
         public string hastaneAdi { get; set; }
 
+        [ForeignKey("IletisimBilgileri")]
+        public int iletisimId { get; set; }
+        public IletisimBilgileri IletisimBilgileri { get; set; } = null!;
+
         //**************************************************************************
 
         public ICollection<Doktor> Doktorlar { get; set; }
-        public ICollection<IletisimBilgileri> IletisimBilgileri { get; set; }
         public ICollection<Randevu> Randevular { get; set; }
 
         //********************************************************
         //Çok a çok ilişki kısmı - HastaneHasta
         public List<HastaneHasta> HastaneHastalar { get; } = new();
-        public List<HastaIletisim> Hastalar { get; } = new();
+        public List<Hasta> Hastalar { get; } = new();
 
         //********************************************************
         //Çok a çok ilişki kısmı - HastaneAnaBilimDali

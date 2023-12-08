@@ -68,9 +68,16 @@ namespace webProjeOdev.Models
         public int hastaneId { get; set; }
         public Hastane Hastane { get; set; } = null!;
 
+        [ForeignKey("Poliklinik")]
+        public int poliklinikId { get; set; }
+        public Poliklinik Poliklinik { get; set; } = null!;
+
+        [ForeignKey("IletisimBilgileri")]
+        public int iletisimId { get; set; }
+        public IletisimBilgileri IletisimBilgileri { get; set; } = null!;
+
         //****************************************************************
-        public ICollection<IletisimBilgileri> IletisimBilgileri { get; set; }
-        public ICollection<Poliklinik> Poliklinikler { get; set; }
+        
         public ICollection<Randevu> Randevular { get; set; }
     }
 }

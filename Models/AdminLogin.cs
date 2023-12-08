@@ -1,6 +1,4 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using Microsoft.AspNetCore.Identity;
 
 namespace webProjeOdev.Models
 {
@@ -9,7 +7,7 @@ namespace webProjeOdev.Models
         [Required(ErrorMessage = "Kullanici adiniz hatali")]
         [EmailAddress(ErrorMessage = "Gecerli bir e-mail adresi giriniz")]
         public string KullaniciAdi { get; set; }
-        
+
         public string? Id { get; set; }
         public string? Ad { get; set; }
         public string? Soyad { get; set; }

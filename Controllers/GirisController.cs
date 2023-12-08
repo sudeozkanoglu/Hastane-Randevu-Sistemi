@@ -1,20 +1,17 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
+﻿using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Security.Claims;
 using webProjeOdev.Data;
 using webProjeOdev.Models;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Model;
 
 namespace webProjeOdev.Controllers
 {
-
     public class GirisController : Controller
     {
         private HastaneRandevuContext _context = new HastaneRandevuContext();
-      
+
         public IActionResult AdminLogin()
         {
             return View();
@@ -23,27 +20,28 @@ namespace webProjeOdev.Controllers
         {
             new AdminLogin(){KullaniciAdi="G201210004@sakarya.edu.tr",Sifre="sau",Ad="Sude",Soyad="Yalcin",Id="1",Role="admin"}
         };
+
         [HttpPost]
         public IActionResult AdminLogin(AdminLogin a)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 foreach (var user in admin)
                 {
                     if (user.KullaniciAdi == a.KullaniciAdi && user.Sifre == a.Sifre)
                     {
 
-                      List<Claim> claims = new List<Claim>();
-                        claims.Add(new Claim(ClaimTypes.NameIdentifier,user.Id.ToString()));
+                        List<Claim> claims = new List<Claim>();
+                        claims.Add(new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()));
                         claims.Add(new Claim(ClaimTypes.Name, user.Ad));
                         claims.Add(new Claim(ClaimTypes.Name, user.Soyad));
                         claims.Add(new Claim(ClaimTypes.Role, user.Role));
                         claims.Add(new Claim("KullaniciAdi", user.KullaniciAdi));
 
-                        ClaimsIdentity identity=new ClaimsIdentity(claims,CookieAuthenticationDefaults.AuthenticationScheme);
-                        ClaimsPrincipal principal=new ClaimsPrincipal(identity);
+                        ClaimsIdentity identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+                        ClaimsPrincipal principal = new ClaimsPrincipal(identity);
                         HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-                        return RedirectToAction("Index","AdminSayfasi");
+                        return RedirectToAction("Index", "AdminSayfasi");
                     }
                     else
                     {
@@ -56,19 +54,20 @@ namespace webProjeOdev.Controllers
             }
             return View();
         }
+
         public IActionResult KayitOl()
         {
             return View();
         }
 
         [HttpPost]
-        public IActionResult KayitOl(HastaIletisim h)
+        public IActionResult KayitOl(Hasta h)
         {
-        
+
 
             if (ModelState.IsValid)
             {
-                if(_context.Hastalar.Any(x=>x.hastaTC==h.hastaTC))
+                if (_context.Hastalar.Any(x => x.hastaTC == h.hastaTC))
                 {
                     ModelState.AddModelError(nameof(h.hastaTC), "Hastanin üyeligi mevcut");
                     View(h);
@@ -81,22 +80,27 @@ namespace webProjeOdev.Controllers
 
             return View(h);
         }
-        [Authorize]
+
         public IActionResult KayitListele()
         {
             return View();
         }
+
         [Authorize]
         public IActionResult AdminLogout()
         {
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction(nameof(AdminLogin));
         }
+
         public IActionResult GirisEngelle()
         {
             return View();
         }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
     }
-
 }
-

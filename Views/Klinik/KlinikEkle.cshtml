@@ -1,0 +1,40 @@
+﻿@model webProjeOdev.Models.Klinik
+
+@{
+    ViewData["Title"] = "KlinikEkle";
+}
+
+<h3>@TempData["msj"]</h3>
+
+<h1>KlinikEkle</h1>
+
+<h4>Klinik</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="KlinikEkle">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="klinikAdi" class="control-label"></label>
+                <input asp-for="klinikAdi" class="form-control" />
+                <span asp-validation-for="klinikAdi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AnaBilimDali.anaBilimDaliAdi" class="control-label"></label>
+                <select class="form-control" asp-for="anaBilimDaliId" asp-items="@ViewBag.AnaBilimDaliList"></select>
+                <span asp-validation-for="anaBilimDaliId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -11,7 +11,7 @@ namespace webProjeOdev.Data
     {
         public DbSet<AnaBilimDali> AnaBilimDallari { get; set; }
         public DbSet<Doktor>Doktorlar { get; set; }
-        public DbSet<HastaIletisim> Hastalar { get; set; }
+        public DbSet<Hasta> Hastalar { get; set; }
         public DbSet<Hastane> Hastaneler { get; set; }
         public DbSet<IletisimBilgileri> IletisimBilgileri { get; set; }
         public DbSet<Klinik> Klinikler { get; set; }
@@ -83,19 +83,6 @@ namespace webProjeOdev.Data
 
             //**************************************************
             //Doktor tabsolunda yer alan Collectionlar
-            modelBuilder.Entity<Doktor>()
-                .HasMany(a => a.IletisimBilgileri)
-                .WithOne(a => a.Doktor)
-                .HasForeignKey(a => a.doktorId)
-                .OnDelete(DeleteBehavior.NoAction)
-                .IsRequired();
-
-            modelBuilder.Entity<Doktor>()
-                .HasMany(z => z.Poliklinikler)
-                .WithOne(z => z.Doktor)
-                .HasForeignKey(z => z.doktorId)
-                .OnDelete(DeleteBehavior.NoAction)
-                .IsRequired();
 
             modelBuilder.Entity<Doktor>()
                 .HasMany(z => z.Randevular)
@@ -106,14 +93,7 @@ namespace webProjeOdev.Data
 
             //**************************************************
             //Hasta tabsolunda yer alan Collectionlar
-            modelBuilder.Entity<HastaIletisim>()
-                .HasMany(b => b.IletisimBilgileri)
-                .WithOne(b => b.Hasta)
-                .HasForeignKey(b => b.hastaId)
-                .OnDelete(DeleteBehavior.NoAction)
-                .IsRequired();
-
-            modelBuilder.Entity<HastaIletisim>()
+            modelBuilder.Entity<Hasta>()
                 .HasMany(b => b.Randevular)
                 .WithOne(b => b.Hasta)
                 .HasForeignKey(b => b.hastaId)
@@ -122,12 +102,6 @@ namespace webProjeOdev.Data
 
             //**************************************************
             //Hastane tabsolunda yer alan Collectionlar
-            modelBuilder.Entity<Hastane>()
-                .HasMany(c => c.IletisimBilgileri)
-                .WithOne(c => c.Hastane)
-                .HasForeignKey(c => c.hastaneId)
-                .OnDelete(DeleteBehavior.NoAction)
-                .IsRequired();
 
             modelBuilder.Entity<Hastane>()
                 .HasMany(d => d.Doktorlar)
@@ -152,11 +126,39 @@ namespace webProjeOdev.Data
                 .OnDelete(DeleteBehavior.NoAction)
                 .IsRequired();
 
+            modelBuilder.Entity<Poliklinik>()
+                .HasMany(z => z.Doktorlar)
+                .WithOne(z => z.Poliklinik)
+                .HasForeignKey(z => z.poliklinikId)
+                .OnDelete(DeleteBehavior.NoAction)
+                .IsRequired();
 
+            //**************************************************
+            //IletisimBilgileri tabsolunda yer alan Collectionlar
+            modelBuilder.Entity<IletisimBilgileri>()
+                .HasMany(o => o.Doktorlar)
+                .WithOne(o => o.IletisimBilgileri)
+                .HasForeignKey(o => o.iletisimId)
+                .OnDelete(DeleteBehavior.NoAction)
+                .IsRequired();
+
+            modelBuilder.Entity<IletisimBilgileri>()
+                .HasMany(bo => bo.Hastaneler)
+                .WithOne(bo => bo.IletisimBilgileri)
+                .HasForeignKey(bo => bo.iletisimId)
+                .OnDelete(DeleteBehavior.NoAction)
+                .IsRequired();
+
+            modelBuilder.Entity<IletisimBilgileri>()
+                .HasMany(ao => ao.Hastalar)
+                .WithOne(ao => ao.IletisimBilgileri)
+                .HasForeignKey(ao => ao.iletisimId)
+                .OnDelete(DeleteBehavior.NoAction)
+                .IsRequired();
             //**************************************************
             //Çok a çok ilişki kısmı
             //HastaneHasta
-            modelBuilder.Entity<HastaIletisim>()
+            modelBuilder.Entity<Hasta>()
                 .HasMany(k => k.Hastaneler)
                 .WithMany(k => k.Hastalar)
                 .UsingEntity<HastaneHasta>();

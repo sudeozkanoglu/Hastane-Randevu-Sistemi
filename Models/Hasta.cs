@@ -1,8 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace webProjeOdev.Models
 {
-    public class HastaIletisim
+    public class Hasta
     {
         [Key]
         public int hastaId { get; set; }
@@ -29,7 +30,7 @@ namespace webProjeOdev.Models
         public DateTime dogumTarihi { get; set; }
 
         [Required]
-        [Display(Name = "Cinsiyet\n")]
+        [Display(Name = "Cinsiyet")]
         public Cinsiyet cinsiyet { get; set; }
 
         public enum Cinsiyet
@@ -54,10 +55,13 @@ namespace webProjeOdev.Models
 
         [Required]
         [StringLength(50)]
-        public string Role { get; set; } = "user";//migration yapip orayi da user olarak ayarladik
+        public string Role { get; set; } = "user"; //migration yapip orayi da user olarak ayarladik
+
+        [ForeignKey("IletisimBilgileri")]
+        public int iletisimId { get; set; }
+        public IletisimBilgileri IletisimBilgileri { get; set; } = null!;
 
         //*******************************************************
-        public ICollection<IletisimBilgileri> IletisimBilgileri { get; set; }
         public ICollection<Randevu> Randevular { get; set; }
 
 

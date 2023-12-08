@@ -5,6 +5,6 @@
         public int hastaneId { get; set; }
         public int hastaId { get; set; }
         public Hastane Hastane { get; set; } = null!;
-        public HastaIletisim Hasta { get; set; } = null!;
+        public Hasta Hasta { get; set; } = null!;
     }
 }

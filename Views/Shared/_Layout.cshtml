@@ -20,28 +20,33 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Index</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="AnaBilimDali" asp-action="AnaBilimDaliEkle">Ana Bilim Dalı Ekle</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Klinik" asp-action="KlinikEkle">Klinik Ekle</a>
                         </li>
-                        @if(User.Identity.IsAuthenticated )
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Poliklinik" asp-action="PoliklinikEkle">Poliklinik Ekle</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Deneme" asp-action="HastaneEkle">Hastane Ekle</a>
+                        </li>
+                        @if (User.Identity.IsAuthenticated)
                         {
-                            
-                              <li class="nav-item">
+
+                            <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Giris" asp-action="AdminLogout">Cikis</a>
                             </li>
                         }
                         else
                         {
-                              <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Giris" asp-action="AdminLogin">Admin Girisi</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Giris" asp-action="KayitOl">Kayit Ol</a>
-                        </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Giris" asp-action="AdminLogin">Admin Girisi</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Giris" asp-action="KayitOl">Kayit Ol</a>
+                            </li>
                         }
-                      
                     </ul>
                 </div>
             </div>

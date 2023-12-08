@@ -5,61 +5,108 @@ build_property.UsingMicrosoftNETSdkWeb = true
 build_property.ProjectTypeGuids = 
 build_property.InvariantGlobalization = 
 build_property.PlatformNeutralAssembly = 
-build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = webProjeOdev
 build_property.RootNamespace = webProjeOdev
-build_property.ProjectDir = C:\Users\SudeS\source\repos\webProjeOdev\webProjeOdev\
+build_property.ProjectDir = C:\Users\ozkan\source\repos\webProjeOdev\webProjeOdev\
 build_property.RazorLangVersion = 6.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = C:\Users\SudeS\source\repos\webProjeOdev\webProjeOdev
+build_property.MSBuildProjectDirectory = C:\Users\ozkan\source\repos\webProjeOdev\webProjeOdev
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/SudeS/source/repos/webProjeOdev/webProjeOdev/Views/AdminSayfasi/Index.cshtml]
+[C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/AdminSayfasi/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWRtaW5TYXlmYXNpXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SudeS/source/repos/webProjeOdev/webProjeOdev/Views/Giris/AdminLogin.cshtml]
+[C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/AnaBilimDali/AnaBilimDaliEkle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQW5hQmlsaW1EYWxpXEFuYUJpbGltRGFsaUVrbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/AnaBilimDali/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQW5hQmlsaW1EYWxpXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/Deneme/HastaneEkle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVuZW1lXEhhc3RhbmVFa2xlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/Deneme/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVuZW1lXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/Giris/AdminLogin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lyaXNcQWRtaW5Mb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SudeS/source/repos/webProjeOdev/webProjeOdev/Views/Giris/GirisEngelle.cshtml]
+[C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/Giris/GirisEngelle.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lyaXNcR2lyaXNFbmdlbGxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SudeS/source/repos/webProjeOdev/webProjeOdev/Views/Giris/KayitListele.cshtml]
+[C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/Giris/KayitListele.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lyaXNcS2F5aXRMaXN0ZWxlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SudeS/source/repos/webProjeOdev/webProjeOdev/Views/Giris/KayitOl.cshtml]
+[C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/Giris/KayitOl.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lyaXNcS2F5aXRPbC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SudeS/source/repos/webProjeOdev/webProjeOdev/Views/Home/Index.cshtml]
+[C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/Hastane/HastaneEkle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGFzdGFuZVxIYXN0YW5lRWtsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/Hastane/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGFzdGFuZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/Hastane/Unsuccess.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGFzdGFuZVxVbnN1Y2Nlc3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SudeS/source/repos/webProjeOdev/webProjeOdev/Views/Home/Privacy.cshtml]
+[C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SudeS/source/repos/webProjeOdev/webProjeOdev/Views/Shared/Error.cshtml]
+[C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/Klinik/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2xpbmlrXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/Klinik/KlinikEkle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2xpbmlrXEtsaW5pa0VrbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/Klinik/Success.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcS2xpbmlrXFN1Y2Nlc3MuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/Poliklinik/PoliklinikEkle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9saWtsaW5pa1xQb2xpa2xpbmlrRWtsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/Poliklinik/Success.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcUG9saWtsaW5pa1xTdWNjZXNzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SudeS/source/repos/webProjeOdev/webProjeOdev/Views/Shared/_ValidationScriptsPartial.cshtml]
+[C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SudeS/source/repos/webProjeOdev/webProjeOdev/Views/_ViewImports.cshtml]
+[C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SudeS/source/repos/webProjeOdev/webProjeOdev/Views/_ViewStart.cshtml]
+[C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/SudeS/source/repos/webProjeOdev/webProjeOdev/Views/Shared/_Layout.cshtml]
+[C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-2p7zknz1mh

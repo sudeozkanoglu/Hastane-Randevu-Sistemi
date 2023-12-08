@@ -76,10 +76,16 @@ namespace webProjeOdev.Migrations
                     b.Property<int>("hastaneId")
                         .HasColumnType("int");
 
+                    b.Property<int>("iletisimId")
+                        .HasColumnType("int");
+
                     b.Property<int>("klinikId")
                         .HasColumnType("int");
 
                     b.Property<int>("medeniHal")
+                        .HasColumnType("int");
+
+                    b.Property<int>("poliklinikId")
                         .HasColumnType("int");
 
                     b.HasKey("doktorId");
@@ -88,12 +94,16 @@ namespace webProjeOdev.Migrations
 
                     b.HasIndex("hastaneId");
 
+                    b.HasIndex("iletisimId");
+
                     b.HasIndex("klinikId");
+
+                    b.HasIndex("poliklinikId");
 
                     b.ToTable("Doktorlar");
                 });
 
-            modelBuilder.Entity("webProjeOdev.Models.HastaIletisim", b =>
+            modelBuilder.Entity("webProjeOdev.Models.Hasta", b =>
                 {
                     b.Property<int>("hastaId")
                         .ValueGeneratedOnAdd()
@@ -131,10 +141,15 @@ namespace webProjeOdev.Migrations
                         .HasMaxLength(11)
                         .HasColumnType("nvarchar(11)");
 
+                    b.Property<int>("iletisimId")
+                        .HasColumnType("int");
+
                     b.Property<int>("medeniHal")
                         .HasColumnType("int");
 
                     b.HasKey("hastaId");
+
+                    b.HasIndex("iletisimId");
 
                     b.ToTable("Hastalar");
                 });
@@ -152,7 +167,12 @@ namespace webProjeOdev.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
+                    b.Property<int>("iletisimId")
+                        .HasColumnType("int");
+
                     b.HasKey("hastaneId");
+
+                    b.HasIndex("iletisimId");
 
                     b.ToTable("Hastaneler");
                 });
@@ -233,30 +253,15 @@ namespace webProjeOdev.Migrations
                     b.Property<int>("Iller")
                         .HasColumnType("int");
 
-                    b.Property<int>("doktorId")
-                        .HasColumnType("int");
-
                     b.Property<string>("email")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("hastaId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("hastaneId")
-                        .HasColumnType("int");
 
                     b.Property<string>("telefonNumarasi")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("iletisimId");
-
-                    b.HasIndex("doktorId");
-
-                    b.HasIndex("hastaId");
-
-                    b.HasIndex("hastaneId");
 
                     b.ToTable("IletisimBilgileri");
                 });
@@ -292,9 +297,6 @@ namespace webProjeOdev.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("poliklinikId"));
 
-                    b.Property<int>("doktorId")
-                        .HasColumnType("int");
-
                     b.Property<int>("klinikId")
                         .HasColumnType("int");
 
@@ -304,8 +306,6 @@ namespace webProjeOdev.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.HasKey("poliklinikId");
-
-                    b.HasIndex("doktorId");
 
                     b.HasIndex("klinikId");
 
@@ -375,9 +375,21 @@ namespace webProjeOdev.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
+                    b.HasOne("webProjeOdev.Models.IletisimBilgileri", "IletisimBilgileri")
+                        .WithMany("Doktorlar")
+                        .HasForeignKey("iletisimId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
                     b.HasOne("webProjeOdev.Models.Klinik", "Klinik")
                         .WithMany("Doktorlar")
                         .HasForeignKey("klinikId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.HasOne("webProjeOdev.Models.Poliklinik", "Poliklinik")
+                        .WithMany("Doktorlar")
+                        .HasForeignKey("poliklinikId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
@@ -385,7 +397,33 @@ namespace webProjeOdev.Migrations
 
                     b.Navigation("Hastane");
 
+                    b.Navigation("IletisimBilgileri");
+
                     b.Navigation("Klinik");
+
+                    b.Navigation("Poliklinik");
+                });
+
+            modelBuilder.Entity("webProjeOdev.Models.Hasta", b =>
+                {
+                    b.HasOne("webProjeOdev.Models.IletisimBilgileri", "IletisimBilgileri")
+                        .WithMany("Hastalar")
+                        .HasForeignKey("iletisimId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("IletisimBilgileri");
+                });
+
+            modelBuilder.Entity("webProjeOdev.Models.Hastane", b =>
+                {
+                    b.HasOne("webProjeOdev.Models.IletisimBilgileri", "IletisimBilgileri")
+                        .WithMany("Hastaneler")
+                        .HasForeignKey("iletisimId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("IletisimBilgileri");
                 });
 
             modelBuilder.Entity("webProjeOdev.Models.HastaneAnaBilim", b =>
@@ -409,7 +447,7 @@ namespace webProjeOdev.Migrations
 
             modelBuilder.Entity("webProjeOdev.Models.HastaneHasta", b =>
                 {
-                    b.HasOne("webProjeOdev.Models.HastaIletisim", "Hasta")
+                    b.HasOne("webProjeOdev.Models.Hasta", "Hasta")
                         .WithMany("HastaneHastalar")
                         .HasForeignKey("hastaId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -470,33 +508,6 @@ namespace webProjeOdev.Migrations
                     b.Navigation("Poliklinik");
                 });
 
-            modelBuilder.Entity("webProjeOdev.Models.IletisimBilgileri", b =>
-                {
-                    b.HasOne("webProjeOdev.Models.Doktor", "Doktor")
-                        .WithMany("IletisimBilgileri")
-                        .HasForeignKey("doktorId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("webProjeOdev.Models.HastaIletisim", "Hasta")
-                        .WithMany("IletisimBilgileri")
-                        .HasForeignKey("hastaId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("webProjeOdev.Models.Hastane", "Hastane")
-                        .WithMany("IletisimBilgileri")
-                        .HasForeignKey("hastaneId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Doktor");
-
-                    b.Navigation("Hasta");
-
-                    b.Navigation("Hastane");
-                });
-
             modelBuilder.Entity("webProjeOdev.Models.Klinik", b =>
                 {
                     b.HasOne("webProjeOdev.Models.AnaBilimDali", "AnaBilimDali")
@@ -510,19 +521,11 @@ namespace webProjeOdev.Migrations
 
             modelBuilder.Entity("webProjeOdev.Models.Poliklinik", b =>
                 {
-                    b.HasOne("webProjeOdev.Models.Doktor", "Doktor")
-                        .WithMany("Poliklinikler")
-                        .HasForeignKey("doktorId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.HasOne("webProjeOdev.Models.Klinik", "Klinik")
                         .WithMany("Poliklinikler")
                         .HasForeignKey("klinikId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
-
-                    b.Navigation("Doktor");
 
                     b.Navigation("Klinik");
                 });
@@ -541,7 +544,7 @@ namespace webProjeOdev.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("webProjeOdev.Models.HastaIletisim", "Hasta")
+                    b.HasOne("webProjeOdev.Models.Hasta", "Hasta")
                         .WithMany("Randevular")
                         .HasForeignKey("hastaId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -591,18 +594,12 @@ namespace webProjeOdev.Migrations
 
             modelBuilder.Entity("webProjeOdev.Models.Doktor", b =>
                 {
-                    b.Navigation("IletisimBilgileri");
-
-                    b.Navigation("Poliklinikler");
-
                     b.Navigation("Randevular");
                 });
 
-            modelBuilder.Entity("webProjeOdev.Models.HastaIletisim", b =>
+            modelBuilder.Entity("webProjeOdev.Models.Hasta", b =>
                 {
                     b.Navigation("HastaneHastalar");
-
-                    b.Navigation("IletisimBilgileri");
 
                     b.Navigation("Randevular");
                 });
@@ -619,9 +616,16 @@ namespace webProjeOdev.Migrations
 
                     b.Navigation("HastanePoliklinikler");
 
-                    b.Navigation("IletisimBilgileri");
-
                     b.Navigation("Randevular");
+                });
+
+            modelBuilder.Entity("webProjeOdev.Models.IletisimBilgileri", b =>
+                {
+                    b.Navigation("Doktorlar");
+
+                    b.Navigation("Hastalar");
+
+                    b.Navigation("Hastaneler");
                 });
 
             modelBuilder.Entity("webProjeOdev.Models.Klinik", b =>
@@ -637,6 +641,8 @@ namespace webProjeOdev.Migrations
 
             modelBuilder.Entity("webProjeOdev.Models.Poliklinik", b =>
                 {
+                    b.Navigation("Doktorlar");
+
                     b.Navigation("HastaneKlinikler");
 
                     b.Navigation("Randevular");

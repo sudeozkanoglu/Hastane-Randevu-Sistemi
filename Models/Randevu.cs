@@ -44,6 +44,6 @@ namespace webProjeOdev.Models
 
         [ForeignKey("Hasta")]
         public int hastaId { get; set; }
-        public HastaIletisim Hasta { get; set; } = null!;
+        public Hasta Hasta { get; set; } = null!;
     }
 }
