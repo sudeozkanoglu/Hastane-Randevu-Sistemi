@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace webProjeOdev.Models
+namespace webProjeOdev2.Models
 {
     public class AdminLogin
     {
+
         [Required(ErrorMessage = "Kullanici adiniz hatali")]
         [EmailAddress(ErrorMessage = "Gecerli bir e-mail adresi giriniz")]
         public string KullaniciAdi { get; set; }
@@ -18,3 +19,4 @@ namespace webProjeOdev.Models
         public string Role { get; set; } = "admin";
     }
 }
+

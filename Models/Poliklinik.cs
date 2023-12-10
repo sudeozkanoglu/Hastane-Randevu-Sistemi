@@ -1,9 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc.TagHelpers;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Xml.Linq;
 
-namespace webProjeOdev.Models
+namespace webProjeOdev2.Models
 {
     public class Poliklinik
     {
@@ -21,15 +19,17 @@ namespace webProjeOdev.Models
         public int klinikId { get; set; }
         public Klinik Klinik { get; set; } = null!;
 
+        [ForeignKey("Doktor")]
+        public int doktorId { get; set; }
+        public Doktor Doktor { get; set; } = null!;
+
         //*********************************************************
         public ICollection<Randevu> Randevular { get; set; }
-        public ICollection<Doktor> Doktorlar { get; set; }
 
         //********************************************************
         //Çok a çok ilişki kısmı - HastanePoliklinik
         public List<HastaneKlinik> HastaneKlinikler { get; } = new();
         public List<Hastane> Hastaneler { get; } = new();
-
 
     }
 }

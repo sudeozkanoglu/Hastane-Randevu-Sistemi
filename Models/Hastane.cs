@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+using webProjeOdev2.Data.Enum;
 
-namespace webProjeOdev.Models
+namespace webProjeOdev2.Models
 {
     public class Hastane
     {
@@ -10,16 +10,26 @@ namespace webProjeOdev.Models
 
         [Required]
         [MaxLength(100)]
-        [Display(Name ="Hastane Adı")]
+        [Display(Name = "Hastane Adı")]
         public string hastaneAdi { get; set; }
+        [Required]
+        [Phone]
+        [Display(Name = "Telefon Numarası")]
+        public string telefonNumarasi { get; set; }
 
-        [ForeignKey("IletisimBilgileri")]
-        public int iletisimId { get; set; }
-        public IletisimBilgileri IletisimBilgileri { get; set; } = null!;
+        [Required]
+        [EmailAddress]
+        [Display(Name = "E-mail Adresi")]
+        public string email { get; set; }
+
+        [Required]
+        [Display(Name = "İl")]
+        public Il Iller { get; set; }
 
         //**************************************************************************
 
         public ICollection<Doktor> Doktorlar { get; set; }
+
         public ICollection<Randevu> Randevular { get; set; }
 
         //********************************************************
@@ -41,6 +51,7 @@ namespace webProjeOdev.Models
         //Çok a çok ilişki kısmı - HastanePoliklinik
         public List<HastanePoliklinik> HastanePoliklinikler { get; } = new();
         public List<Poliklinik> Poliklinikler { get; } = new();
+
 
     }
 }

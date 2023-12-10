@@ -1,4 +1,5 @@
-﻿@model webProjeOdev.Models.Hasta
+﻿@using webProjeOdev2.Data.Enum;
+@model webProjeOdev2.Models.Hasta
 
 @{
     ViewData["Title"] = "KayitOl";
@@ -6,7 +7,7 @@
 
 <h1>KayitOl</h1>
 
-<h4>HastaIletisim</h4>
+<h4>Hasta</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -34,19 +35,35 @@
             </div>
             <div class="form-group">
                 <label asp-for="cinsiyet" class="control-label"></label>
-				<select asp-for="cinsiyet" class="form_control" asp-items="Html.GetEnumSelectList<Hasta.Cinsiyet>()"></select>
+                <select asp-for="cinsiyet" class="form-control" asp-items="Html.GetEnumSelectList<Hasta.Cinsiyet>()"></select>
                 <span asp-validation-for="cinsiyet" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="medeniHal" class="control-label"></label>
-				<select asp-for="medeniHal" class="form-control" asp-items="Html.GetEnumSelectList<Hasta.MedeniHal>()"></select>
+                <select asp-for="medeniHal" class="form-control" asp-items="Html.GetEnumSelectList<Hasta.MedeniHal>()"></select>
                 <span asp-validation-for="medeniHal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="telefonNumarasi" class="control-label"></label>
+                <input asp-for="telefonNumarasi" class="form-control" />
+                <span asp-validation-for="telefonNumarasi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="email" class="control-label"></label>
+                <input asp-for="email" class="form-control" />
+                <span asp-validation-for="email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Iller" class="control-label"></label>
+                <select asp-for="Iller" class="form-control" asp-items="Html.GetEnumSelectList<Il>()"></select>
+                <span asp-validation-for="Iller" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="hastaSifre" class="control-label"></label>
                 <input asp-for="hastaSifre" class="form-control" />
                 <span asp-validation-for="hastaSifre" class="text-danger"></span>
             </div>
+           
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -58,3 +75,6 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

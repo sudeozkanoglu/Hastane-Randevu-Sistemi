@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 
-namespace webProjeOdev.Controllers
+namespace webProjeOdev2.Controllers
 {
     public class AdminSayfasiController : Controller
     {
-        [Authorize]
         public IActionResult Index()
         {
             return View();

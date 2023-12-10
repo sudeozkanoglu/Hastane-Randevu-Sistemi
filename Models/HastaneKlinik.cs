@@ -1,4 +1,4 @@
-﻿namespace webProjeOdev.Models
+﻿namespace webProjeOdev2.Models
 {
     public class HastaneKlinik
     {
@@ -6,5 +6,6 @@
         public int poliklinikId { get; set; }
         public Hastane Hastane { get; set; } = null!;
         public Klinik Klinik { get; set; } = null!;
+
     }
 }

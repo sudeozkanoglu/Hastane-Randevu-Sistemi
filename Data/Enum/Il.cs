@@ -1,4 +1,4 @@
-﻿namespace webProjeOdev.Data.Enum
+﻿namespace webProjeOdev2.Data.Enum
 {
     public enum Il
     {
@@ -81,6 +81,6 @@
         Van,
         Yalova,
         Yozgat,
-        Zonguldak
+        
     }
 }

@@ -1,17 +1,18 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-using webProjeOdev.Data.Enum;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+using webProjeOdev2.Data.Enum;
 
-namespace webProjeOdev.Models
+namespace webProjeOdev2.Models
 {
     public class Doktor
     {
+
         [Key]
         public int doktorId { get; set; }
 
         [Required]
         [MaxLength(100)]
-        [Display(Name ="Doktor Adı")]
+        [Display(Name = "Doktor Adı")]
         public string doktorAdi { get; set; }
 
         [Required]
@@ -44,6 +45,19 @@ namespace webProjeOdev.Models
             Evli,
             Bekar
         }
+        [Required]
+        [Phone]
+        [Display(Name = "Telefon Numarası")]
+        public string telefonNumarasi { get; set; }
+
+        [Required]
+        [EmailAddress]
+        [Display(Name = "E-mail Adresi")]
+        public string email { get; set; }
+
+        [Required]
+        [Display(Name = "İl")]
+        public Il Iller { get; set; }
 
         [Required]
         [Display(Name = "Çalışma Günleri")]
@@ -72,12 +86,9 @@ namespace webProjeOdev.Models
         public int poliklinikId { get; set; }
         public Poliklinik Poliklinik { get; set; } = null!;
 
-        [ForeignKey("IletisimBilgileri")]
-        public int iletisimId { get; set; }
-        public IletisimBilgileri IletisimBilgileri { get; set; } = null!;
-
         //****************************************************************
-        
+
         public ICollection<Randevu> Randevular { get; set; }
+
     }
 }

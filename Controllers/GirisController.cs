@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using webProjeOdev.Data;
-using webProjeOdev.Models;
+using webProjeOdev2.Models;
+using WebProjeOdev2.Data;
+using Microsoft.AspNetCore.Authorization;
 
-namespace webProjeOdev.Controllers
+namespace webProjeOdev2.Controllers
 {
     public class GirisController : Controller
     {
@@ -20,8 +20,6 @@ namespace webProjeOdev.Controllers
         {
             new AdminLogin(){KullaniciAdi="G201210004@sakarya.edu.tr",Sifre="sau",Ad="Sude",Soyad="Yalcin",Id="1",Role="admin"}
         };
-
-        [HttpPost]
         public IActionResult AdminLogin(AdminLogin a)
         {
             if (ModelState.IsValid)
@@ -64,43 +62,46 @@ namespace webProjeOdev.Controllers
         public IActionResult KayitOl(Hasta h)
         {
 
+            ModelState.Remove(nameof(h.HastaneHastalar));
+            ModelState.Remove(nameof(h.Randevular));
+            ModelState.Remove(nameof(h.Hastaneler));
+
 
             if (ModelState.IsValid)
             {
                 if (_context.Hastalar.Any(x => x.hastaTC == h.hastaTC))
                 {
                     ModelState.AddModelError(nameof(h.hastaTC), "Hastanin üyeligi mevcut");
-                    View(h);
+                   return View(h);
                 }
-                _context.Hastalar.Add(h);
-                _context.SaveChanges();
-                return RedirectToAction("KayitListele");
+                else
+                {
+                    _context.Hastalar.Add(h);
+                    _context.SaveChanges();
+                    return RedirectToAction("KayitListele");
+                }
+               
             }
 
 
             return View(h);
         }
-
         public IActionResult KayitListele()
         {
-            return View();
+            var hastalar = _context.Hastalar.ToList();
+            return View(hastalar);
         }
-
         [Authorize]
         public IActionResult AdminLogout()
         {
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction(nameof(AdminLogin));
         }
-
         public IActionResult GirisEngelle()
         {
             return View();
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
+
     }
 }

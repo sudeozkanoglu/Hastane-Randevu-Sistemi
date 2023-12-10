@@ -1,11 +1,13 @@
-﻿namespace webProjeOdev.Data.Enum
+﻿namespace webProjeOdev2.Data.Enum
 {
-    public enum CalismaGunleri
-    {
-        Pazartesi,
-        Sali,
-        Çarşamba,
-        Perşembe,
-        Cuma
-    }
+    
+        public enum CalismaGunleri
+        {
+            Pazartesi,
+            Sali,
+            Çarşamba,
+            Perşembe,
+            Cuma
+        }
+    
 }
