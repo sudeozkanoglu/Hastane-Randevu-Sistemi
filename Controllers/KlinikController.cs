@@ -40,10 +40,9 @@ namespace webProjeOdev.Controllers
             ModelState.Remove(nameof(k.Poliklinikler));
             ModelState.Remove(nameof(k.Doktorlar));
             ModelState.Remove(nameof(k.Randevular));
+            ModelState.Remove(nameof(k.AnaBilimDali));
             ModelState.Remove(nameof(k.HastaneKlinikler));
             ModelState.Remove(nameof(k.Hastaneler));
-            ModelState.Remove(nameof(k.AnaBilimDali));
-
             if (ModelState.IsValid)
             {
                 g.Klinikler.Add(k);

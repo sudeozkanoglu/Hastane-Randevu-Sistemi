@@ -30,9 +30,9 @@ namespace webProjeOdev.Controllers
         {
             ModelState.Remove(nameof(l.Klinik));
             ModelState.Remove(nameof(l.Randevular));
-            ModelState.Remove(nameof(l.HastaneKlinikler));
+            ModelState.Remove(nameof(l.HastanePoliklinikler));
             ModelState.Remove(nameof(l.Hastaneler));
-            ModelState.Remove(nameof(l.Doktorlar));
+            ModelState.Remove(nameof(l.Doktor));
 
             if (ModelState.IsValid)
             {

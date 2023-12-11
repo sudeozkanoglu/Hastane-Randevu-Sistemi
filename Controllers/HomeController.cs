@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using webProjeOdev2.Models;
+using webProjeOdev.Models;
 
-namespace webProjeOdev2.Controllers
+namespace webProjeOdev.Controllers
 {
     public class HomeController : Controller
     {

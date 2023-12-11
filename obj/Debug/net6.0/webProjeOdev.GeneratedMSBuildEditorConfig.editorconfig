@@ -27,14 +27,6 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQW5hQmlsaW1EYWxpXEluZGV4LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/Deneme/HastaneEkle.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVuZW1lXEhhc3RhbmVFa2xlLmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
-[C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/Deneme/Index.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcRGVuZW1lXEluZGV4LmNzaHRtbA==
-build_metadata.AdditionalFiles.CssScope = 
-
 [C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/Giris/AdminLogin.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lyaXNcQWRtaW5Mb2dpbi5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
@@ -49,6 +41,30 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/Giris/KayitOl.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcR2lyaXNcS2F5aXRPbC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/HastaneAnaBilim/HastaneAnaBilimEkle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGFzdGFuZUFuYUJpbGltXEhhc3RhbmVBbmFCaWxpbUVrbGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/HastaneAnaBilim/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGFzdGFuZUFuYUJpbGltXEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/HastaneKlinik/HastaneKlinikEkle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGFzdGFuZUtsaW5pa1xIYXN0YW5lS2xpbmlrRWtsZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/HastaneKlinik/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGFzdGFuZUtsaW5pa1xJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/HastanePoliklinik/HastanePoliklinikEkle.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGFzdGFuZVBvbGlrbGluaWtcSGFzdGFuZVBvbGlrbGluaWtFa2xlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/HastanePoliklinik/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSGFzdGFuZVBvbGlrbGluaWtcSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/ozkan/source/repos/webProjeOdev/webProjeOdev/Views/Hastane/HastaneEkle.cshtml]

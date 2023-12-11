@@ -1,4 +1,4 @@
-﻿@model webProjeOdev.ViewModels.HastaneIletisimViewModel
+﻿@model webProjeOdev.Models.Hastane
 @{
     ViewData["Title"] = "HastaneEkle";
 }
@@ -11,44 +11,30 @@
 <hr />
 <div class="row">
     <div class="col-md-4">
-        <form asp-action="KlinikEkle">
+        <form asp-action="HastaneEkle">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="HastaneModel.hastaneAdi" class="control-label"></label>
-                <input asp-for="HastaneModel.hastaneAdi" class="form-control" />
-                <span asp-validation-for="HastaneModel.hastaneAdi" class="text-danger"></span>
+                <label asp-for="hastaneAdi" class="control-label"></label>
+                <input asp-for="hastaneAdi" class="form-control" />
+                <span asp-validation-for="hastaneAdi" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IletisimBilgileriModel.telefonNumarasi" class="control-label"></label>
-                <input asp-for="IletisimBilgileriModel.telefonNumarasi" class="form-control"/>
-                <span asp-validation-for="IletisimBilgileriModel.telefonNumarasi" class="text-danger"></span>
+                <label asp-for="telefonNumarasi" class="control-label"></label>
+                <input asp-for="telefonNumarasi" class="form-control"/>
+                <span asp-validation-for="telefonNumarasi" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IletisimBilgileriModel.email" class="control-label"></label>
-                <input asp-for="IletisimBilgileriModel.email" class="form-control" />
-                <span asp-validation-for="IletisimBilgileriModel.email" class="text-danger"></span>
+                <label asp-for="email" class="control-label"></label>
+                <input asp-for="email" class="form-control" />
+                <span asp-validation-for="email" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="IletisimBilgileriModel.Iller" class="control-label"></label>
-                <select asp-for="IletisimBilgileriModel.Iller" class="form-control" asp-items="Html.GetEnumSelectList<IletisimBilgileri.Il>()">
+                <label asp-for="Iller" class="control-label"></label>
+                <select asp-for="Iller" class="form-control" asp-items="Html.GetEnumSelectList<Hastane.Il>()">
                         <option value="">Seçiniz...</option>
                 </select>
-                <span asp-validation-for="IletisimBilgileriModel.Iller" class="text-danger"></span>
+                <span asp-validation-for="Iller" class="text-danger"></span>
             </div>
-            @*<div class="form-group">
-                <label asp-for="SelectedAnaBilimDaliIds" class="control-label">Ana Bilim Dalı</label>
-                <select asp-for="SelectedAnaBilimDaliIds" asp-items="@Model.AnaBilimDallari" class="form-control" multiple></select>
-                
-            </div>
-            <div class="form-group">
-                <label asp-for="SelectedKlinikIds" class="control-label">Klinik</label>
-                <select asp-for="SelectedKlinikIds" asp-items="@Model.Klinikler" class="form-control" multiple></select>
-                
-            </div>
-            <div class="form-group">
-                <label asp-for="SelectedPoliklinikIds" class="control-label">Poliklinik</label>
-                <select asp-for="SelectedPoliklinikIds" asp-items="@Model.Poliklinikler" class="form-control" multiple></select>
-            </div>*@
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -61,6 +47,7 @@
 </div>
 
 @section Scripts {
+    
         @{
             await Html.RenderPartialAsync("_ValidationScriptsPartial");
          }

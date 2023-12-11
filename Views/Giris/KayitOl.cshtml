@@ -1,5 +1,4 @@
-﻿@using webProjeOdev2.Data.Enum;
-@model webProjeOdev2.Models.Hasta
+﻿@model webProjeOdev.Models.Hasta
 
 @{
     ViewData["Title"] = "KayitOl";
@@ -44,6 +43,12 @@
                 <span asp-validation-for="medeniHal" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="hastaSifre" class="control-label"></label>
+                <input asp-for="hastaSifre" class="form-control" />
+                <span asp-validation-for="hastaSifre" class="text-danger"></span>
+            </div>
+            
+            <div class="form-group">
                 <label asp-for="telefonNumarasi" class="control-label"></label>
                 <input asp-for="telefonNumarasi" class="form-control" />
                 <span asp-validation-for="telefonNumarasi" class="text-danger"></span>
@@ -55,15 +60,9 @@
             </div>
             <div class="form-group">
                 <label asp-for="Iller" class="control-label"></label>
-                <select asp-for="Iller" class="form-control" asp-items="Html.GetEnumSelectList<Il>()"></select>
+                <select asp-for="Iller" class="form-control" asp-items="Html.GetEnumSelectList<Hasta.Il>()"></select>
                 <span asp-validation-for="Iller" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="hastaSifre" class="control-label"></label>
-                <input asp-for="hastaSifre" class="form-control" />
-                <span asp-validation-for="hastaSifre" class="text-danger"></span>
-            </div>
-           
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>

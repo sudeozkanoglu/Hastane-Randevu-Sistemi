@@ -1,4 +1,4 @@
-namespace webProjeOdev2.Models
+namespace webProjeOdev.Models
 {
     public class ErrorViewModel
     {

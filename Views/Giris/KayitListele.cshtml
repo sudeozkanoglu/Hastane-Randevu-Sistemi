@@ -1,4 +1,4 @@
-﻿@model IEnumerable<webProjeOdev2.Models.Hasta>
+﻿@model IEnumerable<webProjeOdev.Models.Hasta>
 
 @{
     ViewData["Title"] = "KayitListele";
@@ -31,65 +31,42 @@
                 @Html.DisplayNameFor(model => model.medeniHal)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.telefonNumarasi)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Iller)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.hastaSifre)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Role)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.hastaTC)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.hastaAdi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.hastaSoyadi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.dogumTarihi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.cinsiyet)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.medeniHal)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.telefonNumarasi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Iller)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.hastaSifre)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Role)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.hastaId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.hastaId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.hastaId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.hastaTC)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.hastaAdi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.hastaSoyadi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.dogumTarihi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.cinsiyet)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.medeniHal)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.hastaSifre)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.hastaId">Edit</a> 
+                    <a asp-action="Details" asp-route-id="@item.hastaId">Details</a>
+                    <a asp-action="Delete" asp-route-id="@item.hastaId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
