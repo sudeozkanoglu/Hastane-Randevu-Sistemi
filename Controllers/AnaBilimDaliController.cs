@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using WebProjeOdev2.Data;
+using webProjeOdev2.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using webProjeOdev.Data;
-using webProjeOdev.Models;
 
-namespace webProjeOdev.Controllers
+namespace webProjeOdev2.Controllers
 {
     public class AnaBilimDaliController : Controller
     {
@@ -18,9 +17,11 @@ namespace webProjeOdev.Controllers
             return View(y);
         }
 
-        
+
         public IActionResult AnaBilimDaliEkle()
         {
+            ViewBag.HastaneList = new SelectList(s.Hastaneler.ToList(), "hastaneId", "hastaneAdi");
+
             return View();
         }
 
@@ -44,3 +45,4 @@ namespace webProjeOdev.Controllers
         }
     }
 }
+

@@ -1,4 +1,4 @@
-﻿@model webProjeOdev.Models.HastaneAnaBilim
+﻿@model webProjeOdev2.Models.HastaneAnaBilim
 
 @{
     ViewData["Title"] = "HastaneAnaBilimEkle";
@@ -15,10 +15,14 @@
             <div class="form-group">
                 <label asp-for="Hastane.hastaneAdi" class="control-label"></label>
                 <select asp-for="hastaneId" class ="form-control" asp-items="@ViewBag.HastaneList"></select>
+                <span asp-validation-for="hastaneId" class="text-danger"></span>
+
             </div>
             <div class="form-group">
                 <label asp-for="AnaBilimDali.anaBilimDaliAdi" class="control-label"></label>
-                <select asp-for="anaBilimDaliId" class ="form-control" asp-items="@ViewBag.AnaBilimDaliList"></select>
+                <select asp-for="anaBilimDaliId" class="form-control" asp-items="@ViewBag.AnaBilimList"></select>
+                <span asp-validation-for="anaBilimDaliId" class="text-danger"></span>
+                
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

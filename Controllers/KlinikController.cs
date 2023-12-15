@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using webProjeOdev.Data;
-using webProjeOdev.Models;
+using WebProjeOdev2.Data;
+using webProjeOdev2.Models;
 
-namespace webProjeOdev.Controllers
+namespace webProjeOdev2.Controllers
 {
     public class KlinikController : Controller
     {
@@ -16,8 +16,8 @@ namespace webProjeOdev.Controllers
                      on Klinik.anaBilimDaliId equals AnaBilimDali.anaBilimDaliId
                      select new
                      {
-                        klinikAdi = Klinik.klinikAdi,
-                        anaBilimDaliAdi = AnaBilimDali.anaBilimDaliAdi
+                         klinikAdi = Klinik.klinikAdi,
+                         anaBilimDaliAdi = AnaBilimDali.anaBilimDaliAdi
                      };
             return View(t1.ToList());
         }
@@ -40,9 +40,10 @@ namespace webProjeOdev.Controllers
             ModelState.Remove(nameof(k.Poliklinikler));
             ModelState.Remove(nameof(k.Doktorlar));
             ModelState.Remove(nameof(k.Randevular));
-            ModelState.Remove(nameof(k.AnaBilimDali));
             ModelState.Remove(nameof(k.HastaneKlinikler));
             ModelState.Remove(nameof(k.Hastaneler));
+            ModelState.Remove(nameof(k.AnaBilimDali));
+
             if (ModelState.IsValid)
             {
                 g.Klinikler.Add(k);

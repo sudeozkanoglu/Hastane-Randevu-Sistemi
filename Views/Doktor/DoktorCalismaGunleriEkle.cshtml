@@ -1,0 +1,54 @@
+﻿@using webProjeOdev2.Data.Enum;
+@model webProjeOdev2.Models.DoktorCalismaGunleri
+
+@{
+    ViewData["Title"] = "DoktorCalismaGunleriEkle";
+}
+
+<h1>DoktorCalismaGunleriEkle</h1>
+
+<h4>DoktorCalismaGunleri</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="DoktorCalismaGunleriEkle">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="calismaGunleri" class="control-label"></label>
+                <select asp-for="calismaGunleri" class="form-control" asp-items="Html.GetEnumSelectList<CalismaGunleri>()"></select>
+                <span asp-validation-for="calismaGunleri" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="calismaSaat" class="control-label"></label>
+                <input asp-for="calismaSaat" class="form-control" />
+                <span asp-validation-for="calismaSaat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Doktor.doktorAdi" class="control-label"></label>
+                <select asp-for="doktorId" class ="form-control" asp-items="@ViewBag.doktorList"></select>
+                <span asp-validation-for="doktorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Doktor.doktorSoyadi" class="control-label"></label>
+                <select asp-for="doktorId" class="form-control" asp-items="@ViewBag.doktorList"></select>
+                <span asp-validation-for="doktorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Doktor.AnaBilimDali.anaBilimDaliAdi" class="control-label"></label>
+                <select asp-for="Doktor.anaBilimDaliId" class="form-control" asp-items="@ViewBag.DoktorAlanBilgilerList"></select>
+                <span asp-validation-for="doktorId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

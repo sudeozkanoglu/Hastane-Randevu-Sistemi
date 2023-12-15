@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using webProjeOdev.Data;
-using webProjeOdev.Models;
+using WebProjeOdev2.Data;
+using webProjeOdev2.Models;
 
-namespace webProjeOdev.Controllers
+namespace webProjeOdev2.Controllers
 {
     public class PoliklinikController : Controller
     {
@@ -30,7 +30,7 @@ namespace webProjeOdev.Controllers
         {
             ModelState.Remove(nameof(l.Klinik));
             ModelState.Remove(nameof(l.Randevular));
-            ModelState.Remove(nameof(l.HastanePoliklinikler));
+            ModelState.Remove(nameof(l.HastaneKlinikler));
             ModelState.Remove(nameof(l.Hastaneler));
             ModelState.Remove(nameof(l.Doktor));
 

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebProjeOdev2.Data;
 
@@ -11,9 +12,11 @@ using WebProjeOdev2.Data;
 namespace webProjeOdev2.Migrations
 {
     [DbContext(typeof(HastaneRandevuContext))]
-    partial class HastaneRandevuContextModelSnapshot : ModelSnapshot
+    [Migration("20231210141157_mig_3")]
+    partial class mig_3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -246,14 +249,14 @@ namespace webProjeOdev2.Migrations
                     b.Property<int>("klinikId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PolikliniklerpoliklinikId")
+                    b.Property<int>("poliklinikId")
                         .HasColumnType("int");
 
                     b.HasKey("hastaneId", "klinikId");
 
-                    b.HasIndex("PolikliniklerpoliklinikId");
-
                     b.HasIndex("klinikId");
+
+                    b.HasIndex("poliklinikId");
 
                     b.ToTable("HastaneKlinik");
                 });
@@ -270,7 +273,7 @@ namespace webProjeOdev2.Migrations
 
                     b.HasIndex("poliklinikId");
 
-                    b.ToTable("HastanePoliklinikler");
+                    b.ToTable("HastanePoliklinik");
                 });
 
             modelBuilder.Entity("webProjeOdev2.Models.Klinik", b =>
@@ -443,10 +446,6 @@ namespace webProjeOdev2.Migrations
 
             modelBuilder.Entity("webProjeOdev2.Models.HastaneKlinik", b =>
                 {
-                    b.HasOne("webProjeOdev2.Models.Poliklinik", null)
-                        .WithMany("HastaneKlinikler")
-                        .HasForeignKey("PolikliniklerpoliklinikId");
-
                     b.HasOne("webProjeOdev2.Models.Hastane", "Hastane")
                         .WithMany("HastaneKlinikler")
                         .HasForeignKey("hastaneId")
@@ -456,6 +455,12 @@ namespace webProjeOdev2.Migrations
                     b.HasOne("webProjeOdev2.Models.Klinik", "Klinik")
                         .WithMany("HastaneKlinikler")
                         .HasForeignKey("klinikId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("webProjeOdev2.Models.Poliklinik", null)
+                        .WithMany("HastaneKlinikler")
+                        .HasForeignKey("poliklinikId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

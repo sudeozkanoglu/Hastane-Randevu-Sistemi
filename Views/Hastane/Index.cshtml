@@ -1,2 +1,53 @@
-﻿<h3>Hastane ve Iletisim Bilgileri Ekleme Basarili</h3>
-<h3>@TempData["msj"]</h3>
+﻿@model IEnumerable<webProjeOdev2.Models.Hastane>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.hastaneAdi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.telefonNumarasi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Iller)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.hastaneAdi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.telefonNumarasi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Iller)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.hastaneId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.hastaneId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.hastaneId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

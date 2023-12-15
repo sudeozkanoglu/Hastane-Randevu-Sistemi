@@ -1,10 +1,10 @@
-﻿@model IEnumerable<webProjeOdev2.Models.Hasta>
+﻿@model IEnumerable<webProjeOdev2.Models.Doktor>
 
 @{
-    ViewData["Title"] = "KayitListele";
+    ViewData["Title"] = "DoktorListele";
 }
 
-<h1>KayitListele</h1>
+<h1>DoktorListele</h1>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,13 +13,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.hastaTC)
+                @Html.DisplayNameFor(model => model.doktorAdi)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.hastaAdi)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.hastaSoyadi)
+                @Html.DisplayNameFor(model => model.doktorSoyadi)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.dogumTarihi)
@@ -39,11 +36,15 @@
             <th>
                 @Html.DisplayNameFor(model => model.Iller)
             </th>
+           
             <th>
-                @Html.DisplayNameFor(model => model.hastaSifre)
+                @Html.DisplayNameFor(model => model.AnaBilimDali)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Role)
+                @Html.DisplayNameFor(model => model.Klinik)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Hastane)
             </th>
             <th></th>
         </tr>
@@ -52,13 +53,10 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.hastaTC)
+                @Html.DisplayFor(modelItem => item.doktorAdi)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.hastaAdi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.hastaSoyadi)
+                @Html.DisplayFor(modelItem => item.doktorSoyadi)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.dogumTarihi)
@@ -78,16 +76,20 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Iller)
             </td>
+           
             <td>
-                @Html.DisplayFor(modelItem => item.hastaSifre)
+                @Html.DisplayFor(modelItem => item.AnaBilimDali)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Role)
+                @Html.DisplayFor(modelItem => item.Klinik.klinikAdi)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.hastaId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.hastaId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.hastaId">Delete</a>
+                @Html.DisplayFor(modelItem => item.Hastane.hastaneAdi)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.doktorId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.doktorId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.doktorId">Delete</a>
             </td>
         </tr>
 }

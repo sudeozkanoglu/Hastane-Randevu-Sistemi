@@ -1,44 +1,39 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using webProjeOdev.Data;
-using webProjeOdev.Models;
+using webProjeOdev2.Models;
+using WebProjeOdev2.Data;
 
-namespace webProjeOdev.Controllers
+namespace webProjeOdev2.Controllers
 {
     public class HastaneAnaBilimController : Controller
     {
-        private HastaneRandevuContext w = new HastaneRandevuContext();
-
-        public IActionResult Index()
-        {
-            return View();
-        }
+        private HastaneRandevuContext s = new HastaneRandevuContext();
 
         public IActionResult HastaneAnaBilimEkle()
         {
-            ViewBag.AnaBilimDaliList = new SelectList(w.AnaBilimDallari.ToList(), "anaBilimDaliId", "anaBilimDaliAdi");
-            ViewBag.HastaneList = new SelectList(w.Hastaneler.ToList(), "hastaneId", "hastaneAdi");
+            ViewBag.HastaneList = new SelectList(s.Hastaneler.ToList(), "hastaneId", "hastaneAdi");
+            ViewBag.AnaBilimList = new SelectList(s.AnaBilimDallari.ToList(), "anaBilimDaliId", "anaBilimDaliAdi");
+
             return View();
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult HastaneAnaBilimEkle(HastaneAnaBilim hab)
         {
             ModelState.Remove(nameof(hab.Hastane));
             ModelState.Remove(nameof(hab.AnaBilimDali));
-
             if (ModelState.IsValid)
             {
-                w.HastaneAnaBilimler.Add(hab);
-                w.SaveChanges();
-                TempData["msj"] = "Ekleme Başarılı";
-                return RedirectToAction("Index");
+                s.HastanedekiAnaBilimler.Add(hab);
+                s.SaveChanges();
+                return RedirectToAction("Success");
             }
-            ViewBag.AnaBilimDaliList = new SelectList(w.AnaBilimDallari.ToList(), "anaBilimDaliId", "anaBilimDaliAdi");
-            ViewBag.HastaneList = new SelectList(w.Hastaneler.ToList(), "hastaneId", "hastaneAdi");
-            TempData["msj"] = "Ekleme Başarısız";
-            return View(hab);
+            return View();
+        }
+
+        public IActionResult Success()
+        {
+            return View();
         }
     }
 }

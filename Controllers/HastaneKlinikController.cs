@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.SignalR;
-using webProjeOdev.Data;
-using webProjeOdev.Models;
+using WebProjeOdev2.Data;
+using webProjeOdev2.Models;
 
-namespace webProjeOdev.Controllers
+namespace webProjeOdev2.Controllers
 {
     public class HastaneKlinikController : Controller
     {
@@ -17,7 +16,7 @@ namespace webProjeOdev.Controllers
         public IActionResult HastaneKlinikEkle()
         {
             var y1 = from klinik in hc.Klinikler
-                     join anaBilim in hc.HastaneAnaBilimler on klinik.anaBilimDaliId equals anaBilim.anaBilimDaliId
+                     join anaBilim in hc.HastanedekiAnaBilimler on klinik.anaBilimDaliId equals anaBilim.anaBilimDaliId
                      where klinik.anaBilimDaliId == anaBilim.anaBilimDaliId
                      select klinik;
             ViewBag.HastaneList = new SelectList(hc.Hastaneler.ToList(), "hastaneId", "hastaneAdi");
@@ -40,7 +39,7 @@ namespace webProjeOdev.Controllers
             }
             TempData["msj"] = "Ekleme Başarısız";
             return View(hk);
-            
+
         }
     }
 }

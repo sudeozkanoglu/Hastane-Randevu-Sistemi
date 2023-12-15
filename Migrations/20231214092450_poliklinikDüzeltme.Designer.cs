@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebProjeOdev2.Data;
 
@@ -11,9 +12,11 @@ using WebProjeOdev2.Data;
 namespace webProjeOdev2.Migrations
 {
     [DbContext(typeof(HastaneRandevuContext))]
-    partial class HastaneRandevuContextModelSnapshot : ModelSnapshot
+    [Migration("20231214092450_poliklinikDüzeltme")]
+    partial class poliklinikDüzeltme
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
