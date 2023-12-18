@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace webProjeOdev2.Models
+namespace webProjeOdev8.Models
 {
     public class Randevu
     {

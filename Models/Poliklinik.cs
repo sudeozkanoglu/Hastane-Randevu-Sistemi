@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace webProjeOdev2.Models
+namespace webProjeOdev8.Models
 {
     public class Poliklinik
     {
@@ -15,7 +15,8 @@ namespace webProjeOdev2.Models
 
 
 
-     public Doktor Doktor { get; set; } = null!;
+        public int doktorId { get; set; }
+        public Doktor Doktor { get; set; } = null!;
         //*******************************************************
 
         [ForeignKey("Klinik")]
@@ -30,8 +31,8 @@ namespace webProjeOdev2.Models
 
         //********************************************************
         //Çok a çok ilişki kısmı - HastanePoliklinik
-        public List<HastaneKlinik> HastaneKlinikler { get; } = new();
         public List<Hastane> Hastaneler { get; } = new();
+        public List<HastanePoliklinik> HastanePoliklinikler { get; } = new();
 
     }
 }

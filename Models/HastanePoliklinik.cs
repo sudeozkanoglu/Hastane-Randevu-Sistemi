@@ -1,4 +1,4 @@
-﻿namespace webProjeOdev2.Models
+﻿namespace webProjeOdev8.Models
 {
     public class HastanePoliklinik
     {

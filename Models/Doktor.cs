@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using webProjeOdev2.Data.Enum;
+using webProjeOdev8.Data.Enum;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using webProjeOdev8.Models;
 
-namespace webProjeOdev2.Models
+namespace webProjeOdev8.Models
 {
     public class Doktor
     {
@@ -45,8 +47,8 @@ namespace webProjeOdev2.Models
             Evli,
             Bekar
         }
-        [Required]
-        [Phone]
+        [Required(ErrorMessage = "Telefon Numarası Gerekli")]
+        [Phone(ErrorMessage = "Telefon Numarası Uygun Değil")]
         [Display(Name = "Telefon Numarası")]
         public string telefonNumarasi { get; set; }
 
@@ -59,11 +61,12 @@ namespace webProjeOdev2.Models
         [Display(Name = "İl")]
         public Il Iller { get; set; }
 
-       
 
-    
-     public Poliklinik Poliklinik { get; set; } = null!;
+
         //***************************************************************
+
+
+        public Poliklinik Poliklinik { get; set; } = null!;
 
         [ForeignKey("AnaBilimDali")]
         public int anaBilimDaliId { get; set; }
@@ -81,8 +84,10 @@ namespace webProjeOdev2.Models
 
 
         //****************************************************************
-        public ICollection<DoktorCalismaGunleri> DoktorCalismaGunleri { get; set; }
         public ICollection<Randevu> Randevular { get; set; }
+        //Coka Cok kismi************************************************
+        public List<DoktorCalismaGunleri> DoktorCalismaGunleri { get; } = new();
+
 
     }
 }

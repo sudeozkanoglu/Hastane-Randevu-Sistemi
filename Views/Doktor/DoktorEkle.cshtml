@@ -1,5 +1,5 @@
-﻿@using webProjeOdev2.Data.Enum;
-@model webProjeOdev2.Models.Doktor
+﻿@using webProjeOdev8.Data.Enum;
+@model webProjeOdev8.Models.Doktor
 
 @{
     ViewData["Title"] = "DoktorEkle";
@@ -53,21 +53,31 @@
                 <select asp-for="Iller" class="form-control" asp-items="Html.GetEnumSelectList<Il>()"></select>
                 <span asp-validation-for="Iller" class="text-danger"></span>
             </div>
-            <div>
+
+  
+
+            <div class="form-group">
+
                 <select asp-for="hastaneId" id="HastaneSecim" asp-items="@ViewBag.HastaneList" onchange="AnaBilimleriDoldur(this,'anaBilimList'); " >
-                   
+                    <option disable selected>Hastane seciniz</option>
                 </select>
             </div>
             
            
-            <div>
+            <div class="form-group">
+
                 <select id="anaBilimList" asp-for="anaBilimDaliId" asp-items="ViewBag.anaBilimDaliId" onchange="KlinikleriDoldur(this,'klinikList');">
                 </select>
             </div>
-            <div>
-                <select id="klinikList" asp-for="klinikId" asp-items="ViewBag.klinikId">
+
+            <div class="form-group">
+
+                <select id="klinikList" asp-for="klinikId" asp-items="ViewBag.klinikId" >
                 </select>
             </div>
+           
+
+        
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
@@ -85,133 +95,3 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 }
-
-
-
-<!--
-------------------------------
-
-
-
-    <script>
-        $(function () {
-
-            $("#HastaneSecim").change(function () {
-                $("#anaBilimList").empty();
-                $.ajax({
-                    url: '/Doktor/AnaBilimGetirme',
-                    dataType: 'json',
-                    data: { id: $("#HastaneSecim").val() },
-                    success: function (data) {
-                        $("#anaBilimList").append("<option value'-1'> Ana Bilim Secin </option>");
-
-                        $.each(data, (index, value) => {
-
-                            $("#anaBilimList").append(`<option value="${value.value}">${value.text}</option>`);
-                        });
-                    }
-
-                })
-            });
-        })
-    </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
--------------------------------
-
-
-         <div class="form-group">
-    <label asp-for="Hastane.hastaneAdi" class="control-label"></label>
-    <select asp-for="hastaneId" class="form-control" asp-items="@ViewBag.HastaneList"></select>
-    <span asp-validation-for="hastaneId" class="text-danger"></span>
-</div>
-
-<div class="form-group">
-    <label asp-for="AnaBilimDali.anaBilimDaliAdi" class="control-label"></label>
-    <select asp-for="anaBilimDaliId" class ="form-control" asp-items="@ViewBag.AnaBilimDaliList"></select>
-    <span asp-validation-for="anaBilimDaliId" class="text-danger"></span>
-</div>
-<div class="form-group">
-    <label asp-for="Klinik.klinikAdi" class="control-label"></label>
-    <select asp-for="klinikId" class ="form-control" asp-items="@ViewBag.KlinikList"></select>
-    <span asp-validation-for="klinikId" class="text-danger"></span>
-</div>
-
-
-
-deneme1-------------------------------------
- <script type="text/javascript">
-        $(document).ready(function () {
-            GetAnaBilimByHastaneId();
-        })
-        $("#HastaneId").change(function () {
-            GetAnaBilimByHastaneId();
-        });
-        var GetAnaBilimByHastaneId = function () {
-            $.ajax({
-                url: '@Url.Action("GetAnaBilimByHastaneId","Doktor")',
-                type: 'GET',
-                data: {
-                    hastaneId: $('#hastaneId').val(),
-                },
-                success: function (data) {
-                    $('#anaBilimId').find('option').remove()
-                    $(data).each(
-                        function (index, item) {
-                            $('#anaBilimId').append('<option value="' + item.anaBilimDaliId + '">' + item.anaBilimDaliAdi + '</option>')
-                        }
-                    );
-                }
-            })
-        }
-
-
-    </script>
-    ----------------------------------
-
- $(document).ready(function () {
-            //Dropdown secme olayi
-            $("#HastaneList").change(function () {
-                $("#AnaBilimList").empty();
-                $.ajax({
-                    type: 'GET',
-                    url: '@Url.Action("AnaBilimYukle")',
-
-                    dataType: 'json',
-                    data: { id: $("#HastaneList").val() },
-
-                    success: function (anabilimdallari) {
-                        $("#AnaBilimList").append('<option value="' + -1+'">' +
-                            "Ana Bilim Dali Sec" + '</option>');
-                        $.each(anabilimdallari, function (i, anabilim) {
-                            $("#AnaBilimList").append('<option value="' + anabilim.value + '">' +
-                                anabilim.text + '</option>');
-                        });
-                    },
-                    error: function (ex) {
-                        alert('Ana bilim getirme hatasi' + ex);
-                    }
-                });
-                return false;
-            })
-        })
-
-
-
-
-
-
-                -->

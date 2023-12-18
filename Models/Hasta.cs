@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using webProjeOdev2.Data.Enum;
+using webProjeOdev8.Data.Enum;
 
-namespace webProjeOdev2.Models
+namespace webProjeOdev8.Models
 {
     public class Hasta
     {
