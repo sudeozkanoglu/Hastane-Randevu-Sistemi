@@ -6,13 +6,13 @@
     <title>@ViewData["Title"] - webProjeOdev2</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/webProjeOdev2.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/webProjeOdev8.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">webProjeOdev2</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">webProjeOdev8</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -20,13 +20,16 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Index</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="DoktorCalismaGunleri" asp-action="DoktorCalismaGunuEkle">Doktora calisma gun ekle</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="CalismaGunleri" asp-action="CalismaGunleriEkle">Cal Gun Ekle</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="HastaneKlinik" asp-action="HastaneKlinikEkle">Hastane İçin Klinik Ekle</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Poliklinik" asp-action="PoliklinikEkle">Poliklinik Ekle</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="HastanePoliklinik" asp-action="HastanePoliklinikEkle">Hastane İçin Poliklinik Ekle</a>
@@ -51,12 +54,8 @@
                             </li>
 
                             <!--Ifin icinde olmasi gerekiyor-->
-                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="HastaneKlinik" asp-action="HastaneKlinikEkle">Hastaneye klinik ekle</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Poliklinik" asp-action="PoliklinikEkle">Poliklinik ekle</a>
-                            </li>
+
+
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Klinik" asp-action="KlinikEkle">Klinik ekle</a>
                             </li>
@@ -92,7 +91,7 @@
     </div>
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2023 - webProjeOdev2 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2023 - webProjeOdev8 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
