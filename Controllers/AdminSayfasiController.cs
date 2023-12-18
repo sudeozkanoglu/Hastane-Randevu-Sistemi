@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace webProjeOdev2.Controllers
+namespace webProjeOdev8.Controllers
 {
     public class AdminSayfasiController : Controller
     {

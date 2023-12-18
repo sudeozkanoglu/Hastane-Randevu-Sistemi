@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using WebProjeOdev2.Data;
-using webProjeOdev2.Models;
+using WebProjeOdev8.Data;
+using webProjeOdev8.Models;
 
-namespace webProjeOdev2.Controllers
+namespace webProjeOdev8.Controllers
 {
     public class KlinikController : Controller
     {

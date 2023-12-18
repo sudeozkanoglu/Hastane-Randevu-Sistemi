@@ -2,11 +2,11 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using webProjeOdev2.Models;
-using WebProjeOdev2.Data;
+using webProjeOdev8.Models;
+using WebProjeOdev8.Data;
 using Microsoft.AspNetCore.Authorization;
 
-namespace webProjeOdev2.Controllers
+namespace webProjeOdev8.Controllers
 {
     public class GirisController : Controller
     {

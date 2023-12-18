@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using webProjeOdev2.Models;
-using WebProjeOdev2.Data;
+using webProjeOdev8.Models;
+using WebProjeOdev8.Data;
 
-namespace webProjeOdev2.Controllers
+namespace webProjeOdev8.Controllers
 {
     public class HastaneController : Controller
     {

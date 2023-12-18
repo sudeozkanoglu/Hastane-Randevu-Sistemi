@@ -1,9 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using WebProjeOdev2.Data;
-using webProjeOdev2.Models;
+using WebProjeOdev8.Data;
+using webProjeOdev8.Models;
 
-namespace webProjeOdev2.Controllers
+namespace webProjeOdev8.Controllers
 {
     public class PoliklinikController : Controller
     {
@@ -17,10 +17,34 @@ namespace webProjeOdev2.Controllers
         {
             return View();
         }
-
+        private List<SelectListItem> GetDoktor(int klinikId)
+        {
+            List<SelectListItem> lstDoktorlar = q.Doktorlar
+                .Where(c => c.klinikId == klinikId)
+                .OrderBy(n => n.doktorId)
+                .Select(n =>
+                new SelectListItem
+                {
+                    Value = n.doktorId.ToString(),
+                    Text = n.doktorAdi.ToString()+" "+n.doktorSoyadi.ToString()
+                }).ToList();
+            var defItem = new SelectListItem()
+            {
+                Value = "",
+                Text = "--Select doktor--"
+            };
+            lstDoktorlar.Insert(0, defItem);
+            return lstDoktorlar;
+        }
+        public JsonResult GetDoktorByKlinik(int klinikId)
+        {
+            List<SelectListItem> doktorlar = GetDoktor(klinikId);
+            return Json(doktorlar);
+        }
         public IActionResult PoliklinikEkle()
         {
             ViewBag.KlinikList = new SelectList(q.Klinikler.ToList(), "klinikId", "klinikAdi");
+           
             return View();
         }
 
@@ -30,9 +54,10 @@ namespace webProjeOdev2.Controllers
         {
             ModelState.Remove(nameof(l.Klinik));
             ModelState.Remove(nameof(l.Randevular));
-            ModelState.Remove(nameof(l.HastaneKlinikler));
+            ModelState.Remove(nameof(l.HastanePoliklinikler));
             ModelState.Remove(nameof(l.Hastaneler));
             ModelState.Remove(nameof(l.Doktor));
+          
 
             if (ModelState.IsValid)
             {

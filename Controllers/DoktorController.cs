@@ -1,10 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using webProjeOdev2.Models;
-using WebProjeOdev2.Data;
+using webProjeOdev8.Data.Enum;
+using webProjeOdev8.Models;
+using WebProjeOdev8.Data;
 
-namespace webProjeOdev2.Controllers
+namespace webProjeOdev8.Controllers
 {
     public class DoktorController : Controller
     {
@@ -12,7 +13,8 @@ namespace webProjeOdev2.Controllers
         public IActionResult DoktorEkle()
         {
              ViewBag.HastaneList = new SelectList(a.Hastaneler.ToList(), "hastaneId", "hastaneAdi");
-
+      
+            
             return View();
         }
  
@@ -55,7 +57,7 @@ namespace webProjeOdev2.Controllers
             var defItem = new SelectListItem()
             {
                 Value = "",
-                Text = "--Select ana bilim--"
+                Text = "--Select klinik--"
             };
             lstKlinikler.Insert(0, defItem);
             return lstKlinikler;
@@ -66,7 +68,32 @@ namespace webProjeOdev2.Controllers
             return Json(klinikler);
         }
 
-     
+        //poliklinik yappppppppppppppppppppppppppppppppppppppppppppppppp
+        private List<SelectListItem> GetPoliklinik(int klinikId)
+        {
+            List<SelectListItem> lstPoliklinikler = a.Poliklinikler
+                .Where(c => c.klinikId == klinikId)
+                .OrderBy(n => n.poliklinikId)
+                .Select(n =>
+                new SelectListItem
+                {
+                    Value = n.poliklinikId.ToString(),
+                    Text = n.poliklinikAdi.ToString()
+                }).ToList();
+            var defItem = new SelectListItem()
+            {
+                Value = "",
+                Text = "--Select poliklinik--"
+            };
+            lstPoliklinikler.Insert(0, defItem);
+            return lstPoliklinikler;
+        }
+        public JsonResult GetPoliklinikByKlinik(int klinikId)
+        {
+            List<SelectListItem> poliklinikler = GetPoliklinik(klinikId);
+            return Json(poliklinikler);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult DoktorEkle(Doktor d)
@@ -75,7 +102,6 @@ namespace webProjeOdev2.Controllers
             ModelState.Remove(nameof(d.Randevular));
             ModelState.Remove(nameof(d.Klinik));
             ModelState.Remove(nameof(d.AnaBilimDali));
-            ModelState.Remove(nameof(d.DoktorCalismaGunleri));
             ModelState.Remove(nameof(d.Hastane));
 
             if (ModelState.IsValid)
@@ -92,16 +118,32 @@ namespace webProjeOdev2.Controllers
             var y = a.Doktorlar.ToList();
             return View(y);
         }
+        
+       
 
-
-        public IActionResult DoktorCalismaGunleriEkle()
+            [HttpPost]
+        public IActionResult DoktorSil(int? id)
         {
-            ViewBag.DoktorList = new SelectList(a.Doktorlar.ToList(), "doktorId", "DoktorAdi", "DoktorSoyadi");
-            ViewBag.DoktorAlanBilgilerList = new SelectList(a.Doktorlar.ToList(), "anaBilimDaliId", "klinikId", "hastaneId");
-
-            return View();
+            if (id == null)
+            {
+                TempData["hata"] = " Lütfen bos gecmeyiniz";
+                return View("DoktorHata");
+            }
+            var d= a.Doktorlar.Include(x=>x.Randevular).FirstOrDefault(x=>x.doktorId==id);//Randevusu olan doktorlari listeler
+            if (d == null)
+            {
+                TempData["hata"] = " Doktora ait kayit bulunamadi";
+                return View("DoktorHata");
+            }
+            if(d.Randevular.Count()>0)
+            {
+                TempData["hata"] = " Doktora ait randevular var once randevulari iptal et";
+                return View("DoktorHata");
+            }
+            a.Doktorlar.Remove(d);
+            a.SaveChanges();
+            TempData["hata"] = " Doktor silindi";
+            return View("DoktorListele");
         }
-
-
     }
 }
