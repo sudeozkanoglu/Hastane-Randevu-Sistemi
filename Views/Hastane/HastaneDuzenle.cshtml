@@ -1,0 +1,92 @@
+﻿@model webProjeOdev.Models.Hastane
+
+<head>
+    <style>
+        .bg-img {
+            background-image: url('/images/yonetici.jpg') !important;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+            .bg-img::before {
+                background-color: rgba(0,0,0,0.6);
+                content: "";
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+            }
+
+        .hero-section .container {
+            height: 150vh;
+            z-index: 1;
+            position: relative;
+            margin-top: 15%;
+        }
+
+        .hero-section h1 {
+            font-size: 1.8rem;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-img">
+    <section class="hero-section">
+        <div class="container">
+            <div class="row ">
+                <div class="col-4 offset-4" style="text-align:center;">
+                    <h1>Hastane Düzenle</h1>
+                    <hr class="text-white" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 offset-4">
+                    <form asp-action="HastaneDuzenle">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="hastaneId" />
+                        <div class="form-group mt-3">
+                            <label asp-for="hastaneAdi" class="control-label"></label>
+                            <input asp-for="hastaneAdi" class="form-control" />
+                            <span asp-validation-for="hastaneAdi" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label asp-for="telefonNumarasi" class="control-label"></label>
+                            <input asp-for="telefonNumarasi" class="form-control" />
+                            <span asp-validation-for="telefonNumarasi" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label asp-for="email" class="control-label"></label>
+                            <input asp-for="email" class="form-control" />
+                            <span asp-validation-for="email" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label asp-for="Iller" class="control-label"></label>
+                            <select asp-for="Iller" class="form-control" asp-items="Html.GetEnumSelectList<Hastane.Il>()">
+                                <option value="">Seçiniz...</option>
+                            </select>
+                            <span asp-validation-for="Iller" class="text-danger"></span>
+                        </div>
+                        <div class="form-group d-grid mt-3">
+                            <button type="submit" value="Create" class="btn d-block" style="background-color:#B96028; color:white">Kaydet</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-4 ">
+                </div>
+                <div class="col-4 ">
+                    <a type="button" asp-area="" asp-controller="Hastane" asp-action="Index" class="btn mx-auto d-grid gap-2" style="background-color:#A3AB78; color:white">Önceki Sayfaya Dön</a>
+                </div>
+                <div class="col-4">
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

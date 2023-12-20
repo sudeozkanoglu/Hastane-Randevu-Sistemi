@@ -1,6 +1,219 @@
-﻿
-<div class="row">
-    <div class="col">
-        <h1 class="display-2">Admin Saayfasi</h1>
-    </div>
-</div>
+﻿@*AdminSayfasi Index*@
+<head>
+	<style>
+		.btn:hover{
+			color: #F2F2F2;
+		}
+
+		.bg-img {
+			background-image: url('/images/ilac.jpg') !important;
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+
+		.bg-img::before {
+			background-color: rgba(0,0,0,0.6);
+			content: "";
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+		}
+
+		.hero-section .container {
+			height: 170vh;
+			z-index: 1;
+			position: relative;
+			margin-top: 15%;
+		}
+
+		.hero-section h1 {
+			font-size: 1.8rem;
+			color: white;
+		}
+
+		.card{
+			position: absolute;
+			width:85vh;
+			height: 45vh;
+			transform-style: preserve-3d;
+			transition: all 0.5s ease;
+			margin-bottom: 10%;
+			background: rgba(255, 255, 255, 0.2);
+			border: 1px solid rgba(255,255,255, 0.3 );
+			box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+		}
+
+		.card:hover{
+			transform: rotateY(180deg);
+		}
+
+		.front{
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			backface-visibility: hidden;
+			color: black;
+			text-align: center;
+		}
+
+		.back{
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			backface-visibility: hidden;
+			color: black;
+			text-align: center;
+			transform: rotateY(180deg);
+		}
+
+		.row{
+			padding-bottom: 30% !important;
+		}
+
+		.card-text{
+			text-align: center;
+			margin-top: 10%;
+		}
+
+		.card-footer{
+			margin-top: 10%;
+		}
+	</style>
+</head>
+<body class="bg-img">
+	<section class="hero-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 mb-3">
+					<div class="card text-center">
+						<div class="front">
+							<div class="card-header">
+								Yönetici İşlemleri
+							</div>
+							<div class="card-body">
+								<h5 class="card-title">Hastane İşlemleri</h5>
+								<hr/>
+								<p class="card-text">Bu Menüden Sisteme Hastane Bilgisi Ekleyebilir, Hastane Bilgilerini Düzenleyebilir, Silebilir Ya Da Sistemdeki Hastaneleri Listeleyebilirsiniz.</p>
+							</div>
+							<div class="card-footer text-body-secondary">
+								Merkezi Randevu Sistemi
+							</div>
+						</div>
+						<div class="back">
+							<a class="btn btn-dark" style="margin-top: 20%;" asp-area="" asp-controller="Navigation" asp-action="HastaneNavigation">Hastane İşlemleri</a>
+						</div>
+						
+					</div>
+				</div>
+				<div class="col-md-6 mb-3">
+					<div class="card text-center">
+						<div class="front">
+							<div class="card-header">
+								Yönetici İşlemleri
+							</div>
+							<div class="card-body">
+								<h5 class="card-title">Ana Bilim Dalı İşlemleri</h5>
+								<hr />
+								<p class="card-text">Bu Menüden Sisteme Ana Bilim Dalı Bilgisi Ekleyebilir, Ana Bilim Dalı Bilgilerini Düzenleyebilir, Silebilir Ya Da Sistemdeki Ana Bilim Dallarını Listeleyebilirsiniz.</p>
+							</div>
+							<div class="card-footer text-body-secondary">
+								Merkezi Randevu Sistemi
+							</div>
+						</div>
+						<div class="back">
+							<a class="btn btn-dark" style="margin-top: 20%;" asp-area="" asp-controller="Navigation" asp-action="AnaBilimNavigation">Ana Bilim Dalı İşlemleri</a>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 mb-3">
+					<div class="card text-center" >
+						<div class="front">
+							<div class="card-header">
+								Yönetici İşlemleri
+							</div>
+							<div class="card-body">
+								<h5 class="card-title">Klinik İşlemleri</h5>
+								<hr />
+								<p class="card-text">Bu Menüden Sisteme Klinik Bilgisi Ekleyebilir, Klinik Bilgilerini Düzenleyebilir, Silebilir Ya Da Sistemdeki Klinikleri Listeleyebilirsiniz.</p>
+							</div>
+							<div class="card-footer text-body-secondary">
+								Merkezi Randevu Sistemi
+							</div>
+						</div>
+						<div class="back">
+							<a class="btn btn-dark" style="margin-top: 20%;" asp-area="" asp-controller="Navigation" asp-action="KlinikNavigation">Klinik İşlemleri</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 mb-3">
+					<div class="card text-center" >
+						<div class="front">
+							<div class="card-header">
+								Yönetici İşlemleri
+							</div>
+							<div class="card-body">
+								<h5 class="card-title">Poliklinik İşlemleri</h5>
+								<hr />
+								<p class="card-text">Bu Menüden Sisteme Poliklinik Bilgisi Ekleyebilir, Poliklinik Bilgilerini Düzenleyebilir, Silebilir Ya Da Sistemdeki Poliklinikleri Listeleyebilirsiniz.</p>
+							</div>
+							<div class="card-footer text-body-secondary">
+								Merkezi Randevu Sistemi
+							</div>
+						</div>
+						<div class="back">
+							<a class="btn btn-dark" style="margin-top: 20%;" asp-area="" asp-controller="Navigation" asp-action="PoliklinikNavigation">Poliklinik İşlemleri</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 mb-3">
+					<div class="card text-center" >
+						<div class="front">
+							<div class="card-header">
+								Yönetici İşlemleri
+							</div>
+							<div class="card-body">
+								<h5 class="card-title">Doktor İşlemleri</h5>
+								<hr />
+								<p class="card-text">Bu Menüden Sisteme Doktor Bilgisi Ekleyebilir, Doktor Bilgilerini Düzenleyebilir, Silebilir Ya Da Sistemdeki Klinikleri Listeleyebilirsiniz.</p>
+							</div>
+							<div class="card-footer text-body-secondary">
+								Merkezi Randevu Sistemi
+							</div>
+						</div>
+						<div class="back">
+							<a class="btn btn-dark" style="margin-top: 20%;" asp-area="" asp-controller="Navigation" asp-action="DoktorNavigation">Doktor İşlemleri</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6 mb-3 ">
+					<div class="card text-center">
+						<div class="front">
+							<div class="card-header">
+								Yönetici İşlemleri
+							</div>
+							<div class="card-body">
+								<h5 class="card-title">Hasta İşlemleri</h5>
+								<hr />
+								<p class="card-text">Bu Menüden Sisteme Hasta Bilgisi Ekleyebilir, Hasta Bilgilerini Düzenleyebilir, Silebilir Ya Da Sistemdeki Poliklinikleri Listeleyebilirsiniz.</p>
+							</div>
+							<div class="card-footer text-body-secondary">
+								Merkezi Randevu Sistemi
+							</div>
+						</div>
+						<div class="back">
+							<a  class="btn btn-dark" style="margin-top: 20%;" asp-area="" asp-controller="Navigation" asp-action="HastaNavigation">Hasta İşlemleri</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+</body>

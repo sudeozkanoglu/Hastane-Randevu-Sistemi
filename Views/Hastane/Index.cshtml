@@ -1,53 +1,83 @@
-﻿@model IEnumerable<webProjeOdev8.Models.Hastane>
+﻿@model IEnumerable<webProjeOdev.Models.Hastane>
 
-@{
-    ViewData["Title"] = "Index";
-}
+<head>
+    <style>
+        .bg-img {
+            background-image: url('/images/yonetici.jpg') !important;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
 
-<h1>Index</h1>
+            .bg-img::before {
+                background-color: rgba(0,0,0,0.6);
+                content: "";
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+            }
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.hastaneAdi)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.telefonNumarasi)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Iller)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.hastaneAdi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.telefonNumarasi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Iller)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.hastaneId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.hastaneId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.hastaneId">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+        .hero-section .container {
+            height: 150vh;
+            z-index: 1;
+            position: relative;
+            margin-top: 15%;
+        }
+
+        .hero-section h1 {
+            font-size: 1.8rem;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-img">
+    <section class="hero-section">
+        <div class="container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.hastaneAdi)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.telefonNumarasi)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.email)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Iller)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.hastaneAdi)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.telefonNumarasi)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Iller)
+                            </td>
+                            <td>
+                                <a asp-action="HastaneDuzenle" asp-route-id="@item.hastaneId">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.hastaneId">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.hastaneId">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>

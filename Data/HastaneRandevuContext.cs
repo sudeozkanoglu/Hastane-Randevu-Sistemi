@@ -1,18 +1,16 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using webProjeOdev.Models;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 using System.Reflection.Metadata;
 using Microsoft.Extensions.Hosting;
-using webProjeOdev2.Models;
 
-namespace WebProjeOdev2.Data
+namespace webProjeOdev.Data
 {
     public class HastaneRandevuContext : DbContext
     {
         public DbSet<AnaBilimDali> AnaBilimDallari { get; set; }
-        public DbSet<Doktor> Doktorlar { get; set; }
-        public DbSet<DoktorCalismaGunleri> DoktorCalismaGunleri { get; set; }
-        public DbSet<HastaneAnaBilim> HastanedekiAnaBilimler { get; set; }
+        public DbSet<Doktor>Doktorlar { get; set; }
         public DbSet<Hasta> Hastalar { get; set; }
         public DbSet<Hastane> Hastaneler { get; set; }
         public DbSet<Klinik> Klinikler { get; set; }
@@ -20,6 +18,11 @@ namespace WebProjeOdev2.Data
         public DbSet<Randevu> Randevular { get; set; }
         public DbSet<HastaneKlinik> HastaneKlinikler { get; set; }
         public DbSet<HastanePoliklinik> HastanePoliklinikler { get; set; }
+        public DbSet<HastaneAnaBilim> HastaneAnaBilimler { get; set; }
+        public DbSet<HastaneHasta> HastaneHastalar { get; set; }
+        public DbSet<CalismaGunleri> CalismaGunleri { get; set; }
+        public DbSet<DoktorCalismaGunleri> DoktorCalismaGunleri { get; set; }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -29,10 +32,6 @@ namespace WebProjeOdev2.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder.Entity<DoktorCalismaGunleri>()
-                .Property(a => a.calismaSaat)
-                .HasColumnType("time");
 
             modelBuilder.Entity<Randevu>()
                 .Property(a => a.randevuSaat)
@@ -68,8 +67,7 @@ namespace WebProjeOdev2.Data
                 .WithOne(u => u.AnaBilimDali)
                 .HasForeignKey(u => u.anaBilimDaliId)
                 .OnDelete(DeleteBehavior.NoAction)
-               .IsRequired();
-           
+                .IsRequired();
 
             modelBuilder.Entity<AnaBilimDali>()
                 .HasMany(f => f.Klinikler)
@@ -88,15 +86,6 @@ namespace WebProjeOdev2.Data
             //**************************************************
             //Doktor tabsolunda yer alan Collectionlar
 
-            modelBuilder.Entity<Poliklinik>()
-                 .HasKey(a => a.poliklinikId);
-
-            modelBuilder.Entity<Doktor>()
-                .HasOne(z => z.Poliklinik)
-                .WithOne(z => z.Doktor)
-                .HasForeignKey<Poliklinik>(a => a.poliklinikId);
-
-
             modelBuilder.Entity<Doktor>()
                 .HasMany(z => z.Randevular)
                 .WithOne(z => z.Doktor)
@@ -104,18 +93,8 @@ namespace WebProjeOdev2.Data
                 .OnDelete(DeleteBehavior.NoAction)
                 .IsRequired();
 
-            modelBuilder.Entity<Doktor>()
-              .HasMany(z => z.DoktorCalismaGunleri)
-              .WithOne(z => z.Doktor)
-              .HasForeignKey(z => z.doktorId)
-              .OnDelete(DeleteBehavior.NoAction)
-              .IsRequired();
-
             //**************************************************
             //Hasta tabsolunda yer alan Collectionlar
-
-
-
             modelBuilder.Entity<Hasta>()
                 .HasMany(b => b.Randevular)
                 .WithOne(b => b.Hasta)
@@ -125,8 +104,6 @@ namespace WebProjeOdev2.Data
 
             //**************************************************
             //Hastane tabsolunda yer alan Collectionlar
-
-
 
             modelBuilder.Entity<Hastane>()
                 .HasMany(d => d.Doktorlar)
@@ -150,8 +127,7 @@ namespace WebProjeOdev2.Data
                 .HasForeignKey(c => c.poliklinikId)
                 .OnDelete(DeleteBehavior.NoAction)
                 .IsRequired();
-
-
+            
             //**************************************************
             //Çok a çok ilişki kısmı
             //HastaneHasta
@@ -164,6 +140,7 @@ namespace WebProjeOdev2.Data
                 .HasMany(l => l.Hastalar)
                 .WithMany(l => l.Hastaneler)
                 .UsingEntity<HastaneHasta>();
+
             //**************************************************
             //Çok a çok ilişki kısmı
             //HastaneAnaBilim
@@ -179,31 +156,46 @@ namespace WebProjeOdev2.Data
             //**************************************************
             //Çok a çok ilişki kısmı
             //HastaneKlinik
-            modelBuilder.Entity<Hastane>()
-                .HasMany(w => w.Klinikler)
-                .WithMany(w => w.Hastaneler)
+           modelBuilder.Entity<Klinik>()
+                .HasMany(sa => sa.Hastaneler)
+                .WithMany(sa => sa.Klinikler)
                 .UsingEntity<HastaneKlinik>();
 
-            modelBuilder.Entity<Klinik>()
-                .HasMany(q => q.Hastaneler)
-                .WithMany(q => q.Klinikler)
+            modelBuilder.Entity<Hastane>()
+                .HasMany(sd => sd.Klinikler)
+                .WithMany(sd => sd.Hastaneler)
                 .UsingEntity<HastaneKlinik>();
             //**************************************************
             //Çok a çok ilişki kısmı
             //HastanePoliklinik
-            modelBuilder.Entity<Hastane>()
-                .HasMany(w => w.Poliklinikler)
-                .WithMany(w => w.Hastaneler)
+            modelBuilder.Entity<Poliklinik>()
+                .HasMany(sf => sf.Hastaneler)
+                .WithMany(sf => sf.Poliklinikler)
                 .UsingEntity<HastanePoliklinik>();
 
+            modelBuilder.Entity<Hastane>()
+                .HasMany(sh => sh.Poliklinikler)
+                .WithMany(sh => sh.Hastaneler)
+                .UsingEntity<HastanePoliklinik>();
+            //**************************************************
+            //Çok a çok ilişki kısmı
+            //DoktorCalismaGunleri
+            modelBuilder.Entity<DoktorCalismaGunleri>()
+                .HasKey(ky => new { ky.doktorId, ky.calismaGunleriId });
+            modelBuilder.Entity<DoktorCalismaGunleri>()
+                .HasOne(ky => ky.Doktor)
+                .WithMany(ky => ky.DoktorCalismaGunleri)
+                .HasForeignKey(ky => ky.doktorId);
+            modelBuilder.Entity<DoktorCalismaGunleri>()
+                .HasOne(ky => ky.CalismaGunleri)
+                .WithMany(ky => ky.DoktorCalismaGunleri)
+                .HasForeignKey(ky => ky.calismaGunleriId);
+
+            //**************************************************
             modelBuilder.Entity<Poliklinik>()
-                .HasMany(q => q.Hastaneler)
-                .WithMany(q => q.Poliklinikler)
-                .UsingEntity<HastaneKlinik>();
-
-
+                .HasOne(ax => ax.Doktor)
+                .WithOne(ax => ax.Poliklinik)
+                .HasForeignKey<Poliklinik>(ax => ax.doktorId);
         }
-
-        public DbSet<webProjeOdev2.Models.HastaneKlinik>? HastaneKlinik { get; set; }
     }
 }

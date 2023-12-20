@@ -1,8 +1,44 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿<html>
+	<head>
+        <style>
+            .body {
+                background: url('/images/pexels-cottonbro-studio-7579831.jpg') !important;
+                background-size: cover !important;
+                background-position: center;
+                background-repeat: no-repeat;
+            }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+            .body::before {
+                background-color: rgba(0,0,0,0.6);
+                content: "";
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+            }
+
+            .hero-section .container {
+                height: 100vh;
+                z-index: 1;
+                position: relative;
+            }
+
+            .hero-section h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero-section h2 {
+                font-size: 1.2rem;
+            }
+        </style>
+	</head>
+    <body class="body">
+        <section class="hero-section">
+        <div class="container d-flex align-items-center justify-content-center fs-1 text-white flex-column">
+                <h1>Merkezi Randevu Sistemine Hoş Geldiniz...</h1>
+			<h2>Online Olarak Randevu Oluşturmak İçin <b><i>'Randevu Oluştur'</i></b> Butonunu Kullanınız...</h2>
+            </div>
+        </section>
+    </body>
+</html>

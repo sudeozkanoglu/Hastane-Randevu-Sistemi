@@ -1,0 +1,218 @@
+﻿@*
+    Hastane Navigation Page
+*@
+<head>
+    <style>
+		.btn:hover {
+			color: #F2F2F2;
+		}
+
+		.bg-img {
+			background-image: url('/images/ilac.jpg') !important;
+			background-size: cover;
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+
+		.bg-img::before {
+			background-color: rgba(0,0,0,0.6);
+			content: "";
+			position: absolute;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 0;
+		}
+
+		.hero-section .container {
+			height: 220vh;
+			z-index: 1;
+			position: relative;
+			margin-top: 15%;
+		}
+
+		.hero-section h1 {
+			font-size: 1.8rem;
+			color: white;
+		}
+
+		.card {
+			position: absolute;
+			width: 85vh;
+			height: 45vh;
+			transform-style: preserve-3d;
+			transition: all 0.5s ease;
+			margin-bottom: 10%;
+			background: rgba(255, 255, 255, 0.2);
+			border: 1px solid rgba(255,255,255, 0.3 );
+			box-shadow: 0 4px 30px rgba(0,0,0,0.1);
+		}
+
+		.card:hover {
+			transform: rotateY(180deg);
+		}
+
+		.front {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			backface-visibility: hidden;
+			color: black;
+			text-align: center;
+		}
+
+		.back {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			backface-visibility: hidden;
+			color: black;
+			text-align: center;
+			transform: rotateY(180deg);
+		}
+
+		.row {
+			padding-bottom: 30% !important;
+		}
+
+		.card-body {
+			text-align: center;
+			margin-top: 10%;
+		}
+
+		.card-footer {
+			margin-top: 19%;
+		}
+    </style>
+</head>
+<body class="bg-img">
+   <section class="hero-section">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-6 mb-3">
+					<div class="card text-center">
+						<div class="front">
+							<div class="card-header">
+								Yönetici İşlemleri
+							</div>
+							<div class="card-body">
+								<h5 class="card-title">Hastane Ekleme İşlemleri</h5>
+							</div>
+							<div class="card-footer text-body-secondary">
+								Merkezi Randevu Sistemi
+							</div>
+						</div>
+						<div class="back">
+							<div class="card-body">
+								<hr/>
+								<p class="card-text">Bu Menüden Hastanenin Gerekli Bilgilerini Girerek Sisteme Kayıt Edebilirsiniz...</p>
+								<hr />
+							</div>
+							<a class="btn btn-dark" style="margin-top: 10%;" asp-area="" asp-controller="Hastane" asp-action="HastaneEkle">Hastane Ekle </a>
+						</div>
+
+					</div>
+				</div>
+				<div class="col-md-6 mb-3">
+					<div class="card text-center">
+						<div class="front">
+							<div class="card-header">
+								Yönetici İşlemleri
+							</div>
+							<div class="card-body">
+								<h5 class="card-title">Hastane Diğer İşlemleri</h5>
+							</div>
+							<div class="card-footer text-body-secondary">
+								Merkezi Randevu Sistemi
+							</div>
+						</div>
+						<div class="back">
+							<div class="card-body">
+								<hr />
+								<p class="card-text">Bu Menüden Hastaneyle İlgili Sistemde Yer Alan Bilgileri Listeleyebilir,Silebilir Ya Da Düzenleyebilirsiniz...</p>
+								<hr />
+							</div>
+							<a class="btn btn-dark" style="margin-top: 10%;" asp-area="" asp-controller="Hastane" asp-action="HastaneIslem">Hastane İşlemleri</a>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-6 mb-3">
+					<div class="card text-center">
+						<div class="front">
+							<div class="card-header">
+								Yönetici İşlemleri
+							</div>
+							<div class="card-body">
+								<h5 class="card-title">Hastaneye Ana Bilim Dalı Ekleme İşlemleri</h5>
+							</div>
+							<div class="card-footer text-body-secondary">
+								Merkezi Randevu Sistemi
+							</div>
+						</div>
+						<div class="back">
+							<div class="card-body">
+								<hr />
+								<p class="card-text">Bu Menüden Hastaneye Ana Bilim Dalı Bilgisi Ekleyebilirsiniz...</p>
+								<hr />
+							</div>
+							<a class="btn btn-dark" style="margin-top: 10%;" asp-area="" asp-controller="HastaneAnaBilim" asp-action="HastaneAnaBilimEkle">Ana Bilim Dalı Ekle </a>
+						</div>
+
+					</div>
+				</div>
+				<div class="col-md-6 mb-3">
+					<div class="card text-center">
+						<div class="front">
+							<div class="card-header">
+								Yönetici İşlemleri
+							</div>
+							<div class="card-body">
+								<h5 class="card-title">Hastaneye Klinik Ekleme İşlemleri</h5>
+							</div>
+							<div class="card-footer text-body-secondary">
+								Merkezi Randevu Sistemi
+							</div>
+						</div>
+						<div class="back">
+							<div class="card-body">
+								<hr />
+								<p class="card-text">Bu Menüden Hastaneye Klinik Bilgisi Ekleyebilirsiniz...</p>
+								<hr />
+							</div>
+							<a class="btn btn-dark" style="margin-top: 10%;" asp-area="" asp-controller="HastaneKlinik" asp-action="HastaneKlinikEkle">Klinik Ekle</a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-12 mb-3" style="margin-left: 25%;">
+					<div class="card text-center">
+						<div class="front">
+							<div class="card-header">
+								Yönetici İşlemleri
+							</div>
+							<div class="card-body">
+								<h5 class="card-title">Hastaneye Poliklinik Ekleme İşlemleri</h5>
+							</div>
+							<div class="card-footer text-body-secondary">
+								Merkezi Randevu Sistemi
+							</div>
+						</div>
+						<div class="back">
+							<div class="card-body">
+								<hr />
+								<p class="card-text">Bu Menüden Hastaneye Poliklinik Bilgisi Ekleyebilirsiniz...</p>
+								<hr />
+							</div>
+							<a class="btn btn-dark" style="margin-top: 10%;" asp-area="" asp-controller="HastanePoliklinik" asp-action="HastanePoliklinikEkle">Klinik Ekle</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+   </section>
+</body>
+

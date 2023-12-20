@@ -4,11 +4,11 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using WebProjeOdev2.Data;
+using webProjeOdev.Data;
 
 #nullable disable
 
-namespace webProjeOdev2.Migrations
+namespace webProjeSon.Migrations
 {
     [DbContext(typeof(HastaneRandevuContext))]
     partial class HastaneRandevuContextModelSnapshot : ModelSnapshot
@@ -22,7 +22,7 @@ namespace webProjeOdev2.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("webProjeOdev2.Models.AnaBilimDali", b =>
+            modelBuilder.Entity("webProjeOdev.Models.AnaBilimDali", b =>
                 {
                     b.Property<int>("anaBilimDaliId")
                         .ValueGeneratedOnAdd()
@@ -40,7 +40,30 @@ namespace webProjeOdev2.Migrations
                     b.ToTable("AnaBilimDallari");
                 });
 
-            modelBuilder.Entity("webProjeOdev2.Models.Doktor", b =>
+            modelBuilder.Entity("webProjeOdev.Models.CalismaGunleri", b =>
+                {
+                    b.Property<int>("calismaGunleriId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("calismaGunleriId"));
+
+                    b.Property<TimeSpan>("baslamaSaati")
+                        .HasColumnType("time");
+
+                    b.Property<TimeSpan>("bitisSaati")
+                        .HasColumnType("time");
+
+                    b.Property<string>("calismaGunleri")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("calismaGunleriId");
+
+                    b.ToTable("CalismaGunleri");
+                });
+
+            modelBuilder.Entity("webProjeOdev.Models.Doktor", b =>
                 {
                     b.Property<int>("doktorId")
                         .ValueGeneratedOnAdd()
@@ -98,31 +121,22 @@ namespace webProjeOdev2.Migrations
                     b.ToTable("Doktorlar");
                 });
 
-            modelBuilder.Entity("webProjeOdev2.Models.DoktorCalismaGunleri", b =>
+            modelBuilder.Entity("webProjeOdev.Models.DoktorCalismaGunleri", b =>
                 {
-                    b.Property<int>("doktorCalismaGunleriId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("doktorCalismaGunleriId"));
-
-                    b.Property<int>("calismaGunleri")
-                        .HasColumnType("int");
-
-                    b.Property<TimeSpan>("calismaSaat")
-                        .HasColumnType("time");
-
                     b.Property<int>("doktorId")
                         .HasColumnType("int");
 
-                    b.HasKey("doktorCalismaGunleriId");
+                    b.Property<int>("calismaGunleriId")
+                        .HasColumnType("int");
 
-                    b.HasIndex("doktorId");
+                    b.HasKey("doktorId", "calismaGunleriId");
+
+                    b.HasIndex("calismaGunleriId");
 
                     b.ToTable("DoktorCalismaGunleri");
                 });
 
-            modelBuilder.Entity("webProjeOdev2.Models.Hasta", b =>
+            modelBuilder.Entity("webProjeOdev.Models.Hasta", b =>
                 {
                     b.Property<int>("hastaId")
                         .ValueGeneratedOnAdd()
@@ -179,7 +193,7 @@ namespace webProjeOdev2.Migrations
                     b.ToTable("Hastalar");
                 });
 
-            modelBuilder.Entity("webProjeOdev2.Models.Hastane", b =>
+            modelBuilder.Entity("webProjeOdev.Models.Hastane", b =>
                 {
                     b.Property<int>("hastaneId")
                         .ValueGeneratedOnAdd()
@@ -208,7 +222,7 @@ namespace webProjeOdev2.Migrations
                     b.ToTable("Hastaneler");
                 });
 
-            modelBuilder.Entity("webProjeOdev2.Models.HastaneAnaBilim", b =>
+            modelBuilder.Entity("webProjeOdev.Models.HastaneAnaBilim", b =>
                 {
                     b.Property<int>("anaBilimDaliId")
                         .HasColumnType("int");
@@ -220,10 +234,10 @@ namespace webProjeOdev2.Migrations
 
                     b.HasIndex("hastaneId");
 
-                    b.ToTable("HastanedekiAnaBilimler");
+                    b.ToTable("HastaneAnaBilimler");
                 });
 
-            modelBuilder.Entity("webProjeOdev2.Models.HastaneHasta", b =>
+            modelBuilder.Entity("webProjeOdev.Models.HastaneHasta", b =>
                 {
                     b.Property<int>("hastaId")
                         .HasColumnType("int");
@@ -235,10 +249,10 @@ namespace webProjeOdev2.Migrations
 
                     b.HasIndex("hastaneId");
 
-                    b.ToTable("HastaneHasta");
+                    b.ToTable("HastaneHastalar");
                 });
 
-            modelBuilder.Entity("webProjeOdev2.Models.HastaneKlinik", b =>
+            modelBuilder.Entity("webProjeOdev.Models.HastaneKlinik", b =>
                 {
                     b.Property<int>("hastaneId")
                         .HasColumnType("int");
@@ -246,19 +260,14 @@ namespace webProjeOdev2.Migrations
                     b.Property<int>("klinikId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("PolikliniklerpoliklinikId")
-                        .HasColumnType("int");
-
                     b.HasKey("hastaneId", "klinikId");
-
-                    b.HasIndex("PolikliniklerpoliklinikId");
 
                     b.HasIndex("klinikId");
 
-                    b.ToTable("HastaneKlinik");
+                    b.ToTable("HastaneKlinikler");
                 });
 
-            modelBuilder.Entity("webProjeOdev2.Models.HastanePoliklinik", b =>
+            modelBuilder.Entity("webProjeOdev.Models.HastanePoliklinik", b =>
                 {
                     b.Property<int>("hastaneId")
                         .HasColumnType("int");
@@ -273,7 +282,7 @@ namespace webProjeOdev2.Migrations
                     b.ToTable("HastanePoliklinikler");
                 });
 
-            modelBuilder.Entity("webProjeOdev2.Models.Klinik", b =>
+            modelBuilder.Entity("webProjeOdev.Models.Klinik", b =>
                 {
                     b.Property<int>("klinikId")
                         .ValueGeneratedOnAdd()
@@ -296,9 +305,15 @@ namespace webProjeOdev2.Migrations
                     b.ToTable("Klinikler");
                 });
 
-            modelBuilder.Entity("webProjeOdev2.Models.Poliklinik", b =>
+            modelBuilder.Entity("webProjeOdev.Models.Poliklinik", b =>
                 {
                     b.Property<int>("poliklinikId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("poliklinikId"));
+
+                    b.Property<int>("doktorId")
                         .HasColumnType("int");
 
                     b.Property<int>("klinikId")
@@ -311,12 +326,15 @@ namespace webProjeOdev2.Migrations
 
                     b.HasKey("poliklinikId");
 
+                    b.HasIndex("doktorId")
+                        .IsUnique();
+
                     b.HasIndex("klinikId");
 
                     b.ToTable("Poliklinikler");
                 });
 
-            modelBuilder.Entity("webProjeOdev2.Models.Randevu", b =>
+            modelBuilder.Entity("webProjeOdev.Models.Randevu", b =>
                 {
                     b.Property<int>("randevuId")
                         .ValueGeneratedOnAdd()
@@ -365,21 +383,21 @@ namespace webProjeOdev2.Migrations
                     b.ToTable("Randevular");
                 });
 
-            modelBuilder.Entity("webProjeOdev2.Models.Doktor", b =>
+            modelBuilder.Entity("webProjeOdev.Models.Doktor", b =>
                 {
-                    b.HasOne("webProjeOdev2.Models.AnaBilimDali", "AnaBilimDali")
+                    b.HasOne("webProjeOdev.Models.AnaBilimDali", "AnaBilimDali")
                         .WithMany("Doktorlar")
                         .HasForeignKey("anaBilimDaliId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("webProjeOdev2.Models.Hastane", "Hastane")
+                    b.HasOne("webProjeOdev.Models.Hastane", "Hastane")
                         .WithMany("Doktorlar")
                         .HasForeignKey("hastaneId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("webProjeOdev2.Models.Klinik", "Klinik")
+                    b.HasOne("webProjeOdev.Models.Klinik", "Klinik")
                         .WithMany("Doktorlar")
                         .HasForeignKey("klinikId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -392,26 +410,34 @@ namespace webProjeOdev2.Migrations
                     b.Navigation("Klinik");
                 });
 
-            modelBuilder.Entity("webProjeOdev2.Models.DoktorCalismaGunleri", b =>
+            modelBuilder.Entity("webProjeOdev.Models.DoktorCalismaGunleri", b =>
                 {
-                    b.HasOne("webProjeOdev2.Models.Doktor", "Doktor")
+                    b.HasOne("webProjeOdev.Models.CalismaGunleri", "CalismaGunleri")
+                        .WithMany("DoktorCalismaGunleri")
+                        .HasForeignKey("calismaGunleriId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("webProjeOdev.Models.Doktor", "Doktor")
                         .WithMany("DoktorCalismaGunleri")
                         .HasForeignKey("doktorId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("CalismaGunleri");
 
                     b.Navigation("Doktor");
                 });
 
-            modelBuilder.Entity("webProjeOdev2.Models.HastaneAnaBilim", b =>
+            modelBuilder.Entity("webProjeOdev.Models.HastaneAnaBilim", b =>
                 {
-                    b.HasOne("webProjeOdev2.Models.AnaBilimDali", "AnaBilimDali")
+                    b.HasOne("webProjeOdev.Models.AnaBilimDali", "AnaBilimDali")
                         .WithMany("HastaneAnaBilimler")
                         .HasForeignKey("anaBilimDaliId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("webProjeOdev2.Models.Hastane", "Hastane")
+                    b.HasOne("webProjeOdev.Models.Hastane", "Hastane")
                         .WithMany("HastaneAnaBilimler")
                         .HasForeignKey("hastaneId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -422,15 +448,15 @@ namespace webProjeOdev2.Migrations
                     b.Navigation("Hastane");
                 });
 
-            modelBuilder.Entity("webProjeOdev2.Models.HastaneHasta", b =>
+            modelBuilder.Entity("webProjeOdev.Models.HastaneHasta", b =>
                 {
-                    b.HasOne("webProjeOdev2.Models.Hasta", "Hasta")
+                    b.HasOne("webProjeOdev.Models.Hasta", "Hasta")
                         .WithMany("HastaneHastalar")
                         .HasForeignKey("hastaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("webProjeOdev2.Models.Hastane", "Hastane")
+                    b.HasOne("webProjeOdev.Models.Hastane", "Hastane")
                         .WithMany("HastaneHastalar")
                         .HasForeignKey("hastaneId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -441,19 +467,15 @@ namespace webProjeOdev2.Migrations
                     b.Navigation("Hastane");
                 });
 
-            modelBuilder.Entity("webProjeOdev2.Models.HastaneKlinik", b =>
+            modelBuilder.Entity("webProjeOdev.Models.HastaneKlinik", b =>
                 {
-                    b.HasOne("webProjeOdev2.Models.Poliklinik", null)
-                        .WithMany("HastaneKlinikler")
-                        .HasForeignKey("PolikliniklerpoliklinikId");
-
-                    b.HasOne("webProjeOdev2.Models.Hastane", "Hastane")
+                    b.HasOne("webProjeOdev.Models.Hastane", "Hastane")
                         .WithMany("HastaneKlinikler")
                         .HasForeignKey("hastaneId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("webProjeOdev2.Models.Klinik", "Klinik")
+                    b.HasOne("webProjeOdev.Models.Klinik", "Klinik")
                         .WithMany("HastaneKlinikler")
                         .HasForeignKey("klinikId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -464,16 +486,16 @@ namespace webProjeOdev2.Migrations
                     b.Navigation("Klinik");
                 });
 
-            modelBuilder.Entity("webProjeOdev2.Models.HastanePoliklinik", b =>
+            modelBuilder.Entity("webProjeOdev.Models.HastanePoliklinik", b =>
                 {
-                    b.HasOne("webProjeOdev2.Models.Hastane", "Hastane")
+                    b.HasOne("webProjeOdev.Models.Hastane", "Hastane")
                         .WithMany("HastanePoliklinikler")
                         .HasForeignKey("hastaneId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("webProjeOdev2.Models.Poliklinik", "Poliklinik")
-                        .WithMany()
+                    b.HasOne("webProjeOdev.Models.Poliklinik", "Poliklinik")
+                        .WithMany("HastanePoliklinikler")
                         .HasForeignKey("poliklinikId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -483,9 +505,9 @@ namespace webProjeOdev2.Migrations
                     b.Navigation("Poliklinik");
                 });
 
-            modelBuilder.Entity("webProjeOdev2.Models.Klinik", b =>
+            modelBuilder.Entity("webProjeOdev.Models.Klinik", b =>
                 {
-                    b.HasOne("webProjeOdev2.Models.AnaBilimDali", "AnaBilimDali")
+                    b.HasOne("webProjeOdev.Models.AnaBilimDali", "AnaBilimDali")
                         .WithMany("Klinikler")
                         .HasForeignKey("anaBilimDaliId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -494,18 +516,18 @@ namespace webProjeOdev2.Migrations
                     b.Navigation("AnaBilimDali");
                 });
 
-            modelBuilder.Entity("webProjeOdev2.Models.Poliklinik", b =>
+            modelBuilder.Entity("webProjeOdev.Models.Poliklinik", b =>
                 {
-                    b.HasOne("webProjeOdev2.Models.Klinik", "Klinik")
+                    b.HasOne("webProjeOdev.Models.Doktor", "Doktor")
+                        .WithOne("Poliklinik")
+                        .HasForeignKey("webProjeOdev.Models.Poliklinik", "doktorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("webProjeOdev.Models.Klinik", "Klinik")
                         .WithMany("Poliklinikler")
                         .HasForeignKey("klinikId")
                         .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.HasOne("webProjeOdev2.Models.Doktor", "Doktor")
-                        .WithOne("Poliklinik")
-                        .HasForeignKey("webProjeOdev2.Models.Poliklinik", "poliklinikId")
-                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("Doktor");
@@ -513,39 +535,39 @@ namespace webProjeOdev2.Migrations
                     b.Navigation("Klinik");
                 });
 
-            modelBuilder.Entity("webProjeOdev2.Models.Randevu", b =>
+            modelBuilder.Entity("webProjeOdev.Models.Randevu", b =>
                 {
-                    b.HasOne("webProjeOdev2.Models.AnaBilimDali", "AnaBilimDali")
+                    b.HasOne("webProjeOdev.Models.AnaBilimDali", "AnaBilimDali")
                         .WithMany("Randevular")
                         .HasForeignKey("anaBilimDaliId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("webProjeOdev2.Models.Doktor", "Doktor")
+                    b.HasOne("webProjeOdev.Models.Doktor", "Doktor")
                         .WithMany("Randevular")
                         .HasForeignKey("doktorId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("webProjeOdev2.Models.Hasta", "Hasta")
+                    b.HasOne("webProjeOdev.Models.Hasta", "Hasta")
                         .WithMany("Randevular")
                         .HasForeignKey("hastaId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("webProjeOdev2.Models.Hastane", "Hastane")
+                    b.HasOne("webProjeOdev.Models.Hastane", "Hastane")
                         .WithMany("Randevular")
                         .HasForeignKey("hastaneId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("webProjeOdev2.Models.Klinik", "Klinik")
+                    b.HasOne("webProjeOdev.Models.Klinik", "Klinik")
                         .WithMany("Randevular")
                         .HasForeignKey("klinikId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("webProjeOdev2.Models.Poliklinik", "Poliklinik")
+                    b.HasOne("webProjeOdev.Models.Poliklinik", "Poliklinik")
                         .WithMany("Randevular")
                         .HasForeignKey("poliklinikId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -564,7 +586,7 @@ namespace webProjeOdev2.Migrations
                     b.Navigation("Poliklinik");
                 });
 
-            modelBuilder.Entity("webProjeOdev2.Models.AnaBilimDali", b =>
+            modelBuilder.Entity("webProjeOdev.Models.AnaBilimDali", b =>
                 {
                     b.Navigation("Doktorlar");
 
@@ -575,7 +597,12 @@ namespace webProjeOdev2.Migrations
                     b.Navigation("Randevular");
                 });
 
-            modelBuilder.Entity("webProjeOdev2.Models.Doktor", b =>
+            modelBuilder.Entity("webProjeOdev.Models.CalismaGunleri", b =>
+                {
+                    b.Navigation("DoktorCalismaGunleri");
+                });
+
+            modelBuilder.Entity("webProjeOdev.Models.Doktor", b =>
                 {
                     b.Navigation("DoktorCalismaGunleri");
 
@@ -585,14 +612,14 @@ namespace webProjeOdev2.Migrations
                     b.Navigation("Randevular");
                 });
 
-            modelBuilder.Entity("webProjeOdev2.Models.Hasta", b =>
+            modelBuilder.Entity("webProjeOdev.Models.Hasta", b =>
                 {
                     b.Navigation("HastaneHastalar");
 
                     b.Navigation("Randevular");
                 });
 
-            modelBuilder.Entity("webProjeOdev2.Models.Hastane", b =>
+            modelBuilder.Entity("webProjeOdev.Models.Hastane", b =>
                 {
                     b.Navigation("Doktorlar");
 
@@ -607,7 +634,7 @@ namespace webProjeOdev2.Migrations
                     b.Navigation("Randevular");
                 });
 
-            modelBuilder.Entity("webProjeOdev2.Models.Klinik", b =>
+            modelBuilder.Entity("webProjeOdev.Models.Klinik", b =>
                 {
                     b.Navigation("Doktorlar");
 
@@ -618,9 +645,9 @@ namespace webProjeOdev2.Migrations
                     b.Navigation("Randevular");
                 });
 
-            modelBuilder.Entity("webProjeOdev2.Models.Poliklinik", b =>
+            modelBuilder.Entity("webProjeOdev.Models.Poliklinik", b =>
                 {
-                    b.Navigation("HastaneKlinikler");
+                    b.Navigation("HastanePoliklinikler");
 
                     b.Navigation("Randevular");
                 });

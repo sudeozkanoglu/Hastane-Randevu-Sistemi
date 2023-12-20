@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using webProjeOdev8.Models;
-using WebProjeOdev8.Data;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using webProjeOdev.Data;
+using webProjeOdev.Models;
 
-namespace webProjeOdev8.Controllers
+namespace webProjeOdev.Controllers
 {
+    [Authorize]
     public class CalismaGunleriController : Controller
     {
         private HastaneRandevuContext c = new HastaneRandevuContext();
@@ -28,7 +30,7 @@ namespace webProjeOdev8.Controllers
             }
             TempData["msj"] = "Ekleme Başarısız";
             return View(cg);
-           
+
         }
     }
 }

@@ -1,0 +1,53 @@
+﻿@model webProjeOdev.Models.Hastane
+
+@{
+    ViewData["Title"] = "HastaneGuncelle";
+}
+
+<h1>HastaneGuncelle</h1>
+
+<h4>Hastane</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="HastaneGuncelle">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="hastaneId" />
+            <div class="form-group">
+                <label asp-for="hastaneId" class="control-label"></label>
+                <select asp-for="hastaneId" class="form-control" asp-items="@ViewBag.HastaneList">
+                    <option value="">Seçiniz...</option>
+                </select>
+            </div>
+            <hr/>
+            <div class="form-group">
+                <label asp-for="hastaneAdi" class="control-label"></label>
+                <input asp-for="hastaneAdi" class="form-control" />
+                <span asp-validation-for="hastaneAdi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="telefonNumarasi" class="control-label"></label>
+                <input asp-for="telefonNumarasi" class="form-control" />
+                <span asp-validation-for="telefonNumarasi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="email" class="control-label"></label>
+                <input asp-for="email" class="form-control" />
+                <span asp-validation-for="email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Iller" class="control-label"></label>
+                <select asp-for="Iller" class="form-control" asp-items="Html.GetEnumSelectList<Hastane.Il>()"></select>
+                <span asp-validation-for="Iller" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

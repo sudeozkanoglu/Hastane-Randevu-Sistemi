@@ -1,0 +1,78 @@
+﻿@model IEnumerable<webProjeOdev.Models.Poliklinik>
+
+<head>
+    <style>
+        .bg-img {
+            background-image: url('/images/yonetici.jpg') !important;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+            .bg-img::before {
+                background-color: rgba(0,0,0,0.6);
+                content: "";
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+            }
+
+        .hero-section .container {
+            height: 150vh;
+            z-index: 1;
+            position: relative;
+            margin-top: 15%;
+        }
+
+        .hero-section h1 {
+            font-size: 1.8rem;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-img">
+    <section class="hero-section">
+        <div class="container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.poliklinikAdi)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Klinik)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Doktor)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.poliklinikAdi)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Klinik.klinikAdi)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Doktor.doktorAdi)
+                            </td>
+                            <td>
+                                <a asp-action="PoliklinikDuzenle" asp-route-id="@item.poliklinikId">Edit</a> |
+                                <a asp-action="Details" asp-route-id="@item.poliklinikId">Details</a> |
+                                <a asp-action="Delete" asp-route-id="@item.poliklinikId">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>
+

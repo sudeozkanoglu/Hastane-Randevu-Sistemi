@@ -1,0 +1,85 @@
+﻿@model webProjeOdev.Models.Klinik
+
+<head>
+    <style>
+        .bg-img {
+            background-image: url('/images/yonetici.jpg') !important;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+            .bg-img::before {
+                background-color: rgba(0,0,0,0.6);
+                content: "";
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+            }
+
+        .hero-section .container {
+            height: 150vh;
+            z-index: 1;
+            position: relative;
+            margin-top: 15%;
+        }
+
+        .hero-section h1 {
+            font-size: 1.8rem;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-img">
+    <section class="hero-section">
+        <div class="container">
+            <div class="row ">
+                <div class="col-4 offset-4" style="text-align:center;">
+                    <h1>Klinik Düzenle</h1>
+                    <hr class="text-white" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 offset-4">
+                    <form asp-action="KlinikDuzenle">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="klinikId" />
+                        <div class="form-group mt-3">
+                            <label asp-for="klinikAdi" class="control-label">Klinik Adı</label>
+                            <input asp-for="klinikAdi" class="form-control" />
+                            <span asp-validation-for="klinikAdi" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label asp-for="anaBilimDaliId" class="control-label">Ana Bilim Dalı Adı</label>
+                            <select asp-for="anaBilimDaliId" class="form-control" asp-items="@ViewBag.AnaBilimDaliList"></select>
+                            <span asp-validation-for="anaBilimDaliId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group d-grid mt-3">
+                            <button type="submit" value="Create" class="btn d-block" style="background-color:#B96028; color:white">Kaydet</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-4 ">
+                </div>
+                <div class="col-4 ">
+                    <a type="button" asp-area="" asp-controller="Klinik" asp-action="Index" class="btn mx-auto d-grid gap-2" style="background-color:#A3AB78; color:white">Önceki Sayfaya Dön</a>
+                </div>
+                <div class="col-4">
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

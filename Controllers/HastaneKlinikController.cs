@@ -1,13 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using WebProjeOdev8.Data;
-using webProjeOdev8.Models;
+using Microsoft.AspNetCore.SignalR;
+using webProjeOdev.Data;
+using webProjeOdev.Models;
 
-namespace webProjeOdev8.Controllers
+namespace webProjeOdev.Controllers
 {
+    [Authorize]
     public class HastaneKlinikController : Controller
     {
-
         private HastaneRandevuContext hc = new HastaneRandevuContext();
         public IActionResult Index()
         {
@@ -17,7 +19,7 @@ namespace webProjeOdev8.Controllers
         public IActionResult HastaneKlinikEkle()
         {
             var y1 = from klinik in hc.Klinikler
-                     join anaBilim in hc.HastanedekiAnaBilimler on klinik.anaBilimDaliId equals anaBilim.anaBilimDaliId
+                     join anaBilim in hc.HastaneAnaBilimler on klinik.anaBilimDaliId equals anaBilim.anaBilimDaliId
                      where klinik.anaBilimDaliId == anaBilim.anaBilimDaliId
                      select klinik;
             ViewBag.HastaneList = new SelectList(hc.Hastaneler.ToList(), "hastaneId", "hastaneAdi");
@@ -40,7 +42,7 @@ namespace webProjeOdev8.Controllers
             }
             TempData["msj"] = "Ekleme Başarısız";
             return View(hk);
-
+            
         }
     }
 }

@@ -1,20 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using webProjeOdev8.Data.Enum;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using webProjeOdev8.Models;
+﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace webProjeOdev8.Models
+namespace webProjeOdev.Models
 {
     public class Doktor
     {
-
         [Key]
         public int doktorId { get; set; }
 
         [Required]
         [MaxLength(100)]
-        [Display(Name = "Doktor Adı")]
+        [Display(Name ="Doktor Adı")]
         public string doktorAdi { get; set; }
 
         [Required]
@@ -47,26 +43,106 @@ namespace webProjeOdev8.Models
             Evli,
             Bekar
         }
+
         [Required(ErrorMessage = "Telefon Numarası Gerekli")]
         [Phone(ErrorMessage = "Telefon Numarası Uygun Değil")]
         [Display(Name = "Telefon Numarası")]
         public string telefonNumarasi { get; set; }
 
-        [Required]
-        [EmailAddress]
+        [Required(ErrorMessage = "EmaiL gEREKLİ")]
+        [EmailAddress(ErrorMessage = "Email biçimi düzgün değil")]
         [Display(Name = "E-mail Adresi")]
         public string email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "İl seçimi zorunlu")]
         [Display(Name = "İl")]
         public Il Iller { get; set; }
 
-
+        public enum Il
+        {
+            Adana,
+            Adıyaman,
+            Afyonkarahisar,
+            Ağrı,
+            Aksaray,
+            Amasya,
+            Ankara,
+            Antalya,
+            Ardahan,
+            Artvin,
+            Aydın,
+            Balıkesir,
+            Bartın,
+            Batman,
+            Bayburt,
+            Bilecik,
+            Bingöl,
+            Bitlis,
+            Bolu,
+            Burdur,
+            Bursa,
+            Çanakkale,
+            Çankırı,
+            Çorum,
+            Denizli,
+            Diyarbakır,
+            Düzce,
+            Edirne,
+            Elazığ,
+            Erzincan,
+            Erzurum,
+            Eskişehir,
+            Gaziantep,
+            Giresun,
+            Gümüşhane,
+            Hakkari,
+            Hatay,
+            Iğdır,
+            Isparta,
+            İstanbul,
+            İzmir,
+            Kahramanmaraş,
+            Karabük,
+            Karaman,
+            Kars,
+            Kastamonu,
+            Kayseri,
+            Kırıkkale,
+            Kırklareli,
+            Kırşehir,
+            Kilis,
+            Kocaeli,
+            Konya,
+            Kütahya,
+            Malatya,
+            Manisa,
+            Mardin,
+            Mersin,
+            Muğla,
+            Muş,
+            Nevşehir,
+            Ordu,
+            Osmaniye,
+            Rize,
+            Sakarya,
+            Samsun,
+            Siirt,
+            Sinop,
+            Sivas,
+            Şanlıurfa,
+            Şırnak,
+            Tekirdağ,
+            Tokat,
+            Trabzon,
+            Tunceli,
+            Uşak,
+            Van,
+            Yalova,
+            Yozgat,
+            Zonguldak
+        }
 
         //***************************************************************
-
-
-        public Poliklinik Poliklinik { get; set; } = null!;
 
         [ForeignKey("AnaBilimDali")]
         public int anaBilimDaliId { get; set; }
@@ -81,13 +157,12 @@ namespace webProjeOdev8.Models
         public Hastane Hastane { get; set; } = null!;
 
 
+        public Poliklinik Poliklinik { get; set; }
 
 
         //****************************************************************
+        
         public ICollection<Randevu> Randevular { get; set; }
-        //Coka Cok kismi************************************************
         public List<DoktorCalismaGunleri> DoktorCalismaGunleri { get; } = new();
-
-
     }
 }
