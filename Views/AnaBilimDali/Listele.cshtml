@@ -1,0 +1,35 @@
+﻿@model IEnumerable<webProjeOdev8.Models.AnaBilimDali>
+
+@{
+    ViewData["Title"] = "Listele";
+}
+
+<h1>Listele</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.anaBilimDaliAdi)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.anaBilimDaliAdi)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.anaBilimDaliId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.anaBilimDaliId">Details</a> |
+                <a asp-action="Sil" asp-route-id="@item.anaBilimDaliId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

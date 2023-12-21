@@ -1,88 +1,67 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
-using webProjeOdev.Data;
-using webProjeOdev.Models;
+using webProjeOdev8.Models;
+using WebProjeOdev8.Data;
 
-namespace webProjeOdev.Controllers
+namespace webProjeOdev8.Controllers
 {
-    [Authorize]
     public class HastaneAnaBilimController : Controller
     {
-        private HastaneRandevuContext w = new HastaneRandevuContext();
-
-        public IActionResult Index()
-        {
-            var ha = w.HastaneAnaBilimler.Include(x => x.Hastane).Include(y => y.AnaBilimDali).ToList();
-            return View(ha);
-        }
+        private HastaneRandevuContext s = new HastaneRandevuContext();
 
         public IActionResult HastaneAnaBilimEkle()
         {
-            ViewBag.AnaBilimDaliList = new SelectList(w.AnaBilimDallari.ToList(), "anaBilimDaliId", "anaBilimDaliAdi");
-            ViewBag.HastaneList = new SelectList(w.Hastaneler.ToList(), "hastaneId", "hastaneAdi");
+            ViewBag.HastaneList = new SelectList(s.Hastaneler.ToList(), "hastaneId", "hastaneAdi");
+            ViewBag.AnaBilimList = new SelectList(s.AnaBilimDallari.ToList(), "anaBilimDaliId", "anaBilimDaliAdi");
+
             return View();
         }
-
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult HastaneAnaBilimEkle(HastaneAnaBilim hab)
         {
             ModelState.Remove(nameof(hab.Hastane));
             ModelState.Remove(nameof(hab.AnaBilimDali));
-
             if (ModelState.IsValid)
             {
-                w.HastaneAnaBilimler.Add(hab);
-                w.SaveChanges();
-                TempData["msj"] = "Ekleme Başarılı";
-                return RedirectToAction("Index");
+                s.HastanedekiAnaBilimler.Add(hab);
+                s.SaveChanges();
+                return RedirectToAction("Listele");
             }
-            ViewBag.AnaBilimDaliList = new SelectList(w.AnaBilimDallari.ToList(), "anaBilimDaliId", "anaBilimDaliAdi");
-            ViewBag.HastaneList = new SelectList(w.Hastaneler.ToList(), "hastaneId", "hastaneAdi");
-            TempData["msj"] = "Ekleme Başarısız";
-            return View(hab);
+            return View();
         }
-
-        public IActionResult HastaneAnaBilimDuzenle(int? id , int? id2)
+     
+        public IActionResult Sil(int? id1, int? id2)
         {
-            if (id is null || id2 is null)
+            if (id1 is null || id2 is null)
             {
-                TempData["hata"] = "Lütfen boş geçmeyiniz";
+                TempData["hata"] = "Lütfen silinecek alanı seçiniz";
                 return View("Hata");
             }
-            var k = w.HastaneAnaBilimler.FirstOrDefault(x => x.hastaneId == id && x.anaBilimDaliId == id2);
-            if (k == null)
-            {
-                TempData["hata"] = "Lütfen geçerli bir yazar giriniz ";
-                return View("Hata");
 
+            var hastaneAnaBilim = s.HastanedekiAnaBilimler
+                       .FirstOrDefault(x => x.Hastane.hastaneId == id1 && x.AnaBilimDali.anaBilimDaliId == id2);
+
+            if (hastaneAnaBilim == null)
+            {
+                TempData["hata"] = "Belirtilen öğe bulunamadı";
+                return View("Hata");
             }
-            ViewBag.AnaBilimDaliList = new SelectList(w.AnaBilimDallari.ToList(), "anaBilimDaliId", "anaBilimDaliAdi");
-            ViewBag.HastaneList = new SelectList(w.Hastaneler.ToList(), "hastaneId", "hastaneAdi");
-            return View(k);
+
+            s.HastanedekiAnaBilimler.Remove(hastaneAnaBilim);
+            s.SaveChanges();
+
+            return RedirectToAction("Listele");
         }
-
-        [HttpPost]
-        public IActionResult HastaneAnaBilimDuzenle(int? id, int? id2 , HastaneAnaBilim ah)
+        public IActionResult Listele()
         {
-            if (id != ah.hastaneId || id2 != ah.anaBilimDaliId)
-            {
-                TempData["Hata"] = "Hatalı";
-                return View("Hata");
-            }
-            ModelState.Remove(nameof(ah.Hastane));
-            ModelState.Remove(nameof(ah.AnaBilimDali));
-            if (ModelState.IsValid)
-            {
-                w.HastaneAnaBilimler.Update(ah);
-                w.SaveChanges();
-                return RedirectToAction("Index");
-            }
-            TempData["Hata"] = "Hatalı";
-            return View("Hata");
+            var y = s.HastanedekiAnaBilimler.Include(hab=>hab.Hastane).Include(hab=>hab.AnaBilimDali).ToList();
+            return View(y);
+        }
+        public IActionResult Hata()
+        {
+            return View();
         }
     }
 }

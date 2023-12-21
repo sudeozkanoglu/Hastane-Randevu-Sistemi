@@ -1,0 +1,66 @@
+﻿@model webProjeOdev8.Models.Randevu
+
+@{
+    ViewData["Title"] = "RandevuEkle";
+}
+
+<h1>RandevuEkle</h1>
+
+<h4>Randevu</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="RandevuEkle">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            
+            <div class="form-group">
+                <label asp-for="hastaneId" class="control-label" ></label>
+                <select asp-for="hastaneId" class="form-control" id="HastaneSecim" asp-items="@ViewBag.HastaneList" onchange="AnaBilimleriDoldur(HastaneSecim,'anaBilimList'); ">
+                    <option disable selected>Hastane seciniz</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label asp-for="anaBilimDaliId" class="control-label" ></label>
+                <select asp-for="anaBilimDaliId" class="form-control" asp-items="ViewBag.anaBilimDaliId" id="anaBilimList" onchange="KlinikleriDoldur(this,'klinikList');"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="klinikId" class="control-label"></label>
+                <select asp-for="klinikId" class="form-control" asp-items="ViewBag.klinikId" id="klinikList" onchange="DoktoruDoldur2(HastaneSecim,this,'doktorList');"></select>
+            </div>
+           
+            <div class="form-group">
+                <label asp-for="doktorId" class="control-label"></label>
+                <select asp-for="doktorId" class="form-control" asp-items="ViewBag.doktorId" id="doktorList" onchange="PoliklinikleriDoldur2(this,'poliklinikList')"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="poliklinikId" class="control-label"></label>
+                <select asp-for="poliklinikId" class="form-control" asp-items="ViewBag.poliklinikId" id="poliklinikList" ></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="randevuTarihi" class="control-label"></label>
+                <input asp-for="randevuTarihi" class="form-control" />
+                <span asp-validation-for="randevuTarihi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="randevuSaat" class="control-label"></label>
+                <input asp-for="randevuSaat" class="form-control" />
+                <span asp-validation-for="randevuSaat" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="hastaId" class="control-label"></label>
+                <select asp-for="hastaId" class ="form-control" asp-items="ViewBag.hastaId"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

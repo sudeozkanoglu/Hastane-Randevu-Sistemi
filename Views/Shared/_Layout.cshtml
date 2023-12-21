@@ -3,43 +3,82 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - webProjeOdev</title>
+    <title>@ViewData["Title"] - webProjeOdev2</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/webProjeOdev.styles.css" asp-append-version="true" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/webProjeOdev8.styles.css" asp-append-version="true" />
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-lg fixed-top">
-            <div class="container">
-                <a class="navbar-brand me-auto" asp-area="" asp-controller="Home" asp-action="Index">Logo</a>
-                <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
-                    <div class="offcanvas-header">
-                        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Logo</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                    </div>
-                    <div class="offcanvas-body">
-                        <ul class="navbar-nav justify-content-center flex-grow-1 pe-3">
-                            <li class="nav-item">
-                                <a class="nav-link mx-lg-2 active" aria-current="page" asp-area="" asp-controller="Home" asp-action="Index">Ana Sayfa</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link mx-lg-2" asp-area="" asp-controller="Giris" asp-action="KayitOl">Randevu Al</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                @if(!User.Identity.IsAuthenticated)
-                {
-                    <a class="btn login-button" asp-area="" asp-controller="Giris" asp-action="AdminLogin">Yönetici Girişi</a>
-                }
-                else{
-                    <a class="btn login-button" asp-area="" asp-controller="Giris" asp-action="AdminLogout">Çıkış Yap</a>
-                }
-                <button class="navbar-toggler pe-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+            <div class="container-fluid">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">webProjeOdev8</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="DoktorCalismaGunleri" asp-action="DoktorCalismaGunuEkle">Doktora calisma gun ekle</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="CalismaGunleri" asp-action="CalismaGunleriEkle">Cal Gun Ekle</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="HastaneKlinik" asp-action="HastaneKlinikEkle">Hastane İçin Klinik Ekle</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Poliklinik" asp-action="PoliklinikEkle">Poliklinik Ekle</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="HastanePoliklinik" asp-action="HastanePoliklinikEkle">Hastane İçin Poliklinik Ekle</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Doktor" asp-action="DoktorListele">Doktor Listele</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Doktor" asp-action="DoktorListele">Doktor Listele</a>
+                        </li>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Giris" asp-action="AdminLogout">Cikis</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Giris" asp-action="AdminLogin">Admin Girisi</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Giris" asp-action="KayitOl">Kayit Ol</a>
+                            </li>
+
+                            <!--Ifin icinde olmasi gerekiyor-->
+
+
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Klinik" asp-action="KlinikEkle">Klinik ekle</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="AnaBilimDali" asp-action="AnaBilimDaliEkle">Ana Bilim Dali ekle</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Doktor" asp-action="DoktorEkle">Doktor ekle</a>
+                            </li>
+                          
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Hastane" asp-action="HastaneEkle">Hastane ekle</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="HastaneAnaBilim" asp-action="HastaneAnaBilimEkle">Hastaneye ana bilim ekle</a>
+                            </li>
+                        }
+
+                    </ul>
+                </div>
             </div>
         </nav>
     </header>
@@ -48,6 +87,11 @@
             @RenderBody()
         </main>
     </div>
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - webProjeOdev8 - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<webProjeOdev8.Models.DoktorCalismaGunleri>
+
+@{
+    ViewData["Title"] = "Listele";
+}
+
+<h1>Listele</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Doktor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CalismaGunleri)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+            var doktor = item.Doktor.doktorAdi + " " + item.Doktor.doktorSoyadi;
+            var calismazamani = item.CalismaGunleri.calismaGunleri + " " + item.CalismaGunleri.baslamaSaati + "-" + item.CalismaGunleri.bitisSaati;
+            <tr>
+            <td>
+                @Html.DisplayFor(modelItem =>doktor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => calismazamani)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Sil", new {  id1=item.doktorId, id2=item.calismaGunleriId  })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

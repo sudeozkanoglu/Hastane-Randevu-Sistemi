@@ -1,4 +1,4 @@
-﻿namespace webProjeOdev2.Data.Enum
+﻿namespace webProjeOdev8.Data.Enum
 {
     public enum Il
     {

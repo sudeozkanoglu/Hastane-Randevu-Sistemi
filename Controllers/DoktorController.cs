@@ -1,25 +1,24 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using webProjeOdev.Data;
-using webProjeOdev.Models;
+using Microsoft.EntityFrameworkCore;
+using webProjeOdev8.Data.Enum;
+using webProjeOdev8.Models;
+using WebProjeOdev8.Data;
 
-namespace webProjeOdev.Controllers
+namespace webProjeOdev8.Controllers
 {
-    [Authorize]
     public class DoktorController : Controller
     {
         private HastaneRandevuContext a = new HastaneRandevuContext();
         public IActionResult DoktorEkle()
         {
-            ViewBag.HastaneList = new SelectList(a.Hastaneler.ToList(), "hastaneId", "hastaneAdi");
-
+             ViewBag.HastaneList = new SelectList(a.Hastaneler.ToList(), "hastaneId", "hastaneAdi");
             return View();
         }
-
+ 
         private List<SelectListItem> GetAnaBilim(int hastaneId)
         {
-            List<SelectListItem> lstAnaBilimler = a.HastaneAnaBilimler
+            List<SelectListItem> lstAnaBilimler = a.HastanedekiAnaBilimler
                 .Where(c => c.hastaneId == hastaneId)
                 .OrderBy(n => n.AnaBilimDali.anaBilimDaliAdi)
                 .Select(n =>
@@ -29,16 +28,16 @@ namespace webProjeOdev.Controllers
                     Text = n.AnaBilimDali.anaBilimDaliAdi
                 }).ToList();
             var defItem = new SelectListItem()
-            {
-                Value = "",
-                Text = "--Select ana bilim--"
+            { 
+                Value="",
+                Text="--Select ana bilim--"
             };
             lstAnaBilimler.Insert(0, defItem);
             return lstAnaBilimler;
         }
         public JsonResult GetAnaBilimByHastane(int hastaneId)
         {
-            List<SelectListItem> anabilimler = GetAnaBilim(hastaneId);
+            List<SelectListItem> anabilimler=GetAnaBilim(hastaneId);
             return Json(anabilimler);
         }
 
@@ -56,7 +55,7 @@ namespace webProjeOdev.Controllers
             var defItem = new SelectListItem()
             {
                 Value = "",
-                Text = "--Select ana bilim--"
+                Text = "--Select klinik--"
             };
             lstKlinikler.Insert(0, defItem);
             return lstKlinikler;
@@ -67,6 +66,31 @@ namespace webProjeOdev.Controllers
             return Json(klinikler);
         }
 
+        //poliklinik yappppppppppppppppppppppppppppppppppppppppppppppppp
+        private List<SelectListItem> GetPoliklinik(int klinikId)
+        {
+            List<SelectListItem> lstPoliklinikler = a.Poliklinikler
+                .Where(c => c.klinikId == klinikId)
+                .OrderBy(n => n.poliklinikId)
+                .Select(n =>
+                new SelectListItem
+                {
+                    Value = n.poliklinikId.ToString(),
+                    Text = n.poliklinikAdi.ToString()
+                }).ToList();
+            var defItem = new SelectListItem()
+            {
+                Value = "",
+                Text = "--Select poliklinik--"
+            };
+            lstPoliklinikler.Insert(0, defItem);
+            return lstPoliklinikler;
+        }
+        public JsonResult GetPoliklinikByKlinik(int klinikId)
+        {
+            List<SelectListItem> poliklinikler = GetPoliklinik(klinikId);
+            return Json(poliklinikler);
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -89,9 +113,70 @@ namespace webProjeOdev.Controllers
         }
         public IActionResult DoktorListele()
         {
-            var y = a.Doktorlar.ToList();
+            var y = a.Doktorlar.Include(a => a.AnaBilimDali).Include(a => a.Hastane).Include(a => a.Klinik).ToList();
             return View(y);
         }
 
+        public IActionResult DoktorSil(int? id)
+        {
+            if (id == null)//Gereksizzzzzzzzzzzzzzzzzz
+            {
+                TempData["hata"] = " Lütfen bos gecmeyiniz";
+                return View("DoktorHata");
+            }
+            var d= a.Doktorlar.Include(x=>x.Randevular).FirstOrDefault(x=>x.doktorId==id);//Randevusu olan doktorlari listeler
+            if (d == null)//Gereksizzzzzzzzzzzzzzzzzzzzz
+            {
+                TempData["hata"] = " Doktora ait kayit bulunamadi";
+                return View("DoktorHata");
+            }
+            if(d.Randevular.Count()>0)
+            {
+                TempData["hata"] = " Doktora ait randevular var once randevulari iptal et";
+                return View("DoktorHata");
+            }
+            a.Doktorlar.Remove(d);
+            a.SaveChanges();
+            TempData["hata"] = " Doktor silindi";
+            return RedirectToAction("DoktorListele");
+        }/*
+        public IActionResult DoktorDuzenle(int? id)
+        {
+            if (id is null)
+            {
+                TempData["hata"] = "Lütfen boş geçmeyiniz";
+                return View("YazarHata");
+            }
+            var y = a.Doktorlar.FirstOrDefault(x => x.doktorId == id);
+            if (y == null)
+            {
+                TempData["hata"] = "Lütfen geçerli bir yazar giriniz ";
+                return View("YazarHata");
+
+            }
+            return View(y);
+        }
+        [HttpPost]
+        public IActionResult DoktorDuzenle(int? id, Doktor y)
+        {
+            if (id != y.doktorId)
+            {
+                TempData["hata"] = "Lütfen bızıklama ";
+                return View("Hata");
+
+            }
+            if (ModelState.IsValid)
+            {
+                // var yaz=   k.Yazarlar.FirstOrDefault(x => x.YazarID == id);
+                // yaz.YazarAd = y.YazarAd; Bu işlemleri otomotaik yapıyor
+                a.Doktorlar.Update(y);
+                a.SaveChanges();
+                TempData["msj"] = y.doktorAdi +" "+y.doktorSoyadi+ " adlı doktor düzenlendi";
+                return RedirectToAction("DoktorListele");
+            }
+            TempData["hata"] = "Lütfen tüm alanları doldurun ";
+            return View("Hata");
+        }
+        */
     }
 }

@@ -1,4 +1,9 @@
-﻿function AnaBilimleriDoldur(lstHastaneCtrl, lstAnaBilimId) {
+﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
+// for details on configuring this project to bundle and minify static web assets.
+
+// Write your JavaScript code.
+
+function AnaBilimleriDoldur(lstHastaneCtrl, lstAnaBilimId) {
     var lstAnaBilimler = $("#" + lstAnaBilimId);
     lstAnaBilimler.empty();
 
@@ -63,6 +68,27 @@ function PoliklinikleriDoldur(lstKlinikCtrl, lstPoliklinikId) {
     }
     return;
 }
+function PoliklinikleriDoldur2(lstDoktorCtrl, lstPoliklinikId) {
+    var lstPoliklinikler = $("#" + lstPoliklinikId);
+    lstPoliklinikler.empty();
+
+    var selectedDoktor = lstDoktorCtrl.options[lstDoktorCtrl.selectedIndex].value;
+
+    if (selectedDoktor != null && selectedDoktor != '') {
+        $.getJSON("/Randevu/GetPoliklinikByDoktor", { doktorId: selectedDoktor }, function (poliklinikler) {
+            if (poliklinikler != null && !jQuery.isEmptyObject(poliklinikler)) {
+                $.each(poliklinikler, function (index, poliklinik) {
+                    lstPoliklinikler.append($('<option/>',
+                        {
+                            value: poliklinik.value,
+                            text: poliklinik.text
+                        }));
+                });
+            };
+        });
+    }
+    return;
+}
 function DoktoruDoldur(lstKlinikCtrl, lstDoktorId) {
     var lstDoktorlar = $("#" + lstDoktorId);
     lstDoktorlar.empty();
@@ -71,6 +97,28 @@ function DoktoruDoldur(lstKlinikCtrl, lstDoktorId) {
 
     if (selectedKlinik != null && selectedKlinik != '') {
         $.getJSON("/Poliklinik/GetDoktorByKlinik", { klinikId: selectedKlinik }, function (doktorlar) {
+            if (doktorlar != null && !jQuery.isEmptyObject(doktorlar)) {
+                $.each(doktorlar, function (index, doktor) {
+                    lstDoktorlar.append($('<option/>',
+                        {
+                            value: doktor.value,
+                            text: doktor.text
+                        }));
+                });
+            };
+        });
+    }
+    return;
+}
+function DoktoruDoldur2(lstHastaneCtrl, lstKlinikCtrl, lstDoktorId) {
+    var lstDoktorlar = $("#" + lstDoktorId);
+    lstDoktorlar.empty();
+
+    var selectedKlinik = lstKlinikCtrl.options[lstKlinikCtrl.selectedIndex].value;
+    var selectedHastane = lstHastaneCtrl.options[lstHastaneCtrl.selectedIndex].value;
+
+    if (selectedKlinik != null && selectedKlinik != '' && selectedHastane != null && selectedHastane != '') {
+        $.getJSON("/Randevu/GetDoktorByHastaneAndKlinik", { klinikId: selectedKlinik, hastaneId: selectedHastane }, function (doktorlar) {
             if (doktorlar != null && !jQuery.isEmptyObject(doktorlar)) {
                 $.each(doktorlar, function (index, doktor) {
                     lstDoktorlar.append($('<option/>',

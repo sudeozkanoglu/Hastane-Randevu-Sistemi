@@ -1,26 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using webProjeOdev.Data;
-using webProjeOdev.Models;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.AspNetCore.Authorization;
+using webProjeOdev8.Models;
+using WebProjeOdev8.Data;
 
-namespace webProjeOdev.Controllers
+namespace webProjeOdev8.Controllers
 {
-    [Authorize]
     public class HastaneController : Controller
     {
-        private HastaneRandevuContext h = new HastaneRandevuContext();
-        public IActionResult Index()
-        {
-            var ha = h.Hastaneler.ToList();
-            return View(ha);
-        }
+        private HastaneRandevuContext g = new HastaneRandevuContext();
 
-        public IActionResult Unsuccess()
-        {
-            return View();
-        }
         public IActionResult HastaneEkle()
         {
             return View();
@@ -28,87 +17,74 @@ namespace webProjeOdev.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult HastaneEkle(Hastane ha)
+        public IActionResult HastaneEkle(Hastane h)
         {
 
-            ModelState.Remove(nameof(ha.Hastalar));
-            ModelState.Remove(nameof(ha.Doktorlar));
-            ModelState.Remove(nameof(ha.Randevular));
-            ModelState.Remove(nameof(ha.HastaneAnaBilimler));
-            ModelState.Remove(nameof(ha.AnaBilimDallari));
-            ModelState.Remove(nameof(ha.HastaneKlinikler));
-            ModelState.Remove(nameof(ha.Klinikler));
-            ModelState.Remove(nameof(ha.HastanePoliklinikler));
-            ModelState.Remove(nameof(ha.Poliklinikler));
-
-            try
-            {
-                if (ModelState.IsValid)
-                {
-                    
-                    h.Hastaneler.Add(ha);
-
-                    // Tek bir SaveChanges çağrısı ile değişiklikleri kaydet
-                    h.SaveChanges();
-
-                    TempData["msj"] = "Ekleme Başarılı";
-                    return RedirectToAction("Index");
-                }
-                TempData["msj"] = "Ekleme Başarısız - Geçersiz Model";
-                return RedirectToAction("Unsuccess");
-            }
-            catch (Exception ex)
-            {
-                // Loglama yapabilir veya hata mesajını başka bir şekilde işleyebilirsiniz
-                TempData["msj"] = "Ekleme Başarısız - Veritabanı Hatası";
-                return RedirectToAction("Unsuccess");
-            }
-        }
-
-        public IActionResult HastaneDuzenle(int? id)
-        {
-            if (id is null)
-            {
-                TempData["hata"] = "Lütfen boş geçmeyiniz";
-                return View("Hata");
-            }
-            var ha = h.Hastaneler.FirstOrDefault(x => x.hastaneId == id);
-            if (ha == null)
-            {
-                TempData["hata"] = "Lütfen geçerli bir yazar giriniz ";
-                return View("Hata");
-
-            }
-            return View(ha);
-        }
-
-        [HttpPost]
-        public IActionResult HastaneDuzenle(int? id, Hastane ha)
-        {
-            if (id != ha.hastaneId)
-            {
-                TempData["Hata"] = "Hatalıı";
-                return View("Hata");
-            }
-
-            ModelState.Remove(nameof(ha.Hastalar));
-            ModelState.Remove(nameof(ha.Doktorlar));
-            ModelState.Remove(nameof(ha.Randevular));
-            ModelState.Remove(nameof(ha.HastaneAnaBilimler));
-            ModelState.Remove(nameof(ha.AnaBilimDallari));
-            ModelState.Remove(nameof(ha.HastaneKlinikler));
-            ModelState.Remove(nameof(ha.Klinikler));
-            ModelState.Remove(nameof(ha.HastanePoliklinikler));
-            ModelState.Remove(nameof(ha.Poliklinikler));
-
+            ModelState.Remove(nameof(h.Klinikler));
+            ModelState.Remove(nameof(h.Doktorlar));
+            ModelState.Remove(nameof(h.Randevular));
+            ModelState.Remove(nameof(h.HastaneHastalar));
+            ModelState.Remove(nameof(h.Hastalar));
+            ModelState.Remove(nameof(h.HastaneAnaBilimler));
+            ModelState.Remove(nameof(h.AnaBilimDallari));
+            ModelState.Remove(nameof(h.HastaneKlinikler));
+            ModelState.Remove(nameof(h.HastanePoliklinikler));
+            ModelState.Remove(nameof(h.Poliklinikler));
             if (ModelState.IsValid)
             {
-                h.Hastaneler.Update(ha);
-                h.SaveChanges();
+                g.Hastaneler.Add(h);
+                g.SaveChanges();
+                TempData["msj"] = h.hastaneAdi + "Hastane Eklendi";
                 return RedirectToAction("Index");
             }
-            TempData["Hata"] = "Hatalı";
-            return View("Hata");
+            TempData["msj"] = "Ekleme Başarısız";
+            return View(h);
+        }
+        public IActionResult Index()
+        {
+            var y = g.Hastaneler.ToList();
+            return View(y);
+        }
+        public IActionResult HastaneSil(int? id)//Hastaneyi sildigimde icinde hastaneyle ilgili bilgi olanlarin hepsini silebiliriz aslinda
+        {
+            if (id == null)
+            {
+                TempData["hata"] = " Lütfen bos gecmeyiniz";
+                return View("HastaneHata");
+            }
+            var r = g.Hastaneler.Include(x => x.Randevular)
+                .FirstOrDefault(x => x.hastaneId == id);//O hastanede var olan randevulari listeler
+            if (r == null)
+            {
+                TempData["hata"] = " Hastaneye ait kayit bulunamadi";
+                return View("HastaneHata");
+            }
+            if (r.Randevular.Count() > 0)
+            {
+                TempData["hata"] = " Hastaneye ait randevular var once randevulari iptal et";
+                return View("HastaneHata");
+            }
+            var d = g.Hastaneler.Include(x => x.Doktorlar)
+              .FirstOrDefault(x => x.hastaneId == id);//O hastanede var olan randevulari listeler
+            if (d == null)
+            {
+                TempData["hata"] = " Hastaneye ait kayit bulunamadi";
+                return View("HastaneHata");
+            }
+            if (d.Doktorlar.Count() > 0)
+            {
+                TempData["hata"] = "Hastaneye kayitli doktorlar var önce doktorlari sil";
+                return View("HastaneHata");
+            }
+            g.Hastaneler.Remove(d);
+            g.SaveChanges();
+            TempData["hata"] = " Doktor silindi";
+            return RedirectToAction("DoktorListele");
+        }
+        public IActionResult HastaneHata()
+        {
+            var y = g.Hastaneler.ToList();
+            return View(y);
         }
     }
-} 
+}

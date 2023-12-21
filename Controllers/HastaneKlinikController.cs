@@ -1,17 +1,38 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.AspNetCore.SignalR;
-using webProjeOdev.Data;
-using webProjeOdev.Models;
+using WebProjeOdev8.Data;
+using webProjeOdev8.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace webProjeOdev.Controllers
+namespace webProjeOdev8.Controllers
 {
-    [Authorize]
     public class HastaneKlinikController : Controller
     {
+
         private HastaneRandevuContext hc = new HastaneRandevuContext();
-        public IActionResult Index()
+        public IActionResult Sil(int? id1, int? id2)
+        {
+           
+            var hastaneKlinik = hc.HastaneKlinikler
+                       .SingleOrDefault(x => x.Hastane.hastaneId == id1 && x.Klinik.klinikId == id2);
+
+            if (hastaneKlinik == null)
+            {
+                TempData["hata"] = "Belirtilen öğe bulunamadı";
+                return View("Hata");
+            }
+
+            hc.HastaneKlinikler.Remove(hastaneKlinik);
+            hc.SaveChanges();
+
+            return RedirectToAction("Listele");
+        }
+        public IActionResult Listele()
+        {
+            var y = hc.HastaneKlinikler.Include(hab => hab.Hastane).Include(hab => hab.Klinik).ToList();
+            return View(y);
+        }
+        public IActionResult Hata()
         {
             return View();
         }
@@ -19,7 +40,7 @@ namespace webProjeOdev.Controllers
         public IActionResult HastaneKlinikEkle()
         {
             var y1 = from klinik in hc.Klinikler
-                     join anaBilim in hc.HastaneAnaBilimler on klinik.anaBilimDaliId equals anaBilim.anaBilimDaliId
+                     join anaBilim in hc.HastanedekiAnaBilimler on klinik.anaBilimDaliId equals anaBilim.anaBilimDaliId
                      where klinik.anaBilimDaliId == anaBilim.anaBilimDaliId
                      select klinik;
             ViewBag.HastaneList = new SelectList(hc.Hastaneler.ToList(), "hastaneId", "hastaneAdi");
@@ -38,11 +59,11 @@ namespace webProjeOdev.Controllers
                 hc.HastaneKlinikler.Add(hk);
                 hc.SaveChanges();
                 TempData["msj"] = "Ekleme Başarılı";
-                return RedirectToAction("Index");
+                return RedirectToAction("Listele");
             }
             TempData["msj"] = "Ekleme Başarısız";
             return View(hk);
-            
+
         }
     }
 }

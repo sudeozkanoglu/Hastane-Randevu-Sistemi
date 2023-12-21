@@ -1,0 +1,41 @@
+﻿@model IEnumerable<webProjeOdev8.Models.HastaneKlinik>
+
+@{
+    ViewData["Title"] = "Listele";
+}
+
+<h1>Listele</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Hastane)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Klinik)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Hastane.hastaneAdi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Klinik.klinikAdi)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                    @Html.ActionLink("Delete", "Sil", new {  id1=item.hastaneId ,id2=item.klinikId })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
