@@ -1,10 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using webProjeOdev8.Models;
-using WebProjeOdev8.Data;
+using webProjeOdev.Data;
+using webProjeOdev.Models;
 
-namespace webProjeOdev8.Controllers
+namespace webProjeSon.Controllers
 {
     public class RandevuController : Controller
     {
@@ -23,7 +22,7 @@ namespace webProjeOdev8.Controllers
         {
             List<SelectListItem> lstDoktorlar = a.Doktorlar
                 .Where(c => c.hastaneId == hastaneId)
-                .Where(c=>c.klinikId==klinikId)
+                .Where(c => c.klinikId == klinikId)
                 .OrderBy(n => n.doktorAdi)
                 .Select(n =>
                 new SelectListItem
@@ -39,9 +38,9 @@ namespace webProjeOdev8.Controllers
             lstDoktorlar.Insert(0, defItem);
             return lstDoktorlar;
         }
-        public JsonResult GetDoktorByHastaneAndKlinik(int hastaneId,int klinikId)
+        public JsonResult GetDoktorByHastaneAndKlinik(int hastaneId, int klinikId)
         {
-            List<SelectListItem> doktorlar = GetDoktor(hastaneId,klinikId);
+            List<SelectListItem> doktorlar = GetDoktor(hastaneId, klinikId);
             return Json(doktorlar);
         }
         private List<SelectListItem> GetPoliklinik(int doktorId)
@@ -71,7 +70,7 @@ namespace webProjeOdev8.Controllers
         public IActionResult RandevuEkle()
         {
             ViewBag.HastaneList = new SelectList(a.Hastaneler.ToList(), "hastaneId", "hastaneAdi");
-           
+
             return View();
         }
 

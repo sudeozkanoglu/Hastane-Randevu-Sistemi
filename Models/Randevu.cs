@@ -1,11 +1,11 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace webProjeOdev8.Models
+namespace webProjeOdev.Models
 {
     public class Randevu
     {
-
         [Key]
         public int randevuId { get; set; }
 
@@ -45,6 +45,5 @@ namespace webProjeOdev8.Models
         [ForeignKey("Hasta")]
         public int hastaId { get; set; }
         public Hasta Hasta { get; set; } = null!;
-
     }
 }

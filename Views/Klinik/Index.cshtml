@@ -1,30 +1,70 @@
-﻿@model webProjeOdev8.Models.Klinik
+﻿@model IEnumerable<webProjeOdev.Models.Klinik>
+<head>
+    <style>
+        .bg-img {
+            background-image: url('/images/yonetici.jpg') !important;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
 
-@{
-    ViewData["Title"] = "Index";
-}
+            .bg-img::before {
+                background-color: rgba(0,0,0,0.6);
+                content: "";
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+            }
 
-<h1>Index</h1>
+        .hero-section .container {
+            height: 150vh;
+            z-index: 1;
+            position: relative;
+            margin-top: 15%;
+        }
 
-<div>
-    <h4>Klinik</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.klinikAdi)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.klinikAdi)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.AnaBilimDali)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.AnaBilimDali.anaBilimDaliAdi)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.klinikId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+        .hero-section h1 {
+            font-size: 1.8rem;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-img">
+    <section class="hero-section">
+        <div class="container">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.klinikAdi)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.AnaBilimDali)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.klinikAdi)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AnaBilimDali.anaBilimDaliAdi)
+                            </td>
+                            <td>
+                                <a asp-action="KlinikDuzenle" asp-route-id="@item.klinikId">@_localization.GetKey("edit").Value</a> |
+                                <a asp-action="Delete" asp-route-id="@item.klinikId">@_localization.GetKey("delete").Value</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </section>
+</body>
+

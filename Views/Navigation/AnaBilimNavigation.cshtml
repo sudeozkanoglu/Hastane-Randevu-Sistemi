@@ -93,22 +93,22 @@
 					<div class="card text-center">
 						<div class="front">
 							<div class="card-header">
-								Yönetici İşlemleri
+								@_localization.GetKey("adminpro").Value
 							</div>
 							<div class="card-body">
-								<h5 class="card-title">Ana Bilim Dalı Ekleme İşlemleri</h5>
+								<h5 class="card-title">@_localization.GetKey("ana")</h5>
 							</div>
 							<div class="card-footer text-body-secondary">
-								Merkezi Randevu Sistemi
+								@_localization.GetKey("central").Value
 							</div>
 						</div>
 						<div class="back">
 							<div class="card-body">
 								<hr />
-								<p class="card-text">Bu Menüden Ana Bilim Dalının Gerekli Bilgilerini Girerek Sisteme Kayıt Edebilirsiniz...</p>
+								<p class="card-text">@_localization.GetKey("anaReg").Value</p>
 								<hr />
 							</div>
-							<a class="btn btn-dark" style="margin-top: 10%;" asp-area="" asp-controller="AnaBilimDali" asp-action="AnaBilimDaliEkle">Ana Bilim Dalı Ekle </a>
+							<a class="btn btn-dark" style="margin-top: 10%;" asp-area="" asp-controller="AnaBilimDali" asp-action="AnaBilimDaliEkle">@_localization.GetKey("addMajor").Value </a>
 						</div>
 
 					</div>
@@ -117,22 +117,22 @@
 					<div class="card text-center">
 						<div class="front">
 							<div class="card-header">
-								Yönetici İşlemleri
+								@_localization.GetKey("adminpro").Value
 							</div>
 							<div class="card-body">
-								<h5 class="card-title">Ana Bilim Dalı Diğer İşlemleri</h5>
+								<h5 class="card-title">@_localization.GetKey("ana2")</h5>
 							</div>
 							<div class="card-footer text-body-secondary">
-								Merkezi Randevu Sistemi
+								@_localization.GetKey("central").Value
 							</div>
 						</div>
 						<div class="back">
 							<div class="card-body">
 								<hr />
-								<p class="card-text">Bu Menüden Ana Bilim Dalıyla İlgili Sistemde Yer Alan Bilgileri Listeleyebilir,Silebilir Ya Da Güncelleyebilirsiniz...</p>
+								<p class="card-text">@_localization.GetKey("otherAna").Value</p>
 								<hr />
 							</div>
-							<a class="btn btn-dark" style="margin-top: 10%;" asp-area="" asp-controller="AnaBilimDali" asp-action="AnaBilimDaliIslem">Ana Bilim Dalı İşlemleri</a>
+							<a class="btn btn-dark" style="margin-top: 10%;" asp-area="" asp-controller="AnaBilimDali" asp-action="Index">@_localization.GetKey("ana").Value</a>
 						</div>
 
 					</div>

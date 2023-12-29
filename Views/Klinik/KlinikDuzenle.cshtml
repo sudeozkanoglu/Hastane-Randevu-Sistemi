@@ -37,7 +37,7 @@
         <div class="container">
             <div class="row ">
                 <div class="col-4 offset-4" style="text-align:center;">
-                    <h1>Klinik Düzenle</h1>
+                    <h1>@_localization.GetKey("editClinic").Value</h1>
                     <hr class="text-white" />
                 </div>
             </div>
@@ -47,17 +47,17 @@
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <input type="hidden" asp-for="klinikId" />
                         <div class="form-group mt-3">
-                            <label asp-for="klinikAdi" class="control-label">Klinik Adı</label>
+                            <label asp-for="klinikAdi" class="control-label" style="color:white;">@_localization.GetKey("clinicName").Value</label>
                             <input asp-for="klinikAdi" class="form-control" />
                             <span asp-validation-for="klinikAdi" class="text-danger"></span>
                         </div>
                         <div class="form-group mt-3">
-                            <label asp-for="anaBilimDaliId" class="control-label">Ana Bilim Dalı Adı</label>
+                            <label asp-for="anaBilimDaliId" class="control-label" style="color: white;">@_localization.GetKey("majorName").Value</label>
                             <select asp-for="anaBilimDaliId" class="form-control" asp-items="@ViewBag.AnaBilimDaliList"></select>
                             <span asp-validation-for="anaBilimDaliId" class="text-danger"></span>
                         </div>
                         <div class="form-group d-grid mt-3">
-                            <button type="submit" value="Create" class="btn d-block" style="background-color:#B96028; color:white">Kaydet</button>
+                            <button type="submit" value="Create" class="btn d-block" style="background-color:#B96028; color:white">@_localization.GetKey("save").Value</button>
                         </div>
                     </form>
                 </div>
@@ -67,7 +67,7 @@
                 <div class="col-4 ">
                 </div>
                 <div class="col-4 ">
-                    <a type="button" asp-area="" asp-controller="Klinik" asp-action="Index" class="btn mx-auto d-grid gap-2" style="background-color:#A3AB78; color:white">Önceki Sayfaya Dön</a>
+                    <a type="button" asp-area="" asp-controller="Klinik" asp-action="Index" class="btn mx-auto d-grid gap-2" style="background-color:#A3AB78; color:white">@_localization.GetKey("back").Value</a>
                 </div>
                 <div class="col-4">
                 </div>
@@ -75,10 +75,6 @@
         </div>
     </section>
 </body>
-
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

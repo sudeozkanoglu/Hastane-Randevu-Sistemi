@@ -1,7 +1,4 @@
-﻿@*
-    Klinik Navigation Page
-*@
-<head>
+﻿<head>
 	<style>
 		.btn:hover {
 			color: #F2F2F2;
@@ -25,7 +22,7 @@
 			}
 
 		.hero-section .container {
-			height: 120vh;
+			height: 170vh;
 			z-index: 1;
 			position: relative;
 			margin-top: 15%;
@@ -75,40 +72,37 @@
 			padding-bottom: 30% !important;
 		}
 
-		.card-body {
+		.card-text {
 			text-align: center;
 			margin-top: 10%;
 		}
 
 		.card-footer {
-			margin-top: 19%;
+			margin-top: 7%;
 		}
 	</style>
 </head>
 <body class="bg-img">
-	<section class="hero-section">
-		<div class="container">
+    <section class="hero-section">
+        <div class="container">
 			<div class="row">
 				<div class="col-md-6 mb-3">
 					<div class="card text-center">
 						<div class="front">
 							<div class="card-header">
-								@_localization.GetKey("adminpro").Value
+								@_localization.GetKey("patient").Value
 							</div>
 							<div class="card-body">
-								<h5 class="card-title">@_localization.GetKey("addingCli").Value</h5>
+								<h5 class="card-title">@_localization.GetKey("hospital").Value</h5>
+								<hr />
+								<p class="card-text">@_localization.GetKey("userIndexFirst").Value</p>
 							</div>
 							<div class="card-footer text-body-secondary">
-								@_localization.GetKey("central").Value
+								@_localization.GetKey("central").Value;
 							</div>
 						</div>
 						<div class="back">
-							<div class="card-body">
-								<hr />
-								<p class="card-text">@_localization.GetKey("textCli").Value</p>
-								<hr />
-							</div>
-							<a class="btn btn-dark" style="margin-top: 10%;" asp-area="" asp-controller="Klinik" asp-action="Index">@_localization.GetKey("addClinic").Value</a>
+							<a class="btn btn-dark" style="margin-top: 20%;" asp-area="" asp-controller="Randevu" asp-action="RandevuEkle">@_localization.GetKey("appointment").Value</a>
 						</div>
 
 					</div>
@@ -117,28 +111,24 @@
 					<div class="card text-center">
 						<div class="front">
 							<div class="card-header">
-								@_localization.GetKey("adminpro").Value
+								@_localization.GetKey("patient").Value
 							</div>
 							<div class="card-body">
-								<h5 class="card-title">@_localization.GetKey("otherCliPro").Value</h5>
+								<h5 class="card-title">@_localization.GetKey("otherAppointment").Value</h5>
+								<hr />
+								<p class="card-text">@_localization.GetKey("userIndexSecond").Value</p>
 							</div>
 							<div class="card-footer text-body-secondary">
 								@_localization.GetKey("central").Value
 							</div>
 						</div>
 						<div class="back">
-							<div class="card-body">
-								<hr />
-								<p class="card-text">@_localization.GetKey("cliText").Value</p>
-								<hr />
-							</div>
-							<a class="btn btn-dark" style="margin-top: 10%;" asp-area="" asp-controller="Klinik" asp-action="KlinikIslem">@_localization.GetKey("clinic").Value</a>
+							<a class="btn btn-dark" style="margin-top: 20%;" asp-area="" asp-controller="Randevu" asp-action="Index">@_localization.GetKey("otherAppointment").Value</a>
 						</div>
 
 					</div>
 				</div>
 			</div>
-		</div>
-	</section>
+        </div>
+    </section>
 </body>
-

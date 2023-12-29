@@ -1,4 +1,4 @@
-﻿@model IEnumerable<webProjeOdev8.Models.Doktor>
+﻿@model IEnumerable<webProjeOdev.Models.Doktor>
 
 @{
     ViewData["Title"] = "DoktorListele";
@@ -36,7 +36,6 @@
             <th>
                 @Html.DisplayNameFor(model => model.Iller)
             </th>
-           
             <th>
                 @Html.DisplayNameFor(model => model.AnaBilimDali)
             </th>
@@ -76,7 +75,6 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Iller)
             </td>
-           
             <td>
                 @Html.DisplayFor(modelItem => item.AnaBilimDali.anaBilimDaliAdi)
             </td>
@@ -87,9 +85,8 @@
                 @Html.DisplayFor(modelItem => item.Hastane.hastaneAdi)
             </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.doktorId">Edit</a> |
-                <a asp-action="DoktorDuzenle" asp-route-id="@item.doktorId">Details</a> |
-                <a asp-action="DoktorSil" asp-controller="Doktor" asp-route-id="@item.doktorId">Delete</a>
+                <a asp-action="DoktorDuzenle" asp-route-id="@item.doktorId">@_localization.GetKey("edit").Value</a>
+                <a asp-action="Sil" asp-route-id="@item.doktorId">Delete</a>
             </td>
         </tr>
 }

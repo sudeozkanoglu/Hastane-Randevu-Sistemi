@@ -1,66 +1,108 @@
-﻿@model webProjeOdev8.Models.Randevu
+﻿@model webProjeOdev.Models.Randevu
+<head>
+    <style>
+        .bg-img {
+            background-image: url('/images/yonetici.jpg') !important;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
 
-@{
-    ViewData["Title"] = "RandevuEkle";
-}
+            .bg-img::before {
+                background-color: rgba(0,0,0,0.6);
+                content: "";
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                left: 0;
+            }
 
-<h1>RandevuEkle</h1>
+        .hero-section .container {
+            height: 150vh;
+            z-index: 1;
+            position: relative;
+            margin-top: 15%;
+        }
 
-<h4>Randevu</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="RandevuEkle">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            
-            <div class="form-group">
-                <label asp-for="hastaneId" class="control-label" ></label>
-                <select asp-for="hastaneId" class="form-control" id="HastaneSecim" asp-items="@ViewBag.HastaneList" onchange="AnaBilimleriDoldur(HastaneSecim,'anaBilimList'); ">
-                    <option disable selected>Hastane seciniz</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label asp-for="anaBilimDaliId" class="control-label" ></label>
-                <select asp-for="anaBilimDaliId" class="form-control" asp-items="ViewBag.anaBilimDaliId" id="anaBilimList" onchange="KlinikleriDoldur(this,'klinikList');"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="klinikId" class="control-label"></label>
-                <select asp-for="klinikId" class="form-control" asp-items="ViewBag.klinikId" id="klinikList" onchange="DoktoruDoldur2(HastaneSecim,this,'doktorList');"></select>
-            </div>
-           
-            <div class="form-group">
-                <label asp-for="doktorId" class="control-label"></label>
-                <select asp-for="doktorId" class="form-control" asp-items="ViewBag.doktorId" id="doktorList" onchange="PoliklinikleriDoldur2(this,'poliklinikList')"></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="poliklinikId" class="control-label"></label>
-                <select asp-for="poliklinikId" class="form-control" asp-items="ViewBag.poliklinikId" id="poliklinikList" ></select>
-            </div>
-            <div class="form-group">
-                <label asp-for="randevuTarihi" class="control-label"></label>
-                <input asp-for="randevuTarihi" class="form-control" />
-                <span asp-validation-for="randevuTarihi" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="randevuSaat" class="control-label"></label>
-                <input asp-for="randevuSaat" class="form-control" />
-                <span asp-validation-for="randevuSaat" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="hastaId" class="control-label"></label>
-                <select asp-for="hastaId" class ="form-control" asp-items="ViewBag.hastaId"></select>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+        .hero-section h1 {
+            font-size: 1.8rem;
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-img">
+    <section class="hero-section">
+        <div class="container">
+            <div class="row">
+                <div class="row ">
+                    <div class="col-4 offset-4" style="text-align:center;">
+                        <h1>@_localization.GetKey("appointment").Value</h1>
+                        <hr class="text-white" />
+                    </div>
+                </div>
+                <div class="col-4 offset-4">
+                    <form asp-action="RandevuEkle">
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+                        <div class="form-group mt-3">
+                            <label asp-for="hastaneId" class="control-label">@_localization.GetKey("hospitalName").Value</label>
+                            <select asp-for="hastaneId" class="form-control" id="HastaneSecim" asp-items="@ViewBag.HastaneList" onchange="AnaBilimleriDoldur(HastaneSecim,'anaBilimList'); ">
+                                <option disable selected>Hastane seciniz</option>
+                            </select>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label asp-for="anaBilimDaliId" class="control-label">@_localization.GetKey("majorName").Value</label>
+                            <select asp-for="anaBilimDaliId" class="form-control" asp-items="ViewBag.anaBilimDaliId" id="anaBilimList" onchange="KlinikleriDoldur(this,'klinikList');"></select>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label asp-for="klinikId" class="control-label">@_localization.GetKey("clinicName").Value</label>
+                            <select asp-for="klinikId" class="form-control" asp-items="ViewBag.klinikId" id="klinikList" onchange="DoktoruDoldur2(HastaneSecim,this,'doktorList');"></select>
+                        </div>
+
+                        <div class="form-group mt-3">
+                            <label asp-for="doktorId" class="control-label">@_localization.GetKey("docName").Value</label>
+                            <select asp-for="doktorId" class="form-control" asp-items="ViewBag.doktorId" id="doktorList" onchange="PoliklinikleriDoldur2(this,'poliklinikList')"></select>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label asp-for="poliklinikId" class="control-label">@_localization.GetKey("poliName").Value</label>
+                            <select asp-for="poliklinikId" class="form-control" asp-items="ViewBag.poliklinikId" id="poliklinikList"></select>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label asp-for="randevuTarihi" class="control-label"></label>
+                            <input asp-for="randevuTarihi" class="form-control" />
+                            <span asp-validation-for="randevuTarihi" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label asp-for="randevuSaat" class="control-label"></label>
+                            <input asp-for="randevuSaat" class="form-control" />
+                            <span asp-validation-for="randevuSaat" class="text-danger"></span>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label asp-for="hastaId" class="control-label"></label>
+                            <select asp-for="hastaId" class="form-control" asp-items="ViewBag.hastaId"></select>
+                        </div>
+                        <div class="form-group d-grid mt-3">
+                            <button type="submit" value="Create" class="btn d-block" style="background-color:#B96028; color:white">@_localization.GetKey("save").Value</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-4 ">
+                </div>
+                <div class="col-4 ">
+                    <a type="button" asp-area="" asp-controller="UserSayfasi" asp-action="Index" class="btn mx-auto d-grid gap-2" style="background-color:#A3AB78; color:white">@_localization.GetKey("back").Value</a>
+                </div>
+                <div class="col-4">
+                </div>
+        </div>
+    </section>
+</body>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    }

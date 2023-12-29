@@ -36,14 +36,15 @@
         <div class="container">
             <div class="row ">
                 <div class="col-4 offset-4" style="text-align:center;">
-                    <h1>@_localization.GetKey("addDoktor").Value</h1>
+                    <h1>@_localization.GetKey("editDoc").Value</h1>
                     <hr class="text-white" />
                 </div>
             </div>
             <div class="row">
                 <div class="col-4 offset-4">
-                    <form asp-action="DoktorEkle">
+                    <form asp-action="DoktorDuzenle">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <input type="hidden" asp-for="doktorId" />
                         <div class="form-group mt-3">
                             <label asp-for="doktorAdi" class="control-label" style="color:white;">@_localization.GetKey("name").Value</label>
                             <input asp-for="doktorAdi" class="form-control" />
@@ -121,11 +122,6 @@
         </div>
     </section>
 </body>
-
-
-@section Scripts{
-
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
-    }
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

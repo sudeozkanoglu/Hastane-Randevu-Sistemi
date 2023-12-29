@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace webProjeOdev8.Models
+namespace webProjeOdev.Models
 {
     public class AnaBilimDali
     {
@@ -22,6 +22,5 @@ namespace webProjeOdev8.Models
         //Çok a çok ilişki kısmı - HastaneAnaBilimDali
         public List<HastaneAnaBilim> HastaneAnaBilimler { get; } = new();
         public List<Hastane> Hastaneler { get; } = new();
-
     }
 }

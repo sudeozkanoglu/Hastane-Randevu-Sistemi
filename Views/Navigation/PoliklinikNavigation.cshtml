@@ -93,22 +93,22 @@
 					<div class="card text-center">
 						<div class="front">
 							<div class="card-header">
-								Yönetici İşlemleri
+								@_localization.GetKey("adminpro").Value
 							</div>
 							<div class="card-body">
-								<h5 class="card-title">Poliklinik Ekleme İşlemleri</h5>
+								<h5 class="card-title">@_localization.GetKey("addingPol").Value</h5>
 							</div>
 							<div class="card-footer text-body-secondary">
-								Merkezi Randevu Sistemi
+								@_localization.GetKey("central").Value
 							</div>
 						</div>
 						<div class="back">
 							<div class="card-body">
 								<hr />
-								<p class="card-text">Bu Menüden Polikliniğin Gerekli Bilgilerini Girerek Sisteme Kayıt Edebilirsiniz...</p>
+								<p class="card-text">@_localization.GetKey("polText").Value</p>
 								<hr />
 							</div>
-							<a class="btn btn-dark" style="margin-top: 10%;" asp-area="" asp-controller="Poliklinik" asp-action="PoliklinikEkle">Poliklinik Ekle </a>
+							<a class="btn btn-dark" style="margin-top: 10%;" asp-area="" asp-controller="Poliklinik" asp-action="PoliklinikEkle">@_localization.GetKey("addPoli").Value</a>
 						</div>
 
 					</div>
@@ -117,22 +117,22 @@
 					<div class="card text-center">
 						<div class="front">
 							<div class="card-header">
-								Yönetici İşlemleri
+								@_localization.GetKey("adminpro").Value
 							</div>
 							<div class="card-body">
-								<h5 class="card-title">Poliklinik Diğer İşlemleri</h5>
+								<h5 class="card-title"></h5>
 							</div>
 							<div class="card-footer text-body-secondary">
-								Merkezi Randevu Sistemi
+								@_localization.GetKey("central").Value
 							</div>
 						</div>
 						<div class="back">
 							<div class="card-body">
 								<hr />
-								<p class="card-text">Bu Menüden Poliklinikle İlgili Sistemde Yer Alan Bilgileri Listeleyebilir, Silebilir Ya Da Güncelleyebilirsiniz...</p>
+								<p class="card-text">@_localization.GetKey("poliText").Value</p>
 								<hr />
 							</div>
-							<a class="btn btn-dark" style="margin-top: 10%;" asp-area="" asp-controller="Poliklinik" asp-action="PoliklinikIslem">Poliklinik İşlemleri</a>
+							<a class="btn btn-dark" style="margin-top: 10%;" asp-area="" asp-controller="Poliklinik" asp-action="Index">@_localization.GetKey("pol").Value</a>
 						</div>
 
 					</div>

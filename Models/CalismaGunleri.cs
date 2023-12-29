@@ -1,10 +1,6 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using webProjeOdev8.Data.Enum;
-using webProjeOdev8.Models;
-using NuGet.Packaging.Signing;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace webProjeOdev8.Models
+namespace webProjeOdev.Models
 {
     public class CalismaGunleri
     {
@@ -24,7 +20,5 @@ namespace webProjeOdev8.Models
 
         //Coka Cok kismi************************************************
         public List<DoktorCalismaGunleri> DoktorCalismaGunleri { get; } = new();
-
     }
 }
-

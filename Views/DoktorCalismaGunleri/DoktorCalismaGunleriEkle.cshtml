@@ -37,7 +37,7 @@
         <div class="container">
             <div class="row ">
                 <div class="col-4 offset-4" style="text-align:center;">
-                    <h1>Doktor Ekle</h1>
+                    <h1>@_localization.GetKey("nameOfDays").Value</h1>
                     <hr class="text-white" />
                 </div>
             </div>
@@ -46,15 +46,15 @@
                     <form asp-action="DoktorCalismaGunleriEkle">
                         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                         <div class="form-group mt-3">
-                            <label asp-for="doktorId" class="control-label"></label>
+                            <label asp-for="doktorId" class="control-label" style="color:white;">@_localization.GetKey("name").Value</label>
                             <select asp-for="doktorId" class="form-control" asp-items="@ViewBag.DoktorList"></select>
                         </div>
                         <div class="form-group mt-3">
-                            <label asp-for="calismaGunleriId" class="control-label"></label>
+                            <label asp-for="calismaGunleriId" class="control-label" style="color:white;">@_localization.GetKey("workDay").Value</label>
                             <select asp-for="calismaGunleriId" class="form-control" asp-items="@ViewBag.CalismaGunleriList"></select>
                         </div>
                         <div class="form-group d-grid mt-3">
-                            <button type="submit" value="Create" class="btn d-block" style="background-color:#B96028; color:white">Kaydet</button>
+                            <button type="submit" value="Create" class="btn d-block" style="background-color:#B96028; color:white">@_localization.GetKey("save").Value</button>
                         </div>
                     </form>
                 </div>
@@ -64,7 +64,7 @@
                 <div class="col-4 ">
                 </div>
                 <div class="col-4 ">
-                    <a type="button" asp-area="" asp-controller="Navigation" asp-action="AnaBilimNavigation" class="btn mx-auto d-grid gap-2" style="background-color:#A3AB78; color:white">Önceki Sayfaya Dön</a>
+                    <a type="button" asp-area="" asp-controller="Navigation" asp-action="AnaBilimNavigation" class="btn mx-auto d-grid gap-2" style="background-color:#A3AB78; color:white">@_localization.GetKey("back").Value</a>
                 </div>
                 <div class="col-4">
                 </div>

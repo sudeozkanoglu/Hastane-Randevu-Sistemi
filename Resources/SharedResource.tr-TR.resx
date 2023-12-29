@@ -1,0 +1,354 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="addClinic" xml:space="preserve">
+    <value>Klinik Ekle</value>
+  </data>
+  <data name="addDoktor" xml:space="preserve">
+    <value>Doktor Ekle</value>
+  </data>
+  <data name="addHospital" xml:space="preserve">
+    <value>Hastane Ekle</value>
+  </data>
+  <data name="addHospitall" xml:space="preserve">
+    <value>Hastane Ekleme İşlemleri</value>
+  </data>
+  <data name="addingCli" xml:space="preserve">
+    <value>Klinik Ekleme İşlemleri</value>
+  </data>
+  <data name="addingPol" xml:space="preserve">
+    <value>Poliklinik Ekleme İşlemleri</value>
+  </data>
+  <data name="addMajor" xml:space="preserve">
+    <value>Ana Bilim Dalı Ekle</value>
+  </data>
+  <data name="addPoli" xml:space="preserve">
+    <value>Poliklinik Ekle</value>
+  </data>
+  <data name="adminIndexFirst" xml:space="preserve">
+    <value>Bu Menüden Sisteme Hastane Bilgisi Ekleyebilir, Hastane Bilgilerini Düzenleyebilir, Silebilir Ya Da Sistemdeki Hastaneleri Listeleyebilirsiniz.</value>
+  </data>
+  <data name="adminIndexSecond" xml:space="preserve">
+    <value>Bu Menüden Sisteme Ana Bilim Dalı Bilgisi Ekleyebilir, Ana Bilim Dalı Bilgilerini Düzenleyebilir, Silebilir Ya Da Sistemdeki Ana Bilim Dallarını Listeleyebilirsiniz.</value>
+  </data>
+  <data name="adminlogin" xml:space="preserve">
+    <value>Yönetici Girişi</value>
+  </data>
+  <data name="adminlogout" xml:space="preserve">
+    <value>Çıkış</value>
+  </data>
+  <data name="adminpro" xml:space="preserve">
+    <value>Yönetici İşlemleri</value>
+  </data>
+  <data name="ana" xml:space="preserve">
+    <value>Ana Bilim Dalı İşlemleri</value>
+  </data>
+  <data name="ana2" xml:space="preserve">
+    <value>Ana Bilim Dalı Diğer İşlemleri</value>
+  </data>
+  <data name="anaReg" xml:space="preserve">
+    <value>Bu Menüden Ana Bilim Dalının Gerekli Bilgilerini Girerek Sisteme Kayıt Edebilirsiniz...</value>
+  </data>
+  <data name="appointment" xml:space="preserve">
+    <value>Randevu Oluştur</value>
+  </data>
+  <data name="back" xml:space="preserve">
+    <value>Geri Dön</value>
+  </data>
+  <data name="birth" xml:space="preserve">
+    <value>Doğum Tarihi</value>
+  </data>
+  <data name="central" xml:space="preserve">
+    <value>Merkezi Randevu Sistemi</value>
+  </data>
+  <data name="city" xml:space="preserve">
+    <value>Şehir</value>
+  </data>
+  <data name="clinic" xml:space="preserve">
+    <value>Klinik İşlemleri</value>
+  </data>
+  <data name="clinicName" xml:space="preserve">
+    <value>Klinik Adı</value>
+  </data>
+  <data name="cliText" xml:space="preserve">
+    <value>Bu Menüden Klinikle İlgili Sistemde Yer Alan Bilgileri Listeleyebilir, Silebilir Ya Da Güncelleyebilirsiniz...</value>
+  </data>
+  <data name="create" xml:space="preserve">
+    <value>Online Olarak Randevu Oluşturmak İçin 'Randevu Oluştur' Butonunu Kullanınız ...</value>
+  </data>
+  <data name="delete" xml:space="preserve">
+    <value>Sil</value>
+  </data>
+  <data name="docAddProcedure" xml:space="preserve">
+    <value>Doktor Ekleme İşlemleri</value>
+  </data>
+  <data name="docDiger" xml:space="preserve">
+    <value>Bu Menüden Doktorla İlgili Sistemde Yer Alan Bilgileri Listeleyebilir,Silebilir Ya Da Güncelleyebilirsiniz...</value>
+  </data>
+  <data name="docName" xml:space="preserve">
+    <value>Doktor Adı</value>
+  </data>
+  <data name="docProcedure" xml:space="preserve">
+    <value>Doktor Diğer İşlemleri</value>
+  </data>
+  <data name="doctor" xml:space="preserve">
+    <value>Bu Menüden Sisteme Doktor Bilgisi Ekleyebilir, Doktor Bilgilerini Düzenleyebilir, Silebilir Ya Da Sistemdeki Klinikleri Listeleyebilirsiniz.</value>
+  </data>
+  <data name="docİcerik" xml:space="preserve">
+    <value>Bu Menüden Doktorun Gerekli Bilgilerini Girerek Sisteme Kayıt Edebilirsiniz...</value>
+  </data>
+  <data name="dok" xml:space="preserve">
+    <value>Doktor İşlemleri</value>
+  </data>
+  <data name="edit" xml:space="preserve">
+    <value>Düzenle</value>
+  </data>
+  <data name="editClinic" xml:space="preserve">
+    <value>Klinik Düzenle</value>
+  </data>
+  <data name="editDoc" xml:space="preserve">
+    <value>Doktor Düzenle</value>
+  </data>
+  <data name="editPol" xml:space="preserve">
+    <value>Poliklinik Düzenle</value>
+  </data>
+  <data name="gender" xml:space="preserve">
+    <value>Cinsiyet</value>
+  </data>
+  <data name="header" xml:space="preserve">
+    <value>Merkezi Randevu Sistemine Hoş Geldiniz ...</value>
+  </data>
+  <data name="home" xml:space="preserve">
+    <value>Ana Sayfa</value>
+  </data>
+  <data name="hospital" xml:space="preserve">
+    <value>Hastane İşlemleri</value>
+  </data>
+  <data name="hospitalName" xml:space="preserve">
+    <value>Hastane Adı</value>
+  </data>
+  <data name="hosText" xml:space="preserve">
+    <value>Bu Menüden Hastanenin Gerekli Bilgilerini Girerek Sisteme Kayıt Edebilirsiniz...</value>
+  </data>
+  <data name="identity" xml:space="preserve">
+    <value>TC Numarası</value>
+  </data>
+  <data name="klinik" xml:space="preserve">
+    <value>Bu Menüden Sisteme Klinik Bilgisi Ekleyebilir, Klinik Bilgilerini Düzenleyebilir, Silebilir Ya Da Sistemdeki Klinikleri Listeleyebilirsiniz.</value>
+  </data>
+  <data name="listAppointment" xml:space="preserve">
+    <value>Bu Menüden Randevularınızı Listeleyebilir ve İptal Edebilirsiniz...</value>
+  </data>
+  <data name="login" xml:space="preserve">
+    <value>Giriş Yap</value>
+  </data>
+  <data name="mail" xml:space="preserve">
+    <value>E-Mail Adresi</value>
+  </data>
+  <data name="majorName" xml:space="preserve">
+    <value>Ana Bilim Dalı Adı</value>
+  </data>
+  <data name="majorUpdate" xml:space="preserve">
+    <value>Ana Bilim Dalı Düzenle</value>
+  </data>
+  <data name="name" xml:space="preserve">
+    <value>Ad</value>
+  </data>
+  <data name="nameOfDays" xml:space="preserve">
+    <value>Çalışma Günü Ekle</value>
+  </data>
+  <data name="otherAna" xml:space="preserve">
+    <value>Bu Menüden Ana Bilim Dalıyla İlgili Sistemde Yer Alan Bilgileri Listeleyebilir,Silebilir Ya Da Güncelleyebilirsiniz...</value>
+  </data>
+  <data name="otherAppointment" xml:space="preserve">
+    <value>Randevu Diğer İşlemleri</value>
+  </data>
+  <data name="otherCliPro" xml:space="preserve">
+    <value>Klinik Diğer İşlemleri</value>
+  </data>
+  <data name="otherHospital" xml:space="preserve">
+    <value>Hastane Diğer İşlemleri</value>
+  </data>
+  <data name="otherPolPro" xml:space="preserve">
+    <value>Poliklinik Diğer İşlemleri</value>
+  </data>
+  <data name="password" xml:space="preserve">
+    <value>Şifre</value>
+  </data>
+  <data name="pat" xml:space="preserve">
+    <value>Bu Menüden Sistemdeki Hastaları Listeleyebilirsiniz.</value>
+  </data>
+  <data name="patient" xml:space="preserve">
+    <value>Hasta İşlemleri</value>
+  </data>
+  <data name="phone" xml:space="preserve">
+    <value>Telefon Numarası</value>
+  </data>
+  <data name="pol" xml:space="preserve">
+    <value>Poliklinik İşlemleri</value>
+  </data>
+  <data name="poli" xml:space="preserve">
+    <value>Bu Menüden Sisteme Poliklinik Bilgisi Ekleyebilir, Poliklinik Bilgilerini Düzenleyebilir, Silebilir Ya Da Sistemdeki Poliklinikleri Listeleyebilirsiniz.</value>
+  </data>
+  <data name="poliName" xml:space="preserve">
+    <value>Poliklinik Adı</value>
+  </data>
+  <data name="poliText" xml:space="preserve">
+    <value>Bu Menüden Poliklinikle İlgili Sistemde Yer Alan Bilgileri Listeleyebilir, Silebilir Ya Da Güncelleyebilirsiniz...</value>
+  </data>
+  <data name="polText" xml:space="preserve">
+    <value>Bu Menüden Polikliniğin Gerekli Bilgilerini Girerek Sisteme Kayıt Edebilirsiniz...</value>
+  </data>
+  <data name="save" xml:space="preserve">
+    <value>Kaydet</value>
+  </data>
+  <data name="state" xml:space="preserve">
+    <value>Medeni Hal</value>
+  </data>
+  <data name="surname" xml:space="preserve">
+    <value>Soyad</value>
+  </data>
+  <data name="textAna" xml:space="preserve">
+    <value>Bu Menüden Hastaneye Ana Bilim Dalı Bilgisi Ekleyebilirsiniz...</value>
+  </data>
+  <data name="textCli" xml:space="preserve">
+    <value>Bu Menüden Kliniğin Gerekli Bilgilerini Girerek Sisteme Kayıt Edebilirsiniz...</value>
+  </data>
+  <data name="textClinic" xml:space="preserve">
+    <value>Bu Menüden Hastaneye Klinik Bilgilerini Ekleyebilirsiniz...</value>
+  </data>
+  <data name="textHos" xml:space="preserve">
+    <value>Bu Menüden Hastaneyle İlgili Sistemde Yer Alan Bilgileri Listeleyebilir,Silebilir Ya Da Düzenleyebilirsiniz...</value>
+  </data>
+  <data name="textPol" xml:space="preserve">
+    <value>Bu Menüden Hastaneye Poliklinik Bilgisi Ekleyebilirsiniz...</value>
+  </data>
+  <data name="updateHospital" xml:space="preserve">
+    <value>Hastane Güncelle</value>
+  </data>
+  <data name="userIndexFirst" xml:space="preserve">
+    <value>Bu Menüden Randevu Oluşturabilirsiniz...</value>
+  </data>
+  <data name="userName" xml:space="preserve">
+    <value>Kullanıcı Adı</value>
+  </data>
+  <data name="workDay" xml:space="preserve">
+    <value>Çalışma Günü</value>
+  </data>
+</root>

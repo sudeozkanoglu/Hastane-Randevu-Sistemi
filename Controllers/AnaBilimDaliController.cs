@@ -1,20 +1,86 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using WebProjeOdev8.Data;
-using webProjeOdev8.Models;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using webProjeOdev.Data;
+using webProjeOdev.Models;
 
-namespace webProjeOdev8.Controllers
+namespace webProjeOdev.Controllers
 {
+    [Authorize]
     public class AnaBilimDaliController : Controller
     {
         private HastaneRandevuContext s = new HastaneRandevuContext();
 
-        public IActionResult Listele()
+        public IActionResult Index()
         {
-            var y = s.AnaBilimDallari.ToList();
-            return View(y);
+            var a = s.AnaBilimDallari.ToList();
+            return View(a);
         }
+
+        public IActionResult AnaBilimDaliEkle()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult AnaBilimDaliEkle(AnaBilimDali a)
+        {
+            ModelState.Remove(nameof(a.Hastaneler));
+            ModelState.Remove(nameof(a.Klinikler));
+            ModelState.Remove(nameof(a.Doktorlar));
+            ModelState.Remove(nameof(a.Randevular));
+            if (ModelState.IsValid)
+            {
+                s.AnaBilimDallari.Add(a);
+                s.SaveChanges();
+                TempData["msj"] = a.anaBilimDaliAdi + "Ana Bilim Dalı Eklendi";
+                return RedirectToAction("Index");
+            }
+            TempData["msj"] = "Ekleme Başarısız";
+            return View(a);
+        }
+
+        public IActionResult AnaBilimDaliDuzenle(int? id)
+        {
+            if (id is null)
+            {
+                TempData["Hata"] = "Lütfen Boş Geçmeyin";
+                return View("Hata");
+            }
+            var a = s.AnaBilimDallari.FirstOrDefault(x => x.anaBilimDaliId == id);
+            if (a == null)
+            {
+                TempData["Hata"] = "Lütfen Geçerli Bir Ana Bilim Dalı Girin ";
+                return View("Hata");
+
+            }
+            return View(a);
+        }
+
+        [HttpPost]
+        public IActionResult AnaBilimDaliDuzenle(int? id, AnaBilimDali a)
+        {
+            if(id != a.anaBilimDaliId )
+            {
+                TempData["Hata"] = "Hatalı";
+                return View("Hata");
+            }
+            ModelState.Remove(nameof(a.Hastaneler));
+            ModelState.Remove(nameof(a.Klinikler));
+            ModelState.Remove(nameof(a.Doktorlar));
+            ModelState.Remove(nameof(a.Randevular));
+            if (ModelState.IsValid)
+            {
+                s.AnaBilimDallari.Update(a);
+                s.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            TempData["Hata"] = "Hatalı";
+            return View("Hata");
+        }
+
         public IActionResult Sil(int? id)
         {
             var h = s.AnaBilimDallari.Include(x => x.Hastaneler).FirstOrDefault(x => x.anaBilimDaliId == id);
@@ -25,7 +91,7 @@ namespace webProjeOdev8.Controllers
                 return View("Hata");
             }
             var d = s.AnaBilimDallari.Include(x => x.Doktorlar).FirstOrDefault(x => x.anaBilimDaliId == id);
-           
+
             if (d.Doktorlar.Count() > 0)
             {
                 TempData["hata"] = " O Anabilimde calisan doktorlar var. Anabilimi silmek istiyorsaniz önce doktoru silin";
@@ -48,37 +114,7 @@ namespace webProjeOdev8.Controllers
             s.AnaBilimDallari.Remove(r);
             s.SaveChanges();
             TempData["hata"] = " Doktor silindi";
-            return RedirectToAction("Listele");
-        }
-        public IActionResult Hata()
-        {
-            return View();
-        }
-        public IActionResult AnaBilimDaliEkle()
-        {
-            ViewBag.HastaneList = new SelectList(s.Hastaneler.ToList(), "hastaneId", "hastaneAdi");
-
-            return View();
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public IActionResult AnaBilimDaliEkle(AnaBilimDali a)
-        {
-            ModelState.Remove(nameof(a.Hastaneler));
-            ModelState.Remove(nameof(a.Klinikler));
-            ModelState.Remove(nameof(a.Doktorlar));
-            ModelState.Remove(nameof(a.Randevular));
-            if (ModelState.IsValid)
-            {
-                s.AnaBilimDallari.Add(a);
-                s.SaveChanges();
-                TempData["msj"] = a.anaBilimDaliAdi + "Ana Bilim Dalı Eklendi";
-                return RedirectToAction("Listele");
-            }
-            TempData["msj"] = "Ekleme Başarısız";
-            return View(a);
+            return RedirectToAction("Index");
         }
     }
 }
-

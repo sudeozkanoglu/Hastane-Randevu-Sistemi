@@ -31,9 +31,7 @@
                 @Html.DisplayFor(modelItem => item.AnaBilimDali.anaBilimDaliAdi)
             </td>
             <td>
-                @Html.ActionLink("HastaneAnaBilimDuzenle", "HastaneAnaBilimDuzenle", new { id=item.hastaneId , id2 = item.anaBilimDaliId}) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Sil", "Sil", new { /* id=item.PrimaryKey */ })
             </td>
         </tr>
 }

@@ -64,9 +64,8 @@
                                 @Html.DisplayFor(modelItem => item.Doktor.doktorAdi)
                             </td>
                             <td>
-                                <a asp-action="PoliklinikDuzenle" asp-route-id="@item.poliklinikId">Edit</a> |
-                                <a asp-action="Details" asp-route-id="@item.poliklinikId">Details</a> |
-                                <a asp-action="Delete" asp-route-id="@item.poliklinikId">Delete</a>
+                                <a asp-action="PoliklinikDuzenle" asp-route-id="@item.poliklinikId">@_localization.GetKey("edit").Value</a> |
+                                <a asp-action="Delete" asp-route-id="@item.poliklinikId">@_localization.GetKey("delete").Value</a>
                             </td>
                         </tr>
                     }

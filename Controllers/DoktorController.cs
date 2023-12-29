@@ -1,24 +1,26 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using webProjeOdev8.Data.Enum;
-using webProjeOdev8.Models;
-using WebProjeOdev8.Data;
+using webProjeOdev.Data;
+using webProjeOdev.Models;
 
-namespace webProjeOdev8.Controllers
+namespace webProjeOdev.Controllers
 {
+    [Authorize]
     public class DoktorController : Controller
     {
         private HastaneRandevuContext a = new HastaneRandevuContext();
         public IActionResult DoktorEkle()
         {
-             ViewBag.HastaneList = new SelectList(a.Hastaneler.ToList(), "hastaneId", "hastaneAdi");
+            ViewBag.HastaneList = new SelectList(a.Hastaneler.ToList(), "hastaneId", "hastaneAdi");
+
             return View();
         }
- 
+
         private List<SelectListItem> GetAnaBilim(int hastaneId)
         {
-            List<SelectListItem> lstAnaBilimler = a.HastanedekiAnaBilimler
+            List<SelectListItem> lstAnaBilimler = a.HastaneAnaBilimler
                 .Where(c => c.hastaneId == hastaneId)
                 .OrderBy(n => n.AnaBilimDali.anaBilimDaliAdi)
                 .Select(n =>
@@ -28,16 +30,16 @@ namespace webProjeOdev8.Controllers
                     Text = n.AnaBilimDali.anaBilimDaliAdi
                 }).ToList();
             var defItem = new SelectListItem()
-            { 
-                Value="",
-                Text="--Select ana bilim--"
+            {
+                Value = "",
+                Text = "--Select ana bilim--"
             };
             lstAnaBilimler.Insert(0, defItem);
             return lstAnaBilimler;
         }
         public JsonResult GetAnaBilimByHastane(int hastaneId)
         {
-            List<SelectListItem> anabilimler=GetAnaBilim(hastaneId);
+            List<SelectListItem> anabilimler = GetAnaBilim(hastaneId);
             return Json(anabilimler);
         }
 
@@ -55,7 +57,7 @@ namespace webProjeOdev8.Controllers
             var defItem = new SelectListItem()
             {
                 Value = "",
-                Text = "--Select klinik--"
+                Text = "--Select ana bilim--"
             };
             lstKlinikler.Insert(0, defItem);
             return lstKlinikler;
@@ -66,31 +68,6 @@ namespace webProjeOdev8.Controllers
             return Json(klinikler);
         }
 
-        //poliklinik yappppppppppppppppppppppppppppppppppppppppppppppppp
-        private List<SelectListItem> GetPoliklinik(int klinikId)
-        {
-            List<SelectListItem> lstPoliklinikler = a.Poliklinikler
-                .Where(c => c.klinikId == klinikId)
-                .OrderBy(n => n.poliklinikId)
-                .Select(n =>
-                new SelectListItem
-                {
-                    Value = n.poliklinikId.ToString(),
-                    Text = n.poliklinikAdi.ToString()
-                }).ToList();
-            var defItem = new SelectListItem()
-            {
-                Value = "",
-                Text = "--Select poliklinik--"
-            };
-            lstPoliklinikler.Insert(0, defItem);
-            return lstPoliklinikler;
-        }
-        public JsonResult GetPoliklinikByKlinik(int klinikId)
-        {
-            List<SelectListItem> poliklinikler = GetPoliklinik(klinikId);
-            return Json(poliklinikler);
-        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -108,13 +85,57 @@ namespace webProjeOdev8.Controllers
                 a.SaveChanges();
                 return RedirectToAction("DoktorListele");
             }
-
+            ViewBag.HastaneList = new SelectList(a.Hastaneler.ToList(), "hastaneId", "hastaneAdi");
             return View(d);
         }
+
         public IActionResult DoktorListele()
         {
-            var y = a.Doktorlar.Include(a => a.AnaBilimDali).Include(a => a.Hastane).Include(a => a.Klinik).ToList();
+            var y = a.Doktorlar.Include(x => x.AnaBilimDali).Include(z => z.Hastane).Include(y => y.Klinik).ToList();
             return View(y);
+        }
+
+
+        public IActionResult DoktorDuzenle(int? id)
+        {
+            if (id is null)
+            {
+                TempData["Hata"] = "Lütfen Boş Geçmeyin";
+                return View("Hata");
+            }
+            var t = a.Doktorlar.FirstOrDefault(x => x.doktorId == id);
+            if (t == null)
+            {
+                TempData["Hata"] = "Lütfen Geçerli Bir Doktor Girin ";
+                return View("Hata");
+
+            }
+            ViewBag.HastaneList = new SelectList(a.Hastaneler.ToList(), "hastaneId", "hastaneAdi");
+            return View(t);
+        }
+
+        [HttpPost]
+        public IActionResult DoktorDuzenle(int? id , Doktor dr)
+        {
+            if (id != dr.doktorId)
+            {
+                TempData["Hata"] = "Hatalı";
+                return View("Hata");
+            }
+            ModelState.Remove(nameof(dr.Poliklinik));
+            ModelState.Remove(nameof(dr.Randevular));
+            ModelState.Remove(nameof(dr.Klinik));
+            ModelState.Remove(nameof(dr.AnaBilimDali));
+            ModelState.Remove(nameof(dr.Hastane));
+            if (ModelState.IsValid)
+            {
+                a.Doktorlar.Update(dr);
+                a.SaveChanges();
+                return RedirectToAction("DoktorListele");
+            }
+            ViewBag.HastaneList = new SelectList(a.Hastaneler.ToList(), "hastaneId", "hastaneAdi");
+            TempData["Hata"] = "Hatalı";
+            return View("Hata");
         }
 
         public IActionResult DoktorSil(int? id)
@@ -124,13 +145,13 @@ namespace webProjeOdev8.Controllers
                 TempData["hata"] = " Lütfen bos gecmeyiniz";
                 return View("DoktorHata");
             }
-            var d= a.Doktorlar.Include(x=>x.Randevular).FirstOrDefault(x=>x.doktorId==id);//Randevusu olan doktorlari listeler
+            var d = a.Doktorlar.Include(x => x.Randevular).FirstOrDefault(x => x.doktorId == id);//Randevusu olan doktorlari listeler
             if (d == null)//Gereksizzzzzzzzzzzzzzzzzzzzz
             {
                 TempData["hata"] = " Doktora ait kayit bulunamadi";
                 return View("DoktorHata");
             }
-            if(d.Randevular.Count()>0)
+            if (d.Randevular.Count() > 0)
             {
                 TempData["hata"] = " Doktora ait randevular var once randevulari iptal et";
                 return View("DoktorHata");
@@ -139,44 +160,6 @@ namespace webProjeOdev8.Controllers
             a.SaveChanges();
             TempData["hata"] = " Doktor silindi";
             return RedirectToAction("DoktorListele");
-        }/*
-        public IActionResult DoktorDuzenle(int? id)
-        {
-            if (id is null)
-            {
-                TempData["hata"] = "Lütfen boş geçmeyiniz";
-                return View("YazarHata");
-            }
-            var y = a.Doktorlar.FirstOrDefault(x => x.doktorId == id);
-            if (y == null)
-            {
-                TempData["hata"] = "Lütfen geçerli bir yazar giriniz ";
-                return View("YazarHata");
-
-            }
-            return View(y);
         }
-        [HttpPost]
-        public IActionResult DoktorDuzenle(int? id, Doktor y)
-        {
-            if (id != y.doktorId)
-            {
-                TempData["hata"] = "Lütfen bızıklama ";
-                return View("Hata");
-
-            }
-            if (ModelState.IsValid)
-            {
-                // var yaz=   k.Yazarlar.FirstOrDefault(x => x.YazarID == id);
-                // yaz.YazarAd = y.YazarAd; Bu işlemleri otomotaik yapıyor
-                a.Doktorlar.Update(y);
-                a.SaveChanges();
-                TempData["msj"] = y.doktorAdi +" "+y.doktorSoyadi+ " adlı doktor düzenlendi";
-                return RedirectToAction("DoktorListele");
-            }
-            TempData["hata"] = "Lütfen tüm alanları doldurun ";
-            return View("Hata");
-        }
-        */
     }
 }

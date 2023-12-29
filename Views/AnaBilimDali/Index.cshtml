@@ -52,9 +52,8 @@
                                 @Html.DisplayFor(modelItem => item.anaBilimDaliAdi)
                             </td>
                             <td>
-                                <a asp-action="AnaBilimDaliDuzenle" asp-route-id="@item.anaBilimDaliId">Edit</a> |
-                                <a asp-action="Details" asp-route-id="@item.anaBilimDaliId">Details</a> |
-                                <a asp-action="Delete" asp-route-id="@item.anaBilimDaliId">Delete</a>
+                                <a asp-action="AnaBilimDaliDuzenle" asp-route-id="@item.anaBilimDaliId">@_localization.GetKey("edit").Value</a>
+                                <a asp-action="Sil" asp-route-id="@item.anaBilimDaliId">@_localization.GetKey("delete").Value</a>
                             </td>
                         </tr>
                     }

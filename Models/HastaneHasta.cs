@@ -1,4 +1,4 @@
-﻿namespace webProjeOdev8.Models
+﻿namespace webProjeOdev.Models
 {
     public class HastaneHasta
     {
@@ -6,6 +6,5 @@
         public int hastaId { get; set; }
         public Hastane Hastane { get; set; } = null!;
         public Hasta Hasta { get; set; } = null!;
-
     }
 }
