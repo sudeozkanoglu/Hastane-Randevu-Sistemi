@@ -1,12 +1,10 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using webProjeOdev.Data;
-using webProjeOdev.Models;
+using WebProjeOdev8.Data;
+using webProjeOdev8.Models;
 
-namespace webProjeOdev.Controllers
+namespace webProjeOdev8.Controllers
 {
-    [Authorize]
     public class HastanePoliklinikController : Controller
     {
         private HastaneRandevuContext hp = new HastaneRandevuContext();
@@ -22,7 +20,7 @@ namespace webProjeOdev.Controllers
                     join klinik in hp.HastaneKlinikler on poliklinik.klinikId equals klinik.klinikId
                     where poliklinik.klinikId == klinik.klinikId
                     select poliklinik;
-           
+
             ViewBag.HastaneList = new SelectList(hp.Hastaneler.ToList(), "hastaneId", "hastaneAdi");
             ViewBag.PoliklinikList = new SelectList(x.ToList(), "poliklinikId", "poliklinikAdi");
             return View();
@@ -34,7 +32,7 @@ namespace webProjeOdev.Controllers
         {
             ModelState.Remove(nameof(ph.Hastane));
             ModelState.Remove(nameof(ph.Poliklinik));
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 hp.HastanePoliklinikler.Add(ph);
                 hp.SaveChanges();

@@ -1,4 +1,6 @@
-﻿namespace webProjeOdev.Models
+﻿using webProjeOdev8.Models;
+
+namespace webProjeOdev8.Models
 {
     public class DoktorCalismaGunleri
     {

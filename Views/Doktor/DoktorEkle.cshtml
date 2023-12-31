@@ -1,131 +1,100 @@
-﻿@model webProjeOdev.Models.Doktor
-<head>
-    <style>
-        .bg-img {
-            background-image: url('/images/yonetici.jpg') !important;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
+﻿@using webProjeOdev8.Data.Enum;
+@model webProjeOdev8.Models.Doktor
 
-            .bg-img::before {
-                background-color: rgba(0,0,0,0.6);
-                content: "";
-                position: absolute;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                left: 0;
-            }
+@{
+    ViewData["Title"] = "DoktorEkle";
+}
 
-        .hero-section .container {
-            height: 150vh;
-            z-index: 1;
-            position: relative;
-            margin-top: 15%;
-        }
+<h1>DoktorEkle</h1>
 
-        .hero-section h1 {
-            font-size: 1.8rem;
-            color: white;
-        }
-    </style>
-</head>
-<body class="bg-img">
-    <section class="hero-section">
-        <div class="container">
-            <div class="row ">
-                <div class="col-4 offset-4" style="text-align:center;">
-                    <h1>@_localization.GetKey("addDoktor").Value</h1>
-                    <hr class="text-white" />
-                </div>
+<h4>Doktor</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="DoktorEkle">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="doktorAdi" class="control-label"></label>
+                <input asp-for="doktorAdi" class="form-control" />
+                <span asp-validation-for="doktorAdi" class="text-danger"></span>
             </div>
-            <div class="row">
-                <div class="col-4 offset-4">
-                    <form asp-action="DoktorEkle">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="form-group mt-3">
-                            <label asp-for="doktorAdi" class="control-label" style="color:white;">@_localization.GetKey("name").Value</label>
-                            <input asp-for="doktorAdi" class="form-control" />
-                            <span asp-validation-for="doktorAdi" class="text-danger"></span>
-                        </div>
-                        <div class="form-group mt-3">
-                            <label asp-for="doktorSoyadi" class="control-label" style="color:white;">@_localization.GetKey("surname").Value</label>
-                            <input asp-for="doktorSoyadi" class="form-control" />
-                            <span asp-validation-for="doktorSoyadi" class="text-danger"></span>
-                        </div>
-                        <div class="form-group mt-3">
-                            <label asp-for="dogumTarihi" class="control-label" style="color:white;">@_localization.GetKey("birth").Value</label>
-                            <input asp-for="dogumTarihi" class="form-control" />
-                            <span asp-validation-for="dogumTarihi" class="text-danger"></span>
-                        </div>
-                        <div class="form-group mt-3">
-                            <label asp-for="cinsiyet" class="control-label" style="color:white;">@_localization.GetKey("gender").Value</label>
-                            <select asp-for="cinsiyet" class="form-control" asp-items="Html.GetEnumSelectList<Doktor.Cinsiyet>()"></select>
-                            <span asp-validation-for="cinsiyet" class="text-danger"></span>
-                        </div>
-                        <div class="form-group mt-3">
-                            <label asp-for="medeniHal" class="control-label" style="color:white;">@_localization.GetKey("state").Value</label>
-                            <select asp-for="medeniHal" class="form-control" asp-items="Html.GetEnumSelectList<Doktor.MedeniHal>()"></select>
-                            <span asp-validation-for="medeniHal" class="text-danger"></span>
-                        </div>
-                        <div class="form-group mt-3">
-                            <label asp-for="telefonNumarasi" class="control-label" style="color:white;">@_localization.GetKey("phone").Value</label>
-                            <input asp-for="telefonNumarasi" class="form-control" />
-                            <span asp-validation-for="telefonNumarasi" class="text-danger"></span>
-                        </div>
-                        <div class="form-group mt-3">
-                            <label asp-for="email" class="control-label" style="color:white;">@_localization.GetKey("mail").Value</label>
-                            <input asp-for="email" class="form-control" />
-                            <span asp-validation-for="email" class="text-danger"></span>
-                        </div>
-                        <div class="form-group mt-3">
-                            <label asp-for="Iller" class="control-label" style="color:white;">@_localization.GetKey("city").Value</label>
-                            <select asp-for="Iller" class="form-control" asp-items="Html.GetEnumSelectList<Doktor.Il>()"></select>
-                            <span asp-validation-for="Iller" class="text-danger"></span>
-                        </div>
-                        <div class="form-group mt-3">
-                            <label asp-for="hastaneId" class="control-label" style="color:white;">@_localization.GetKey("hospitalName")</label>
-                            <select asp-for="hastaneId" class="form-control" id="HastaneSecim" asp-items="@ViewBag.HastaneList" onchange="AnaBilimleriDoldur(this,'anaBilimList'); ">
-                                <option value="Seçiniz..."></option>
-                            </select>
-                        </div>
-                        <div class="form-group mt-3">
-                            <label asp-for="anaBilimDaliId" class="control-label" style="color:white;">@_localization.GetKey("majorName").Value</label>
-                            <select id="anaBilimList" class="form-control" asp-for="anaBilimDaliId" asp-items="ViewBag.anaBilimDaliId" onchange="KlinikleriDoldur(this,'klinikList');">
-                                <option value="Seçiniz..."></option>
-                            </select>
-                        </div>
-                        <div class="form-group mt-3">
-                            <label asp-for="klinikId" class="control-label" style="color:white;">@_localization.GetKey("clinicName").Value</label>
-                            <select id="klinikList" class="form-control" asp-for="klinikId" asp-items="ViewBag.klinikId">
-                                <option value="Seçiniz..."></option>
-                            </select>
-                        </div>
-                        <div class="form-group d-grid mt-3">
-                            <button type="submit" value="Create" class="btn d-block" style="background-color:#B96028; color:white">@_localization.GetKey("save").Value</button>
-                        </div>
-                    </form>
-                </div>
+            <div class="form-group">
+                <label asp-for="doktorSoyadi" class="control-label"></label>
+                <input asp-for="doktorSoyadi" class="form-control" />
+                <span asp-validation-for="doktorSoyadi" class="text-danger"></span>
             </div>
-            <br />
-            <div class="row">
-                <div class="col-4 ">
-                </div>
-                <div class="col-4 ">
-                    <a type="button" asp-area="" asp-controller="Navigation" asp-action="DoktorNavigation" class="btn mx-auto d-grid gap-2" style="background-color:#A3AB78; color:white">@_localization.GetKey("back").Value</a>
-                </div>
-                <div class="col-4">
-                </div>
+            <div class="form-group">
+                <label asp-for="dogumTarihi" class="control-label"></label>
+                <input asp-for="dogumTarihi" class="form-control" />
+                <span asp-validation-for="dogumTarihi" class="text-danger"></span>
             </div>
-        </div>
-    </section>
-</body>
+            <div class="form-group">
+                <label asp-for="cinsiyet" class="control-label"></label>
+                <select asp-for="cinsiyet" class="form-control" asp-items="Html.GetEnumSelectList<Doktor.Cinsiyet>()"></select>
+                <span asp-validation-for="cinsiyet" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="medeniHal" class="control-label"></label>
+                <select asp-for="medeniHal" class="form-control" asp-items="Html.GetEnumSelectList<Doktor.MedeniHal>()"></select>
+                <span asp-validation-for="medeniHal" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="telefonNumarasi" class="control-label"></label>
+                <input asp-for="telefonNumarasi" class="form-control" />
+                <span asp-validation-for="telefonNumarasi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="email" class="control-label"></label>
+                <input asp-for="email" class="form-control" />
+                <span asp-validation-for="email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Iller" class="control-label"></label>
+                <select asp-for="Iller" class="form-control" asp-items="Html.GetEnumSelectList<Il>()"></select>
+                <span asp-validation-for="Iller" class="text-danger"></span>
+            </div>
 
+  
+
+            <div class="form-group">
+                <label asp-for="hastaneId" class="control-label"></label>
+                <select asp-for="hastaneId" id="HastaneSecim" asp-items="@ViewBag.HastaneList" onchange="AnaBilimleriDoldur(this,'anaBilimList'); " >
+                    <option disable selected>Hastane seciniz</option>
+                </select>
+                <span asp-validation-for="hastaneId" class="text-danger"></span>
+            </div>
+            
+           
+            <div class="form-group">
+                <label asp-for="anaBilimDaliId" class="control-label"></label>
+                <select id="anaBilimList" asp-for="anaBilimDaliId" asp-items="ViewBag.anaBilimDaliId" onchange="KlinikleriDoldur(this,'klinikList');">
+                </select>
+                <span asp-validation-for="anaBilimDaliId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="klinikId" class="control-label"></label>
+                <select id="klinikList" asp-for="klinikId" asp-items="ViewBag.klinikId" >
+                </select>
+                <span asp-validation-for="klinikId" class="text-danger"></span>
+            </div>
+           
+
+        
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
 
 @section Scripts{
 
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-    }
+}

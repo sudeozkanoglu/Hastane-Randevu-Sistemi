@@ -1,11 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
+﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
 
-namespace webProjeOdev.Models
+namespace webProjeOdev8.Models
 {
     public class Randevu
     {
+
         [Key]
         public int randevuId { get; set; }
 
@@ -19,6 +19,7 @@ namespace webProjeOdev.Models
         [Column(TypeName = "time")]
         [Display(Name = "Randevu Saati")]
         public TimeSpan randevuSaat { get; set; }
+
 
         //************************************************
         //foreign key kısımları 
@@ -45,5 +46,6 @@ namespace webProjeOdev.Models
         [ForeignKey("Hasta")]
         public int hastaId { get; set; }
         public Hasta Hasta { get; set; } = null!;
+
     }
 }

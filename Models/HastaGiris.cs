@@ -1,6 +1,4 @@
-﻿using webProjeOdev.Models;
-
-namespace webProjeSon.Models
+﻿namespace webProjeOdev8.Models
 {
     public class HastaGiris
     {

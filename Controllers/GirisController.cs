@@ -1,13 +1,12 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using webProjeOdev.Data;
-using webProjeOdev.Models;
-using webProjeSon.Models;
+using webProjeOdev8.Models;
+using WebProjeOdev8.Data;
+using Microsoft.AspNetCore.Authorization;
 
-namespace webProjeOdev.Controllers
+namespace webProjeOdev8.Controllers
 {
     public class GirisController : Controller
     {
@@ -17,28 +16,10 @@ namespace webProjeOdev.Controllers
         {
             return View();
         }
-
         List<AdminLogin> admin = new List<AdminLogin>()
         {
-            new AdminLogin(){
-                KullaniciAdi="G201210004@sakarya.edu.tr",
-                Sifre="sau",
-                Ad="Sude",
-                Soyad="Selvi",
-                Id="1",
-                Role="admin"
-            },
-            new AdminLogin(){
-                KullaniciAdi="G201210034@sakarya.edu.tr", 
-                Sifre="sau", 
-                Ad="Sude", 
-                Soyad="Özkanoğlu", 
-                Id="2", 
-                Role="admin"
-            }
+            new AdminLogin(){KullaniciAdi="G201210004@sakarya.edu.tr",Sifre="sau",Ad="Sude",Soyad="Yalcin",Id="1",Role="admin"}
         };
-
-        [HttpPost]
         public IActionResult AdminLogin(AdminLogin a)
         {
             if (ModelState.IsValid)
@@ -62,7 +43,7 @@ namespace webProjeOdev.Controllers
                     }
                     else
                     {
-                        return View(a);
+                        return View(a);//HATA BASTIR SIFRE YANLIS DIYEEEEEEEEEEEEEEEE
                     }
 
                 }
@@ -71,7 +52,6 @@ namespace webProjeOdev.Controllers
             }
             return View();
         }
-
         public IActionResult HastaGiris()
         {
             return View();
@@ -109,7 +89,6 @@ namespace webProjeOdev.Controllers
             }
             return View();
         }
-
         public IActionResult KayitOl()
         {
             return View();
@@ -118,15 +97,18 @@ namespace webProjeOdev.Controllers
         [HttpPost]
         public IActionResult KayitOl(Hasta h)
         {
+
             ModelState.Remove(nameof(h.HastaneHastalar));
             ModelState.Remove(nameof(h.Randevular));
             ModelState.Remove(nameof(h.Hastaneler));
+
+
             if (ModelState.IsValid)
             {
                 if (_context.Hastalar.Any(x => x.hastaTC == h.hastaTC))
                 {
                     ModelState.AddModelError(nameof(h.hastaTC), "Hastanin üyeligi mevcut");
-                    return View(h);
+                   return View(h);
                 }
                 else
                 {
@@ -134,8 +116,10 @@ namespace webProjeOdev.Controllers
                     _context.SaveChanges();
                     return RedirectToAction("KayitListele");
                 }
-
+               
             }
+
+
             return View(h);
         }
         public IActionResult KayitListele()
@@ -143,18 +127,17 @@ namespace webProjeOdev.Controllers
             var hastalar = _context.Hastalar.ToList();
             return View(hastalar);
         }
-
         [Authorize]
         public IActionResult AdminLogout()
         {
             HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction(nameof(AdminLogin));
         }
-
         public IActionResult GirisEngelle()
         {
             return View();
         }
+
 
     }
 }

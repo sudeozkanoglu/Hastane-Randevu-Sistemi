@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using webProjeOdev.Data;
-using webProjeOdev.Models;
+using Microsoft.EntityFrameworkCore;
+using webProjeOdev8.Models;
+using WebProjeOdev8.Data;
 
-namespace webProjeSon.Controllers
+namespace webProjeOdev8.Controllers
 {
     public class RandevuController : Controller
     {
@@ -15,7 +16,8 @@ namespace webProjeSon.Controllers
         }
         public IActionResult Listele()
         {
-            var y = a.Randevular.ToList();
+            var hastaIdFromCookie = int.Parse(HttpContext.Request.Cookies["hastaId"]);
+            var y = a.Randevular.Where(a=>a.hastaId== hastaIdFromCookie).ToList();
             return View(y);
         }
         private List<SelectListItem> GetDoktor(int hastaneId, int klinikId)
@@ -67,10 +69,10 @@ namespace webProjeSon.Controllers
             List<SelectListItem> poliklinikler = GetPoliklinik(doktorId);
             return Json(poliklinikler);
         }
+     
         public IActionResult RandevuEkle()
         {
             ViewBag.HastaneList = new SelectList(a.Hastaneler.ToList(), "hastaneId", "hastaneAdi");
-
             return View();
         }
 
@@ -80,12 +82,33 @@ namespace webProjeSon.Controllers
         {
             DayOfWeek haftaninGunu = r.randevuTarihi.DayOfWeek;//haftanin hangi günü oldugunu bulur
 
+            if(haftaninGunu==DayOfWeek.Saturday||haftaninGunu==DayOfWeek.Sunday)
+            {
+                TempData["hata"] = "Cumartesi ve pazar secilemez";
+                return RedirectToAction("RandevuEkle");
+            }
 
-            var ran = a.Randevular.Where(a => a.randevuTarihi == r.randevuTarihi && a.randevuSaat == r.randevuSaat).ToList();
+            /*   var doktorCalismaGünler = a.DoktorCalismaGunler.Include(a=>a.CalismaGunleri).Where(a=>a.doktorId==r.doktorId).ToList();
+               foreach (var item in doktorCalismaGünler)
+               {
+                   if(item.doktorId==r.doktorId&&item.CalismaGunleri.calismaGunleri!= r.randevuTarihi.ToString())
+                   {
+                       string calgun = "";
+                       foreach (var a in doktorCalismaGünler)
+                       {
+                           calgun += a.CalismaGunleri.calismaGunleri + " ";
+                       }
+                        TempData["hata"] = "Doktor "+ calgun + " günleri calismakta. Lütfen sadece o günleri seciniz.";
+                       return RedirectToAction("RandevuEkle");
+                   }
+
+               }
+            */
+            var ran = a.Randevular.Where(a => a.randevuTarihi == r.randevuTarihi && a.randevuSaat == r.randevuSaat && a.doktorId == r.doktorId).ToList();
             if (ran.Count() > 0)
             {
-                TempData["hata"] = "O gün ve saat dolu. Lütfen baska bir gün seciniz.";
-                return RedirectToAction(nameof(Hata));
+                TempData["hata"] = "O gün ve saat dolu. Lütfen baska bir gün veya saat seciniz.";
+                return RedirectToAction("RandevuEkle");
             }
             ModelState.Remove(nameof(r.Hastane));
             ModelState.Remove(nameof(r.AnaBilimDali));
@@ -96,12 +119,38 @@ namespace webProjeSon.Controllers
 
             if (ModelState.IsValid)
             {
-                a.Randevular.Add(r);
+                //Buraya hastanin id'sini atamaliyiz
+                var hastaIdFromCookie = int.Parse(HttpContext.Request.Cookies["hastaId"]);
+                var randevu = new Randevu
+                {
+                    randevuTarihi = r.randevuTarihi,
+                    randevuSaat = r.randevuSaat,
+                    hastaneId = r.hastaneId,
+                    anaBilimDaliId = r.anaBilimDaliId,
+                    klinikId = r.klinikId,
+                    poliklinikId = r.poliklinikId,
+                    doktorId = r.doktorId,
+                    hastaId = hastaIdFromCookie
+
+                };
+                a.Randevular.Add(randevu);
                 a.SaveChanges();
-                return RedirectToAction("Listele");
+                TempData["basarili"] = "Randevunuz olusturuldu";
+                return RedirectToAction("RandevuEkle");
             }
 
-            return View(r);
+            return RedirectToAction("RandevuEkle");
+        }
+
+        public IActionResult RandevuSil(int? id)
+        {
+        
+            var d = a.Randevular.FirstOrDefault(x => x.doktorId == id);
+           
+            a.Randevular.Remove(d);
+            a.SaveChanges();
+            TempData["hata"] = " Randevunuz silindi";
+            return RedirectToAction("RandevuEkle");
         }
     }
 }

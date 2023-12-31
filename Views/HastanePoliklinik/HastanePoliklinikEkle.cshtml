@@ -1,82 +1,39 @@
-﻿@model webProjeOdev.Models.HastanePoliklinik
+﻿@model webProjeOdev8.Models.HastanePoliklinik
 
-<head>
-    <style>
-        .bg-img {
-            background-image: url('/images/yonetici.jpg') !important;
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-        }
+@{
+    ViewData["Title"] = "HastanePoliklinikEkle";
+}
 
-            .bg-img::before {
-                background-color: rgba(0,0,0,0.6);
-                content: "";
-                position: absolute;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                left: 0;
-            }
+<h1>HastanePoliklinikEkle</h1>
 
-        .hero-section .container {
-            height: 150vh;
-            z-index: 1;
-            position: relative;
-            margin-top: 15%;
-        }
-
-        .hero-section h1 {
-            font-size: 1.8rem;
-            color: white;
-        }
-    </style>
-</head>
-<body class="bg-img">
-    <section class="hero-section">
-        <div class="container">
-            <div class="row ">
-                <div class="col-4 offset-4" style="text-align:center;">
-                    <h1>@_localization.GetKey("addPoli").Value</h1>
-                    <hr class="text-white" />
-                </div>
+<h4>HastanePoliklinik</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="HastanePoliklinikEkle">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="hastaneId" class="control-label">Hastane</label>
+                <select asp-for="hastaneId" class="form-control" asp-items="@ViewBag.HastaneList">
+                    <option value="">Seçiniz...</option>
+                </select>
             </div>
-            <div class="row">
-                <div class="col-4 offset-4">
-                    <form asp-action="HastanePoliklinikEkle">
-                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                        <div class="form-group mt-3">
-                            <label asp-for="hastaneId" class="control-label">@_localization.GetKey("hospitalName").Value</label>
-                            <select asp-for="hastaneId" class="form-control" asp-items="@ViewBag.HastaneList">
-                                <option value="">Seçiniz...</option>
-                            </select>
-                        </div>
-                        <div class="form-group mt-3">
-                            <label asp-for="Poliklinik.poliklinikAdi" class="control-label">@_localization.GetKey("poliName").Value</label>
-                            <select asp-for="poliklinikId" class="form-control" asp-items="@ViewBag.PoliklinikList">
-                                <option value="">Seçiniz...</option>
-                            </select>
-                        </div>
-                        <div class="form-group d-grid mt-3">
-                            <button type="submit" value="Create" class="btn d-block" style="background-color:#B96028; color:white">@_localization.GetKey("save").Value</button>
-                        </div>
-                    </form>
-                </div>
+            <div class="form-group">
+                <label asp-for="Poliklinik.poliklinikAdi" class="control-label"></label>
+                <select asp-for="poliklinikId" class="form-control" asp-items="@ViewBag.PoliklinikList">
+                    <option value="">Seçiniz...</option>
+                </select>
             </div>
-            <br />
-            <div class="row">
-                <div class="col-4 ">
-                </div>
-                <div class="col-4 ">
-                    <a type="button" asp-area="" asp-controller="Navigation" asp-action="HastaneNavigation" class="btn mx-auto d-grid gap-2" style="background-color:#A3AB78; color:white">@_localization.GetKey("back").Value</a>
-                </div>
-                <div class="col-4">
-                </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
             </div>
-        </div>
-    </section>
-</body>
+        </form>
+    </div>
+</div>
 
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
