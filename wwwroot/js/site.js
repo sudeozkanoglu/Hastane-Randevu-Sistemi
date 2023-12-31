@@ -89,6 +89,7 @@ function PoliklinikleriDoldur2(lstDoktorCtrl, lstPoliklinikId) {
     }
     return;
 }
+
 function DoktoruDoldur(lstKlinikCtrl, lstDoktorId) {
     var lstDoktorlar = $("#" + lstDoktorId);
     lstDoktorlar.empty();
