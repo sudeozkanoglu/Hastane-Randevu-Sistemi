@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using webProjeOdev8.Models;
 using WebProjeOdev8.Data;
 
@@ -16,8 +17,11 @@ namespace webProjeOdev8.Controllers
         }
         public IActionResult Listele()
         {
-            var hastaIdFromCookie = int.Parse(HttpContext.Request.Cookies["hastaId"]);
-            var y = a.Randevular.Where(a=>a.hastaId== hastaIdFromCookie).ToList();
+            string hastaTcCookie = HttpContext.Session.GetString("TCKimlikNo");
+
+            var hastatc = a.Randevular.Where(a=>a.Hasta.hastaTC==hastaTcCookie).ToList();
+            var y = a.Randevular.Include(a => a.AnaBilimDali).Include(a => a.Hastane).Include(a => a.Klinik).Include(a => a.Poliklinik).Include(a => a.Doktor).Include(a => a.Hasta).Where(a=>a.Hasta.hastaTC== hastaTcCookie).ToList();
+            
             return View(y);
         }
         private List<SelectListItem> GetDoktor(int hastaneId, int klinikId)
@@ -69,7 +73,7 @@ namespace webProjeOdev8.Controllers
             List<SelectListItem> poliklinikler = GetPoliklinik(doktorId);
             return Json(poliklinikler);
         }
-     
+
         public IActionResult RandevuEkle()
         {
             ViewBag.HastaneList = new SelectList(a.Hastaneler.ToList(), "hastaneId", "hastaneAdi");
@@ -82,12 +86,12 @@ namespace webProjeOdev8.Controllers
         {
             DayOfWeek haftaninGunu = r.randevuTarihi.DayOfWeek;//haftanin hangi günü oldugunu bulur
 
-            if(haftaninGunu==DayOfWeek.Saturday||haftaninGunu==DayOfWeek.Sunday)
+            if (haftaninGunu == DayOfWeek.Saturday || haftaninGunu == DayOfWeek.Sunday)
             {
                 TempData["hata"] = "Cumartesi ve pazar secilemez";
                 return RedirectToAction("RandevuEkle");
             }
-
+            //doktor pazartesi ve sali calisiyor diyelim. Doktordan sali günü icin randevu aldigimda asagidaki foreeache'e ilk giriyor sonra if'e giriyor pazartesi ile sali uyusmadigi icin doktor payartesi gunu calisiyor hata mesajini veriyor 
             /*   var doktorCalismaGünler = a.DoktorCalismaGunler.Include(a=>a.CalismaGunleri).Where(a=>a.doktorId==r.doktorId).ToList();
                foreach (var item in doktorCalismaGünler)
                {
@@ -120,23 +124,31 @@ namespace webProjeOdev8.Controllers
             if (ModelState.IsValid)
             {
                 //Buraya hastanin id'sini atamaliyiz
-                var hastaIdFromCookie = int.Parse(HttpContext.Request.Cookies["hastaId"]);
-                var randevu = new Randevu
-                {
-                    randevuTarihi = r.randevuTarihi,
-                    randevuSaat = r.randevuSaat,
-                    hastaneId = r.hastaneId,
-                    anaBilimDaliId = r.anaBilimDaliId,
-                    klinikId = r.klinikId,
-                    poliklinikId = r.poliklinikId,
-                    doktorId = r.doktorId,
-                    hastaId = hastaIdFromCookie
+                string hastaTcCookie = HttpContext.Session.GetString("TCKimlikNo");
+           
+                    var hastaidList = a.Hastalar
+                        .Where(a => a.hastaTC == hastaTcCookie)
+                        .Select(a => a.hastaId)
+                        .ToList();
+                         var randevu = new Randevu
+                         {
+                             randevuTarihi = r.randevuTarihi,
+                             randevuSaat = r.randevuSaat,
+                             hastaneId = r.hastaneId,
+                             anaBilimDaliId = r.anaBilimDaliId,
+                             klinikId = r.klinikId,
+                             poliklinikId = r.poliklinikId,
+                             doktorId = r.doktorId,
+                             hastaId = hastaidList.FirstOrDefault()
 
-                };
-                a.Randevular.Add(randevu);
-                a.SaveChanges();
-                TempData["basarili"] = "Randevunuz olusturuldu";
-                return RedirectToAction("RandevuEkle");
+                         };
+                         a.Randevular.Add(randevu);
+                         a.SaveChanges();
+                         TempData["basarili"] = "Randevunuz olusturuldu";
+                         return RedirectToAction("Listele");
+               
+                   
+              
             }
 
             return RedirectToAction("RandevuEkle");
@@ -144,9 +156,9 @@ namespace webProjeOdev8.Controllers
 
         public IActionResult RandevuSil(int? id)
         {
-        
+
             var d = a.Randevular.FirstOrDefault(x => x.doktorId == id);
-           
+
             a.Randevular.Remove(d);
             a.SaveChanges();
             TempData["hata"] = " Randevunuz silindi";

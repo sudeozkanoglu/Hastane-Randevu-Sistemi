@@ -76,14 +76,13 @@ namespace webProjeOdev8.Controllers
 
                         ClaimsIdentity identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
                         ClaimsPrincipal principal = new ClaimsPrincipal(identity);
+                        HttpContext.Session.SetString("TCKimlikNo", userTc.hastaTC);
                         HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
-                        return RedirectToAction("Index", "UserSayfasi");
+                        return RedirectToAction("RandevuEkle", "Randevu");
                     }
-                    else
-                    {
-                        return View(h);
-                    }
+                   
                 }
+
                 TempData["hata"] = "Kullanici adi veya sifre hatali";
                 return RedirectToAction("Index");
             }
