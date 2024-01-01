@@ -31,8 +31,6 @@ Asp .Net Core 6 MVC , C# , SQLServer , Entity Framework Core , Bootstrap , HTML5
 		- Yeni bir randevu oluşturma
 		- Oluşturulan randevuyu iptal etme
 		- İlgili filtreleme kategorilerine göre randevuları listeleme
-	- Bilgileri Düzenleme Sayfası
-		- Hastaların kişisel bilgilerini düzenleme
   ## Bizimle İletişime Geç
           sude.ozkanoglu@ogr.sakarya.edu.tr 
           sude.selvi@ogr.sakarya.edu.tr
